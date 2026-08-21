@@ -1,4 +1,4 @@
-From https://docs.google.com/document/d/1kT4fvXO5Jch16ugl7BfeB7PlupowD8h1dOeX2SaydzQ/edit?tab=t.0#heading=h.bwbcx8owgtcf
+From https://docs.google.com/document/d/15wQMbgPBKr9iLeaMPDeE9aorBFuUy_XuasAho-uGB44/edit?tab=t.j9wz1sh02k0v#heading=h.bwbcx8owgtcf
 
 # How to Set Up OpenSpace and Web Server
 Amir Sabljic
