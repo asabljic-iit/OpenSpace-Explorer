@@ -1,0 +1,87 @@
+local sunTransforms = asset.require('scene/solarsystem/sun/transforms')
+local earth = asset.require('scene/solarsystem/planets/earth/globe')
+local transforms = asset.require('scene/solarsystem/sun/transforms')
+-- local kernels = asset.resource("data/verrubintelescope")
+local textures = asset.resource("data")
+local model = asset.resource("data")
+-- local coreKernels = asset.require("spice/core")
+
+local RubinHolder = {
+    Identifier = "RubinHolder",
+    Parent = earth.Earth.Identifier,
+    Transform = {
+        Translation = {
+            Type = "GlobeTranslation",
+            Globe = earth.Earth.Identifier,
+            Latitude = -30.244633,
+            Longitude = -70.749417,
+            Altitude = 0,
+            UseHeightmap = true
+        },
+        Rotation = {
+            Type = "GlobeRotation",
+            Globe = earth.Earth.Identifier,
+            Latitude = -30.244633,
+            Longitude = -70.749417
+        }
+    }
+}
+
+local rubin = {
+    Identifier = "rubin",
+    Parent = RubinHolder.Identifier,
+    Transform = {
+        Scale = {
+            Type = "StaticScale",
+            Scale = 0.1    
+        },
+        Rotation = {
+            Type = "StaticRotation",
+            Rotation = {0,2.17,0.1}
+        },
+        Translation = {
+            Type = "StaticTranslation",
+            Position = {0,12,0}
+        }
+    },
+    Renderable = {
+        Type = "RenderableModel",
+        GeometryFile = model .. "/verarubintelescope.obj",
+        ModelScale = .1,
+        LightSources = {
+            {
+                Type = "SceneGraphLightSource",
+                Identifier = "Sun",
+                Node = sunTransforms.SolarSystemBarycenter.Identifier,
+                Intensity = 1.0
+            }
+        }
+    },
+    GUI = {
+        Name = "Vera Rubin Telescope",
+        Path = "/Solar System/Telescopes/Vera Rubin"
+    }
+}
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(RubinHolder)
+  openspace.addSceneGraphNode(rubin)
+end)
+  
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(rubin)
+  openspace.removeSceneGraphNode(RubinHolder)
+end)
+  
+asset.export(RubinHolder)
+asset.export(rubin)
+
+
+asset.meta = {
+    Name = "Vera Rubin Observatory",
+    Version = "1.0",
+    Description = [[ ]],
+    Author = "Vanessa Garcia :)",
+    URL = "",
+    License = "CC-BY"
+}

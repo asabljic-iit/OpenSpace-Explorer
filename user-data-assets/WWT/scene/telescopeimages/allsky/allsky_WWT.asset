@@ -1,0 +1,119 @@
+-- local Object = {
+--   Identifier = "AllSky_Visible",
+--   Transform = {
+--     Rotation = {
+--       Type = "StaticRotation",
+--       Rotation = { 0, 0, math.pi }
+--     }
+--   },
+--   Renderable = {
+--     Type = "RenderableSphereImageLocal",
+--     Size = 9.2E21,
+--     Segments = 80,
+--     Opacity = 0.4,
+--     Texture = asset.resource("DarkUniverse_mellinger_8k.jpg"),
+--     Orientation = "Inside",
+--     MirrorTexture = true,
+--     FadeOutThreshold = 0.0015,
+--     DimInAtmosphere = true,
+--     RenderBinMode = "Background",
+--     DisableDepth = true
+--   },
+--   Tag = { "daytime_hidden" },
+--   GUI = {
+--     Name = "Visible All-sky",
+--     Path = "/Milky Way/All Sky Images",
+--     Focusable = false,
+--     Description = [[An all-sky image of the night sky as our eye sees it (in the visible
+--       spectrum), with the stars removed. You will see the brightest part of the Galaxy if
+--       you look toward Galactic center toward the constellations Scorpius and Sagittarius.
+--       This bright haze is the light from millions of stars; the dark lanes are foreground
+--       dust clouds, obscuring our view of the stars behind them. Census: 1 all-sky image.]]
+--   }
+-- }
+
+local Object2 = {
+  Identifier = "Gaia_AllSky_Visible_HighRes",
+  Transform = {
+    Rotation = {
+      Type = "StaticRotation",
+      Rotation = { 0, 0, math.pi }
+    }
+  },
+  Renderable = {
+    Type = "RenderableSphereImageLocal",
+    Size = 9.2E21,
+    Segments = 260, -- Increased segments from
+    Opacity = 0.5,
+    Texture = asset.resource("allsky_26k.jpg"),
+    Orientation = "Inside",
+    MirrorTexture = true,
+    FadeOutThreshold = 0.0015,
+    DimInAtmosphere = true,
+    RenderBinMode = "Background",
+    DisableDepth = true,
+    BlendingOption = "Additive"
+  },
+  Tag = { "daytime_hidden" },
+  GUI = {
+    Name = "Visible Gaia All-sky (High Res)",
+    Path = "/Milky Way/All Sky Images",
+    Focusable = false,
+    Description = [[High-resolution all-sky image of the night sky in the visible spectrum.]]
+  }
+}
+
+local Object3 = {
+  Identifier = "NASA_DeepStar_Visible_HighRes",
+  Transform = {
+    Rotation = {
+      Type = "StaticRotation",
+      Rotation = { 0, 0, math.pi }
+    }
+  },
+  Renderable = {
+    Type = "RenderableSphereImageLocal",
+    Size = 9.2E21,
+    Segments = 260, -- Increased segments
+    Opacity = 1,
+    Texture = asset.resource("starmap_2020_26k_gal.jpg"),
+    Orientation = "Inside",
+    MirrorTexture = true,
+    FadeOutThreshold = 0.0015,
+    DimInAtmosphere = true,
+    RenderBinMode = "Background",
+    DisableDepth = true,
+    BlendingOption = "Additive"
+  },
+  Tag = { "daytime_hidden" },
+  GUI = {
+    Name = "Visible NASA All-sky Deep Star (High Res)",
+    Path = "/Milky Way/All Sky Images",
+    Focusable = false,
+    Description = [[High-resolution all-sky image of the night sky in the visible spectrum.]]
+  }
+}
+
+asset.onInitialize(function()
+  --openspace.addSceneGraphNode(Object1)
+  openspace.addSceneGraphNode(Object2)
+  openspace.addSceneGraphNode(Object3)
+end)
+
+asset.onDeinitialize(function()
+  --openspace.removeSceneGraphNode(Object1)
+  openspace.removeSceneGraphNode(Object2)
+  openspace.removeSceneGraphNode(Object3)
+end)
+
+--asset.export(Object1)
+asset.export(Object2)
+asset.export(Object3)
+
+-- asset.meta = {
+--   Name = "Milky Way All-Sky Visible Light",
+--   Description = Object.GUI.Description,
+--   Author = "Brian Abbott, Carter Emmart (AMNH), OpenSpace Team",
+--   URL = "https://www.amnh.org/research/hayden-planetarium/digital-universe",
+--   License = "AMNH Digital Universe"
+-- }

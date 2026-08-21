@@ -1,0 +1,19 @@
+asset.require("./vostok/vostok")
+asset.require("./vostok/vostok_actions")
+-- asset.require("./apollo/8/apollo8")
+-- asset.require("./apollo/11/apollo11")
+-- asset.require("./apollo/15/apollo15")
+-- asset.require("./apollo/17/apollo17")
+-- asset.require("./artemis/1/artemis")
+-- asset.require("./artemis/2/artemis2")
+
+
+
+
+asset.meta = {
+  Name = "Asset files for telescope images",
+  Description = [[]],
+  Author = "Vanessa :)",
+  URL = "https://www.openspaceproject.com",
+  License = "MIT"
+}

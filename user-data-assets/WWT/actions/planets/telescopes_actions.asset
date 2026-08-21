@@ -1,0 +1,96 @@
+local FlyToGreenbank = {
+    Identifier = "FlyToGreenbank",
+    Name = "Fly to Greenbank",
+    Command = [[
+        openspace.setPropertyValueSingle("NavigationHandler.OrbitalNavigator.IdleMotion.Motion", 2.00000); 
+        openspace.scheduleScript("openspace.setPropertyValueSingle('NavigationHandler.OrbitalNavigator.IdleMotion.Apply', true)", 15.5);
+        openspace.navigation.flyToGeo("Earth", 38.4330, -79.8397, 1000, 10); 
+        openspace.scheduleScript([=[openspace.navigation.setNavigationState({Anchor = "GBT", Pitch =  0.08144824339527847, Position = {617.6820854094336, 179.47197667269643, -148.88859009483096 }, Timestamp = "2026 AUG 02 21:19:42", Up = { -0.2486918388209054, 0.9603644924074617, 0.12590635816683265}, Yaw = 0.0202676017094776}, false)]=], 15) 
+    ]],
+    GuiPath = "/Telescopes/Ground-based",
+    IsLocal = false
+}
+
+local FlyToVLA = {
+    Identifier = "FlyToVLA",
+    Name = "Fly to Very Large Array",
+    Command = [[
+        openspace.setPropertyValueSingle("NavigationHandler.OrbitalNavigator.IdleMotion.Motion", 2.00000); 
+        openspace.scheduleScript("openspace.setPropertyValueSingle('NavigationHandler.OrbitalNavigator.IdleMotion.Apply', true)", 15.5);
+        openspace.navigation.flyToGeo("Earth", 34.078841, -107.618397, 1000, 10); 
+        openspace.scheduleScript([=[openspace.navigation.setNavigationState({Anchor = "vla9", Pitch = -1.8807843465114028e-07, Position = {509.70530700683594,612.8571319580078,792.8777923583984 }, ReferenceFrame = "Root", Timestamp = "2026 AUG 02 21:19:42", Up = {-0.6784900650261574,-0.3020487497085804,0.669640040962518}, Yaw = 0.0033107771535753}, true)]=], 15) 
+    ]],
+    GuiPath = "/Telescopes/Ground-based",
+    IsLocal = false
+}   
+
+local FlyToRubin = {
+    Identifier = "FlyToRubin",
+    Name = "Fly to Vera Rubin Observatory",
+    Command = [[
+        openspace.setPropertyValueSingle("NavigationHandler.OrbitalNavigator.IdleMotion.Motion", 2.00000); 
+        openspace.scheduleScript("openspace.setPropertyValueSingle('NavigationHandler.OrbitalNavigator.IdleMotion.Apply', true)", 15.5);
+        openspace.navigation.flyToGeo("Earth", -30.2453, -70.7483, 3200, 10); 
+        openspace.scheduleScript([=[openspace.navigation.setNavigationState({Anchor = "rubin", Pitch = -1.571788176983016e-06, Position = {300.27391052246094,-267.59693145751953,-441.23048400878906 }, ReferenceFrame = "Root", Timestamp = "2026 AUG 02 21:19:42", Up = {0.4804322548250124,-0.565812357548541,0.6701053831817176}, Yaw = -3.0177024377115417e-06}, true)]=], 15) 
+    ]],
+    GuiPath = "/Telescopes/Ground-based",
+    IsLocal = false
+}
+
+local FlyToHST = {
+    Identifier = "FlyToHST",
+    Name = "Fly to Hubble Space Telescope",
+    Command = [[
+    openspace.navigation.setFocus("HST",true,true)
+    openspace.navigation.flyTo("HST", 10)
+    openspace.setPropertyValueSingle("NavigationHandler.OrbitalNavigator.IdleMotion.Motion", 0.000000)
+    openspace.setPropertyValueSingle("NavigationHandler.OrbitalNavigator.IdleMotion.Apply", true)
+    ]],
+    GuiPath = "/Telescopes/Space",
+    IsLocal = false
+}
+
+local FlyToJWST = {
+    Identifier = "FlyToJWST",
+    Name = "Fly to JWST",
+    Command = [[
+    openspace.navigation.setFocus("JWSTModel",true,true)
+    openspace.navigation.flyTo("JWSTModel", 10)
+    openspace.setPropertyValueSingle("NavigationHandler.OrbitalNavigator.IdleMotion.Motion", 0.000000)
+    openspace.setPropertyValueSingle("NavigationHandler.OrbitalNavigator.IdleMotion.Apply", true)
+    ]],
+    GuiPath = "/Telescopes/Space",
+    IsLocal = false
+}
+
+local FlyToSpitzer = {
+    Identifier = "FlyToSpitzer",
+    Name = "Fly to Spitzer Space Telescope",
+    Command = [[
+    openspace.navigation.setFocus("Spitzer",true,true)
+    openspace.navigation.flyTo("Spitzer", 10)
+    openspace.setPropertyValueSingle("NavigationHandler.OrbitalNavigator.IdleMotion.Motion", 0.000000)
+    openspace.setPropertyValueSingle("NavigationHandler.OrbitalNavigator.IdleMotion.Apply", true)
+    ]],
+    GuiPath = "/Telescopes/Space",
+    IsLocal = false
+}
+
+asset.onInitialize(function()
+    openspace.action.registerAction(FlyToGreenbank)
+    openspace.action.registerAction(FlyToVLA)
+    openspace.action.registerAction(FlyToRubin)
+    openspace.action.registerAction(FlyToHST)
+    openspace.action.registerAction(FlyToJWST)
+    openspace.action.registerAction(FlyToSpitzer)
+end)
+
+asset.onDeinitialize(function()
+    openspace.action.removeAction(FlyToSpitzer)
+    openspace.action.removeAction(FlyToJWST)
+    openspace.action.removeAction(FlyToHST)
+    openspace.action.removeAction(FlyToRubin)
+    openspace.action.removeAction(FlyToVLA)
+    openspace.action.removeAction(FlyToGreenbank)
+end)
+

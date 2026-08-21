@@ -1,0 +1,233 @@
+asset.require("./allsky/allsky_WWT")
+
+local imagesCSV = asset.resource("image_data.csv")
+local sunAsset = asset.require("scene/solarsystem/sun/transforms")
+local earthAsset = asset.require("scene/solarsystem/planets/earth/transforms")
+local images = asset.resource("images")
+
+-- Distance scale and units conversion constants
+local PARSEC_METERS = 3.0856776E16
+local TARGET_DISTANCE = 4 * PARSEC_METERS
+local RAD_CONVERSION = math.pi / 180
+
+-- Virtual camera node attached to Earth to serve as the observation origin
+local teleCam = {
+  Identifier = "TeleCam",
+  Parent = earthAsset.EarthIAU.Identifier,
+  GUI = {
+    Name = "TeleCam",
+    Path = "/Deep Space Objects",
+    Hidden = true
+  },
+  BoundingSphere = 6378137
+}
+
+-- Reads CSV data to build image planes projected onto a celestial sphere
+local function createImageNodes(baseIdentifier, guiPath, imagefile)
+  local genImages = {}
+  local lines = openspace.readCSVFile(openspace.absPath(imagefile))
+
+  -- Standard vector pointing to Celestial North Pole (RA: 0h, Dec: +90deg)
+  local absoluteNorth = openspace.space.convertFromRaDec('0h0m0s', '90d0m0.0s', 1.0)
+
+  for _, line in ipairs(lines) do
+    local identifier = baseIdentifier .. "-" .. line[2]
+    local ra, dec = line[4], line[5]
+    
+    local fovArcmin = tonumber(line[6])
+    local scale = tonumber(line[7])
+    local angle = tonumber(line[8])
+    local textureFile = images .. "/" .. line[9]
+
+    -- Convert field-of-view from arcminutes to radians
+    local fovDeg = fovArcmin / 60.0
+    local fovRad = fovDeg * RAD_CONVERSION
+
+    -- Convert angular FOV to physical plane size at TARGET_DISTANCE meters
+    local sizeInMeters = TARGET_DISTANCE * math.tan(fovRad / 2)
+
+    -- Convert sky coordinates (RA/Dec) into 3D Cartesian coordinates
+    local positionVector = openspace.space.convertFromRaDec(ra, dec, TARGET_DISTANCE)
+    local rad = (angle + 90) * RAD_CONVERSION
+
+    local px, py, pz = positionVector[1], positionVector[2], positionVector[3]
+    
+    -- Compute tangential Local East vector: (Position * Celestial North)
+    local eX = py * absoluteNorth[3] - pz * absoluteNorth[2]
+    local eY = pz * absoluteNorth[1] - px * absoluteNorth[3]
+    local eZ = px * absoluteNorth[2] - py * absoluteNorth[1]
+    
+    local lenE = math.sqrt(eX*eX + eY*eY + eZ*eZ)
+    local baseEast = { eX / lenE, eY / lenE, eZ / lenE }
+
+    -- Compute tangential Local North vector: (Local East * Position)
+    local nX = baseEast[2] * pz - baseEast[3] * py
+    local nY = baseEast[3] * px - baseEast[1] * pz
+    local nZ = baseEast[1] * py - baseEast[2] * px
+    
+    local lenN = math.sqrt(nX*nX + nY*nY + nZ*nZ)
+    local baseNorth = { nX / lenN, nY / lenN, nZ / lenN }
+
+    -- Rotate Local East axis around the sightline by the specified field angle
+    local cosA, sinA = math.cos(rad), math.sin(rad)
+    local rotatedXAxis = {
+        cosA * baseEast[1] + sinA * baseNorth[1],
+        cosA * baseEast[2] + sinA * baseNorth[2],
+        cosA * baseEast[3] + sinA * baseNorth[3]
+    }
+
+    -- Define OpenSpace SceneGraphNode specification
+    local imageNode = {
+        Identifier = identifier,
+        Parent = sunAsset.SolarSystemBarycenter.Identifier,
+        Transform = {
+            Translation = {
+                Type = "StaticTranslation",
+                Position = positionVector
+            },
+            Rotation = {
+                Type = "FixedRotation",
+                Attached = identifier,
+                ZAxis = "Earth",
+                XAxis = rotatedXAxis,
+                XAxisOrthogonal = true
+            },
+            Scale = {
+              Type = "StaticScale",
+              Scale = scale
+            }
+        },
+        Renderable = {
+            Type = "RenderablePlaneImageLocal",
+            Size = sizeInMeters,
+            AutoScale = true,
+            Origin = "Center",
+            Texture = textureFile,
+            Billboard = false,
+            --LazyLoading = true,
+        },
+        Tag = { "sky_image", "sky_image_" .. line[1] },
+        GUI = {
+            Name = line[3],
+            Path = guiPath .. "/" .. line[1],
+        }
+    }
+    table.insert(genImages, imageNode)
+  end
+  return genImages
+end
+
+_G.isLookAtBusy = nil -- Global flag to debounce camera navigation actions
+
+-- Builds a navigation action that smoothly focuses the camera on a specific target image
+local function buildLookAtAction(node)
+  -- Sequence: Guard check -> Fade out non-target sky images -> Switch camera anchor/aim -> Ease horizontal FOV to fit target
+  local cmd = string.format([[
+    if _G.isLookAtBusy then return end
+    _G.isLookAtBusy = true
+
+    openspace.fadeOut("Scene.*Trail.Renderable")
+    openspace.fadeOut("Scene.*trail.Renderable")
+    openspace.fadeOut("{sky_image}.Renderable", nil, "openspace.fadeIn('Scene.%s.Renderable')")
+    openspace.setPropertyValue("NavigationHandler.OrbitalNavigator.Aim", "%s")
+    
+    if openspace.navigation.getNavigationState().Anchor ~= 'TeleCam' then
+      openspace.navigation.flyTo('TeleCam', 0)
+    end
+
+    openspace.setPropertyValue("NavigationHandler.OrbitalNavigator.Anchor", "TeleCam")
+    
+    local size = openspace.propertyValue("Scene.%s.Renderable.Size")
+    local halfWidth = (math.sqrt(size[1]^2 + size[2]^2) * %f) / 2
+    local fovDeg = (2 * math.atan(halfWidth / (0.9 * 3.0856776E16))) * (180 / math.pi)
+    local fov = math.max(0.005, math.min(fovDeg, 80))
+
+    -- Pass `_G.isLookAtBusy = nil` as the completion callback to unlock the debounce when zooming finishes
+    local zoomin = string.format("openspace.setPropertyValue('RenderEngine.Windowing.Window_0.HorizFieldOfView', %%f, 6, 'QuadraticEaseInOut', '_G.isLookAtBusy = nil')", fov)
+    local aimcam = "openspace.navigation.retargetAnchor(); openspace.navigation.retargetAim(); openspace.scheduleScript(\"" .. zoomin .. "\", 2.75)"
+
+    openspace.setPropertyValue("RenderEngine.Windowing.Window_0.HorizFieldOfView", 50, 2, 'QuadraticEaseInOut', aimcam)
+  ]], node.Identifier, node.Identifier, node.Identifier, node.Transform.Scale.Scale)
+
+  return {
+    Identifier = "LookAt" .. node.Identifier,
+    Name = node.GUI.Name,
+    Command = cmd,
+    GuiPath = node.GUI.Path,
+    IsLocal = false
+  }
+end
+
+-- Toggles foreground solar system assets on/off based on whether TeleCam is anchored
+_G.TeleCamActive = nil
+
+local toggleEarthAction = {
+    Identifier = "HideEarthWhenTelescope",
+    Name = "Hide Earth When Telescope",
+    Command = [[
+      local anchor = openspace.navigation.getNavigationState().Anchor
+      
+      if anchor == 'TeleCam' then
+        _G.TeleCamActive = true
+        openspace.setPropertyValueSingle("NavigationHandler.OrbitalNavigator.IdleMotion.ShouldTriggerWhenIdle", false)
+        openspace.setPropertyValue("NavigationHandler.OrbitalNavigator.RetargetAnchorInterpolationTime", 1.75)
+        openspace.setPropertyValue('Scene.Earth.Renderable.Enabled', false)
+        openspace.setPropertyValue('Scene.EarthAtmosphere.Renderable.Enabled', false)
+        openspace.setPropertyValue('Scene.EarthTrail.Renderable.Enabled', false)
+      else
+        if _G.TeleCamActive then
+          _G.TeleCamActive = nil
+          _G.isLookAtBusy = nil
+          openspace.fadeIn("Scene.*Trail.Renderable")
+          openspace.fadeIn("Scene.*trail.Renderable")
+        end
+        openspace.setPropertyValue("{sky_image}.Renderable.Enabled", false)
+        openspace.setPropertyValue("RenderEngine.Windowing.Window_0.HorizFieldOfView", 80, 1, 'QuadraticEaseInOut')
+        openspace.setPropertyValue('Scene.Earth.Renderable.Enabled', true)
+        openspace.setPropertyValue('Scene.EarthAtmosphere.Renderable.Enabled', true)
+      end
+    ]],
+    IsLocal = false
+}
+
+local nodes = {}
+
+-- Lifecycle: Load nodes, register event handlers, and configure initial node visibilities
+asset.onInitialize(function()
+  nodes = createImageNodes("SkyImage", "/Deep Space Objects", imagesCSV)
+
+  for _, node in ipairs(nodes) do
+    openspace.addSceneGraphNode(node)
+    openspace.action.registerAction(buildLookAtAction(node))
+  end
+
+  openspace.addSceneGraphNode(teleCam)
+  openspace.scheduleScript("openspace.setPropertyValue('{sky_image}.Renderable.Enabled', false)", 1)
+
+  openspace.action.registerAction(toggleEarthAction)
+  openspace.event.registerEventAction("FocusNodeChanged", toggleEarthAction.Identifier)
+end)
+
+-- Lifecycle: Clean up scene graph nodes, actions, and event listeners on unload
+asset.onDeinitialize(function()
+  openspace.event.unregisterEventAction("FocusNodeChanged", toggleEarthAction.Identifier)
+  openspace.action.removeAction(toggleEarthAction)
+
+  openspace.removeSceneGraphNode(teleCam)
+
+  for _, node in ipairs(nodes) do
+    openspace.action.removeAction("LookAt" .. node.Identifier)
+    openspace.removeSceneGraphNode(node)
+  end
+end)
+
+asset.meta = {
+  Name = "Telescope Images",
+  Description = [[
+    Loads deep sky object images from a CSV file, projects them onto planes on a 
+    celestial sphere surrounding the Solar System, and registers navigation actions 
+    to smoothly align and zoom the camera onto individual images.
+  ]],
+  Author = "Amir Sabljic, credit to James Hedberg's Constellation Images asset",
+  License = "MIT"
+}

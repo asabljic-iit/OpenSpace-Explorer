@@ -1,0 +1,25 @@
+-- asset.require("nightsky/altaz", false)
+-- asset.require("nightsky/cardinal_directions", false)
+-- asset.require("nightsky/ecliptic_band", false)
+-- asset.require("nightsky/equatorial_band", false)
+-- asset.require("nightsky/galactic_band", false)
+-- asset.require("nightsky/meridian", false)
+-- asset.require("nightsky/light_pollution", false)
+-- asset.require("nightsky/zenith", false)
+asset.require("nightsky/planets", false)
+-- asset.require("actions/nightsky/camera", false)
+-- asset.require("actions/nightsky/daytime", false)
+-- asset.require("actions/nightsky/createsuntrails", false)
+asset.require("../actions/nightsky/constellation_labels", false)
+-- asset.require("actions/nightsky/position", false)
+-- asset.require("actions/time", false)
+
+
+
+asset.meta = {
+  Name = "Night Sky Assets",
+  Description = [[A collection of assets useful for studying the night sky.]],
+  Author = "OpenSpace Team",
+  URL = "https://openspaceproject.com",
+  License = "MIT license"
+}

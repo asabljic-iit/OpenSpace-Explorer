@@ -1,0 +1,6 @@
+asset.require("./asteroidbelt/inner_main_belt_asteroid")
+asset.require("./asteroidbelt/main_belt_asteroid")
+asset.require("./asteroidbelt/outer_main_belt_asteroid")
+asset.require("./pha/pha")
+asset.require("./Oumuamua/oumuamua")
+asset.require("./Psyche/psyche")

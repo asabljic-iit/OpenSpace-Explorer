@@ -1,0 +1,4 @@
+-- asset.require("./trail")
+asset.require("./models_beresheet")
+asset.require("./actions_beresheet")
+-- asset.require("./mission_beresheet")

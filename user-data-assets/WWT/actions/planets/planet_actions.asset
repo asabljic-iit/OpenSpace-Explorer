@@ -1,0 +1,371 @@
+local FocusOnMercury = {
+    Identifier = "FocusOnMercury",
+    Name = "Face Mercury",
+    Command = [[
+        openspace.navigation.setFocus("Mercury",true,true)
+    ]],
+    GuiPath = "/Solar System/Mercury",
+    IsLocal = false
+}
+
+local FlyToMercury = {
+    Identifier = "FlyToMercury",
+    Name = "Fly to Mercury",
+    Command = [[
+        openspace.setPropertyValueSingle("NavigationHandler.OrbitalNavigator.IdleMotion.Motion", 0.000000)
+        openspace.setPropertyValueSingle("NavigationHandler.OrbitalNavigator.IdleMotion.Apply", true)
+        openspace.navigation.setFocus("Mercury",true,true)
+        openspace.navigation.flyTo("Mercury", 10)
+    ]],
+    GuiPath = "/Solar System/Mercury",
+    IsLocal = false
+}
+
+local FocusOnVenus = {
+    Identifier = "FocusOnVenus",
+    Name = "Face Venus",
+    Command = [[
+        openspace.navigation.setFocus("Venus",true,true)
+    ]],
+    GuiPath = "/Solar System/Venus",
+    IsLocal = false
+}
+
+local FlyToVenus = {
+    Identifier = "FlyToVenus",
+    Name = "Fly to Venus",
+    Command = [[
+        openspace.setPropertyValueSingle("NavigationHandler.OrbitalNavigator.IdleMotion.Motion", 0.000000)
+        openspace.setPropertyValueSingle("NavigationHandler.OrbitalNavigator.IdleMotion.Apply", true)
+        openspace.navigation.setFocus("Venus",true,true)
+        openspace.navigation.flyTo("Venus", 10)
+    ]],
+    GuiPath = "/Solar System/Venus",
+    IsLocal = false
+}
+
+local FocusOnEarth = {
+    Identifier = "FocusOnEarth",
+    Name = "Face Earth",
+    Command = [[
+        openspace.navigation.setFocus("Earth",true,true)
+    ]],
+    GuiPath = "/Solar System/Earth",
+    IsLocal = false
+}
+
+local FlyToEarth = {
+    Identifier = "FlyToEarth",
+    Name = "Fly to Earth",
+    Command = [[
+        openspace.setPropertyValueSingle("NavigationHandler.OrbitalNavigator.IdleMotion.Motion", 0.000000)
+        openspace.setPropertyValueSingle("NavigationHandler.OrbitalNavigator.IdleMotion.Apply", true)
+        openspace.navigation.setFocus("Earth",true,true)
+        openspace.navigation.flyTo("Earth", 10)
+    ]],
+    GuiPath = "/Solar System/Earth",
+    IsLocal = false
+}
+
+local FocusOnMoon = {
+    Identifier = "FocusOnMoon",
+    Name = "Face Moon",
+    Command = [[
+        openspace.navigation.setFocus("Moon",true,true)
+    ]],
+    GuiPath = "/Solar System/Moon",
+    IsLocal = false
+}
+
+local FlyToMoon = {
+    Identifier = "FlyToMoon",
+    Name = "Fly to Moon",
+    Command = [[
+        openspace.setPropertyValueSingle("NavigationHandler.OrbitalNavigator.IdleMotion.Motion", 0.000000)
+        openspace.setPropertyValueSingle("NavigationHandler.OrbitalNavigator.IdleMotion.Apply", true)
+        openspace.navigation.setFocus("Moon",true,true)
+        openspace.navigation.flyTo("Moon", 10)
+    ]],
+    GuiPath = "/Solar System/Moon",
+    IsLocal = false
+}
+
+local FocusOnMars = {
+    Identifier = "FocusOnMars",
+    Name = "Face Mars",
+    Command = [[
+        openspace.navigation.setFocus("Mars",true,true)
+    ]],
+    GuiPath = "/Solar System/Mars",
+    IsLocal = false
+}
+
+local FlyToMars = {
+    Identifier = "FlyToMars",
+    Name = "Fly to Mars",
+    Command = [[
+        openspace.setPropertyValueSingle("NavigationHandler.OrbitalNavigator.IdleMotion.Motion", 0.000000)
+        openspace.setPropertyValueSingle("NavigationHandler.OrbitalNavigator.IdleMotion.Apply", true)
+        openspace.navigation.setFocus("Mars",true,true)
+        openspace.navigation.flyTo("Mars", 10)
+    ]],
+    GuiPath = "/Solar System/Mars",
+    IsLocal = false
+}
+
+local FocusOnJupiter = {
+    Identifier = "FocusOnJupiter",
+    Name = "Face Jupiter",
+    Command = [[
+        openspace.navigation.setFocus("Jupiter",true,true)
+    ]],
+    GuiPath = "/Solar System/Jupiter",
+    IsLocal = false
+}
+
+local FlyToJupiter = {
+    Identifier = "FlyToJupiter",
+    Name = "Fly to Jupiter",
+    Command = [[
+        openspace.setPropertyValueSingle("NavigationHandler.OrbitalNavigator.IdleMotion.Motion", 0.000000)
+        openspace.setPropertyValueSingle("NavigationHandler.OrbitalNavigator.IdleMotion.Apply", true)
+        openspace.navigation.setFocus("Jupiter",true,true)
+        openspace.navigation.flyTo("Jupiter", 10)
+    ]],
+    GuiPath = "/Solar System/Jupiter",
+    IsLocal = false
+}
+
+local FocusOnSaturn = {
+    Identifier = "FocusOnSaturn",
+    Name = "Face Saturn",
+    Command = [[
+        openspace.navigation.setFocus("Saturn",true,true)
+    ]],
+    GuiPath = "/Solar System/Saturn",
+    IsLocal = false
+}
+
+local FlyToSaturn = {
+    Identifier = "FlyToSaturn",
+    Name = "Fly to Saturn",
+    Command = [[
+        openspace.setPropertyValueSingle("NavigationHandler.OrbitalNavigator.IdleMotion.Motion", 0.000000)
+        openspace.setPropertyValueSingle("NavigationHandler.OrbitalNavigator.IdleMotion.Apply", true)
+        openspace.navigation.setFocus("Saturn",true,true)
+        openspace.navigation.flyTo("Saturn", 10)
+    ]],
+    GuiPath = "/Solar System/Saturn",
+    IsLocal = false
+}
+
+local FocusOnUranus = {
+    Identifier = "FocusOnUranus",
+    Name = "Face Uranus",
+    Command = [[
+        openspace.navigation.setFocus("Uranus",true,true)
+    ]],
+    GuiPath = "/Solar System/Uranus",
+    IsLocal = false
+}
+
+local FlyToUranus = {
+    Identifier = "FlyToUranus",
+    Name = "Fly to Uranus",
+    Command = [[
+        openspace.setPropertyValueSingle("NavigationHandler.OrbitalNavigator.IdleMotion.Motion", 0.000000)
+        openspace.setPropertyValueSingle("NavigationHandler.OrbitalNavigator.IdleMotion.Apply", true)
+        openspace.navigation.setFocus("Uranus",true,true)
+        openspace.navigation.flyTo("Uranus", 10)
+    ]],
+    GuiPath = "/Solar System/Uranus",
+    IsLocal = false
+}
+
+local FocusOnNeptune = {
+    Identifier = "FocusOnNeptune",
+    Name = "Face Neptune",
+    Command = [[
+        openspace.navigation.setFocus("Neptune",true,true)
+    ]],
+    GuiPath = "/Solar System/Neptune",
+    IsLocal = false
+}
+
+local FlyToNeptune = {
+    Identifier = "FlyToNeptune",
+    Name = "Fly to Neptune",
+    Command = [[
+        openspace.setPropertyValueSingle("NavigationHandler.OrbitalNavigator.IdleMotion.Motion", 0.000000)
+        openspace.setPropertyValueSingle("NavigationHandler.OrbitalNavigator.IdleMotion.Apply", true)
+        openspace.navigation.setFocus("Neptune",true,true)
+        openspace.navigation.flyTo("Neptune", 10)
+    ]],
+    GuiPath = "/Solar System/Neptune",
+    IsLocal = false
+}
+
+local ShowInnerSolarSystem = {
+    Identifier = "ShowInnerSolarSystem",
+    Name = "Show Inner Solar System",
+    Command = [[
+        openspace.navigation.setFocus("Sun",true,true)
+        openspace.scheduleScript("openspace.navigation.zoomToDistance(809440000000, 5)", 0.1)
+        openspace.setPropertyValueSingle("NavigationHandler.OrbitalNavigator.IdleMotion.Apply", true)
+
+        openspace.fadeIn("Scene.MercuryLabel.Renderable")
+        openspace.fadeIn("Scene.VenusLabel.Renderable")
+        openspace.fadeIn("Scene.EarthLabel.Renderable")
+        openspace.fadeIn("Scene.MarsLabel.Renderable")
+
+        openspace.fadeIn("Scene.SunGlare.Renderable")
+        openspace.fadeIn('Scene.MercuryTrail.Renderable')
+        openspace.fadeIn('Scene.VenusTrail.Renderable')
+        openspace.fadeIn('Scene.EarthTrail.Renderable')
+        openspace.fadeIn('Scene.MarsTrail.Renderable')
+        openspace.fadeIn('Scene.JupiterTrail.Renderable')
+        openspace.fadeIn('Scene.SaturnTrail.Renderable')
+        openspace.fadeIn('Scene.UranusTrail.Renderable')
+        openspace.fadeIn('Scene.NeptuneTrail.Renderable')
+        openspace.fadeIn('Scene.PlutoBarycenterTrail.Renderable')
+
+        openspace.setPropertyValueSingle("Scene.MercuryLabel.Renderable.Size", 8.300000)
+        openspace.setPropertyValueSingle("Scene.VenusLabel.Renderable.Size", 8.300000)
+        openspace.setPropertyValueSingle("Scene.EarthLabel.Renderable.Size", 8.300000)
+        openspace.setPropertyValueSingle("Scene.MarsLabel.Renderable.Size", 8.300000)
+
+        openspace.fadeOut("Scene.JupiterLabel.Renderable")
+        openspace.fadeOut("Scene.SaturnLabel.Renderable")
+        openspace.fadeOut("Scene.UranusLabel.Renderable")
+        openspace.fadeOut("Scene.NeptuneLabel.Renderable")
+        openspace.fadeOut("Scene.PlutoLabel.Renderable")
+
+        openspace.fadeOut('Scene.SSSB_PHA_Asteroid.Renderable')
+        openspace.fadeOut('Scene.SSSB_Inner_Main_Belt_Asteroid.Renderable')
+        openspace.fadeOut('Scene.SSSB_Main_Belt_Asteroid.Renderable')
+        openspace.fadeOut('Scene.SSSB_Outer_Main_Belt_Asteroid.Renderable')    
+
+        openspace.setPropertyValueSingle("NavigationHandler.OrbitalNavigator.IdleMotion.Motion", 0.000000)
+        openspace.scheduleScript("openspace.setPropertyValueSingle('NavigationHandler.OrbitalNavigator.IdleMotion.Apply', true)", 5.5)
+
+        openspace.PlanetLabelCounter = (openspace.PlanetLabelCounter or 0) + 1
+        local clearLabels = [=[if openspace.PlanetLabelCounter == ]=] .. openspace.PlanetLabelCounter .. [=[ then 
+            openspace.fadeOut('Scene.MercuryLabel.Renderable')
+            openspace.fadeOut('Scene.VenusLabel.Renderable')
+            openspace.fadeOut('Scene.EarthLabel.Renderable')
+            openspace.fadeOut('Scene.MarsLabel.Renderable')
+            openspace.fadeOut('Scene.JupiterLabel.Renderable')
+            openspace.fadeOut('Scene.SaturnLabel.Renderable')
+            openspace.fadeOut('Scene.UranusLabel.Renderable')
+            openspace.fadeOut('Scene.NeptuneLabel.Renderable')
+            openspace.fadeOut('Scene.PlutoLabel.Renderable')
+        end]=]
+        openspace.scheduleScript(clearLabels, 20)
+    ]],
+    GuiPath = "/Solar System",
+    IsLocal = false
+}
+
+local ShowSolarSystem = {
+    Identifier = "ShowSolarSystem",
+    Name = "Show Entire Solar System",
+    Command = [[
+        openspace.navigation.setFocus("Sun",true,true)
+        openspace.scheduleScript("openspace.navigation.zoomToDistance(13637775700000, 5)", 0.1)
+        openspace.setPropertyValueSingle("NavigationHandler.OrbitalNavigator.IdleMotion.Apply", true)
+
+        openspace.fadeIn("Scene.JupiterLabel.Renderable")
+        openspace.fadeIn("Scene.SaturnLabel.Renderable")
+        openspace.fadeIn("Scene.UranusLabel.Renderable")
+        openspace.fadeIn("Scene.NeptuneLabel.Renderable")
+        openspace.fadeIn("Scene.PlutoLabel.Renderable")
+
+        openspace.fadeIn("Scene.SunGlare.Renderable")
+        openspace.fadeIn('Scene.MercuryTrail.Renderable')
+        openspace.fadeIn('Scene.VenusTrail.Renderable')
+        openspace.fadeIn('Scene.EarthTrail.Renderable')
+        openspace.fadeIn('Scene.MarsTrail.Renderable')
+        openspace.fadeIn('Scene.JupiterTrail.Renderable')
+        openspace.fadeIn('Scene.SaturnTrail.Renderable')
+        openspace.fadeIn('Scene.UranusTrail.Renderable')
+        openspace.fadeIn('Scene.NeptuneTrail.Renderable')
+        openspace.fadeIn('Scene.PlutoBarycenterTrail.Renderable')
+
+        openspace.fadeOut('Scene.SSSB_PHA_Asteroid.Renderable')
+        openspace.fadeOut('Scene.SSSB_Inner_Main_Belt_Asteroid.Renderable')
+        openspace.fadeOut('Scene.SSSB_Main_Belt_Asteroid.Renderable')
+        openspace.fadeOut('Scene.SSSB_Outer_Main_Belt_Asteroid.Renderable')
+
+        openspace.setPropertyValueSingle("Scene.JupiterLabel.Renderable.Size", 9.500000)
+        openspace.setPropertyValueSingle("Scene.SaturnLabel.Renderable.Size", 9.500000)
+        openspace.setPropertyValueSingle("Scene.UranusLabel.Renderable.Size", 9.500000)
+        openspace.setPropertyValueSingle("Scene.NeptuneLabel.Renderable.Size", 9.500000)
+        openspace.setPropertyValueSingle("Scene.PlutoLabel.Renderable.Size", 9.500000)    
+
+        openspace.setPropertyValueSingle("NavigationHandler.OrbitalNavigator.IdleMotion.Motion", 0.000000)
+        openspace.scheduleScript("openspace.setPropertyValueSingle('NavigationHandler.OrbitalNavigator.IdleMotion.Apply', true)", 5.5)
+
+        openspace.PlanetLabelCounter = (openspace.PlanetLabelCounter or 0) + 1
+        local clearLabels = [=[if openspace.PlanetLabelCounter == ]=] .. openspace.PlanetLabelCounter .. [=[ then 
+            openspace.fadeOut('Scene.MercuryLabel.Renderable')
+            openspace.fadeOut('Scene.VenusLabel.Renderable')
+            openspace.fadeOut('Scene.EarthLabel.Renderable')
+            openspace.fadeOut('Scene.MarsLabel.Renderable')
+            openspace.fadeOut('Scene.JupiterLabel.Renderable')
+            openspace.fadeOut('Scene.SaturnLabel.Renderable')
+            openspace.fadeOut('Scene.UranusLabel.Renderable')
+            openspace.fadeOut('Scene.NeptuneLabel.Renderable')
+            openspace.fadeOut('Scene.PlutoLabel.Renderable')
+        end]=]
+        openspace.scheduleScript(clearLabels, 20)
+    ]],
+    GuiPath = "/Solar System",
+    IsLocal = false
+}
+
+asset.onInitialize(function()
+    openspace.action.registerAction(FocusOnMercury)
+    openspace.action.registerAction(FlyToMercury)
+    openspace.action.registerAction(FocusOnVenus)
+    openspace.action.registerAction(FlyToVenus)
+    openspace.action.registerAction(FocusOnEarth)
+    openspace.action.registerAction(FlyToEarth)
+    openspace.action.registerAction(FocusOnMoon)
+    openspace.action.registerAction(FlyToMoon)
+    openspace.action.registerAction(FocusOnMars)
+    openspace.action.registerAction(FlyToMars)
+    openspace.action.registerAction(FocusOnJupiter)
+    openspace.action.registerAction(FlyToJupiter)
+    openspace.action.registerAction(FocusOnSaturn)
+    openspace.action.registerAction(FlyToSaturn)
+    openspace.action.registerAction(FocusOnUranus)
+    openspace.action.registerAction(FlyToUranus)
+    openspace.action.registerAction(FocusOnNeptune)
+    openspace.action.registerAction(FlyToNeptune)
+    openspace.action.registerAction(ShowInnerSolarSystem)
+    openspace.action.registerAction(ShowSolarSystem)
+end)
+
+asset.onDeinitialize(function()
+    openspace.action.removeAction(FocusOnMercury)
+    openspace.action.removeAction(FlyToMercury)
+    openspace.action.removeAction(FocusOnVenus)
+    openspace.action.removeAction(FlyToVenus)
+    openspace.action.removeAction(FocusOnEarth)
+    openspace.action.removeAction(FlyToEarth)
+    openspace.action.removeAction(FocusOnMoon)
+    openspace.action.removeAction(FlyToMoon)
+    openspace.action.removeAction(FocusOnMars)
+    openspace.action.removeAction(FlyToMars)
+    openspace.action.removeAction(FocusOnJupiter)
+    openspace.action.removeAction(FlyToJupiter)
+    openspace.action.removeAction(FocusOnSaturn)
+    openspace.action.removeAction(FlyToSaturn)
+    openspace.action.removeAction(FocusOnUranus)
+    openspace.action.removeAction(FlyToUranus)
+    openspace.action.removeAction(FocusOnNeptune)
+    openspace.action.removeAction(FlyToNeptune)
+    openspace.action.removeAction(ShowInnerSolarSystem)
+    openspace.action.removeAction(ShowSolarSystem)
+end)
+

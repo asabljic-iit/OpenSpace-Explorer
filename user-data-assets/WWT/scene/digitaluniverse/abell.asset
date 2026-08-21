@@ -1,0 +1,84 @@
+local transforms = asset.require("./transforms")
+
+
+
+local textures = asset.resource({
+  Name = "Point Textures",
+  Type = "HttpSynchronization",
+  Identifier = "digitaluniverse_point_textures",
+  Version = 1
+})
+
+local speck = asset.resource({
+  Name = "Abell Speck Files",
+  Type = "HttpSynchronization",
+  Identifier = "digitaluniverse_abell_speck",
+  Version = 3
+})
+
+
+local Object = {
+  Identifier = "Abell",
+  Renderable = {
+    Type = "RenderablePointCloud",
+    Enabled = false,
+    File = speck .. "abell.speck",
+    Labels = {
+      File = speck .. "abell.label",
+      Opacity = 1.0,
+      Color = { 0.0, 0.8, 0.0 },
+      Size = 21.2,
+      MinMaxSize = { 10, 12 },
+      Unit = "Mpc",
+      TransformationMatrix = transforms.Supergalactic
+    },
+    Opacity = 1.0,
+    Coloring = {
+      FixedColor = { 1.0, 0.4, 0.2 },
+      --ColorMap = speck .. "abell.cmap", -- TODO: Decide whether to add
+    },
+    Texture = {
+      File = textures .. "point3A.png",
+    },
+    Unit = "Mpc",
+    TransformationMatrix = transforms.Supergalactic,
+    SizeSettings = {
+      ScaleExponent = 23.2,
+      MaxSize = 0.27,
+      EnableMaxSizeControl = true
+    }
+  },
+  GUI = {
+    Name = "Abell Galaxy Clusters",
+    Path = "/Universe/Deep Sky Surveys",
+    Focusable = false,
+    Description = [[The Abell catalog includes all the nearby, and not so nearby, galaxy
+      clusters. The northern hemisphere survey, published in 1958, was compiled by George
+      Abell from the Palomar Sky Survey plates. A subsequent southern hemisphere catalog
+      was published posthumously in 1989. Each point in this data set represents a
+      cluster of tens to hundreds (possibly even thousands) of galaxies, similar to the
+      Virgo or Fornax Clusters. The data have an arbitrary cut-off for completeness,
+      resulting in the rectangular shape of the data set. Census: 2,246 galaxy clusters.]]
+  }
+}
+
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(Object)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(Object)
+end)
+
+asset.export(Object)
+
+
+
+asset.meta = {
+  Name = "Abell Galaxy Clusters",
+  Description = Object.GUI.Description,
+  Author = "Stuart Levy (NCSA/UIUC), Brian Abbott (AMNH)",
+  URL = "https://www.amnh.org/research/hayden-planetarium/digital-universe",
+  License = "AMNH Digital Universe"
+}

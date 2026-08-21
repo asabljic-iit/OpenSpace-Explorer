@@ -1,0 +1,16 @@
+asset.require("./greenbank/GBT")
+asset.require("./hubble/hubble")
+asset.require("./rubin/verarubintelescope")
+asset.require("./spitzer/spitzer")
+asset.require("./jwst/jwst")
+asset.require("./vla/vla")
+
+
+
+asset.meta = {
+  Name = "Asset files for telescopes",
+  Description = [[]],
+  Author = "Vanessa Garcia :)",
+  URL = "https://www.openspaceproject.com",
+  License = "MIT"
+}

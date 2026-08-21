@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <!-- Prevents unwanted pinch-zooming on kiosk tablet displays -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>OpenSpace Tablet Control</title>
+
+  <link rel="stylesheet" type="text/css" href="main.css" />
+
+  <!-- Core API wrapper provided by OpenSpace -->
+  <script type="text/javascript" src="openspace-api.js"></script>
+
+  <!-- Config files: customize blocked actions and custom target descriptions -->
+  <script type="text/javascript" src="config.js"></script>
+
+  <!-- External UI icon library -->
+  <script type="text/javascript" src="lucide.min.js"></script>
+  <script>window.exports = {};</script>
+  <script type="text/javascript" src="lucide-lab.js"></script>
+
+  <!-- Main tablet application logic and socket handling -->
+  <script type="text/javascript" src="app.js"></script>
+</head>
+
+<body>
+  <!-- Idle Timeout Overlay -->
+  <div id="idle-overlay" class="idle-overlay active">
+    <div class="idle-content">
+      <i data-lucide="hand" class="idle-icon"></i>
+      <h2>Tap Screen to Begin</h2>
+      <p>Explore the universe with OpenSpace!</p>
+    </div>
+  </div>
+  <!-- Left Workspace Area (Scrollable Categories & Modals) -->
+  <div id="container" class="disconnected">
+    <div id="main-content">
+
+      <!-- Overlay banner shown while waiting for WebSocket / OpenSpace connection -->
+      <div id="connection-status" class="connection-status">
+        <span>Awaiting OpenSpace connection...</span>
+      </div>
+
+      <!-- Root category grid generated dynamically by app.js -->
+      <main id="actions-grid" class="icon-grid"></main>
+    </div>
+
+    <!-- Subcategory / Action button modal dialog -->
+    <div id="folder-modal" class="modal-overlay">
+      <div class="modal-content">
+
+        <!-- Modal navigation header -->
+        <div class="modal-header">
+          <div class="modal-header-left">
+            <button id="modal-back-btn" class="back-btn" onclick="navigateModalBack()">
+              <i data-lucide="arrow-left"></i>
+            </button>
+            <h2 id="modal-title">Category</h2>
+          </div>
+          <button class="close-btn" onclick="closeModal()">
+            <i data-lucide="x"></i>
+          </button>
+        </div>
+
+        <!-- Scrollable container for action buttons and subfolder cards -->
+        <div id="modal-body" class="modal-body"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Right Sidebar Info Panel -->
+  <aside id="info-panel" class="info-panel">
+    <div class="info-content">
+      <h3 id="info-title">Focus Target</h3>
+      <div class="scroll-area">
+        <p id="info-description">Connect to OpenSpace to view target details.</p>
+      </div>
+    </div>
+  </aside>
+</body>
+
+</html>

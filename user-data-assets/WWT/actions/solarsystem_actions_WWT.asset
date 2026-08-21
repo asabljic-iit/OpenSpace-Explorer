@@ -1,0 +1,11 @@
+asset.require("./trails/toggle_all_trails")
+asset.require("./trails/toggle_trails_planets_moons")
+-- asset.require("./planets/planet_lighting_WWT")
+asset.require("actions/system/undo_event_fades")
+-- asset.require("actions/trails/toggle_all_minor_moon_trails")
+-- asset.require("actions/trails/on_off_all_minor_moons")
+
+asset.require("./planets/planet_actions")
+asset.require("./planets/dwarfplanet_actions")
+asset.require("./asteroids/asteroids_actions")
+asset.require("./planets/speciallocations_actions")

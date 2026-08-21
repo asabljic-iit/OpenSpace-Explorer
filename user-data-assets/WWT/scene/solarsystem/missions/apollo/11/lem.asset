@@ -1,0 +1,91 @@
+local sunAsset = asset.require("scene/solarsystem/sun/transforms")
+local moonAsset = asset.require("scene/solarsystem/planets/earth/moon/globe")
+
+
+
+local lemModel = asset.resource({
+  Name = "Apollo Lem Models",
+  Type = "HttpSynchronization",
+  Identifier = "apollo_lem_model",
+  Version = 4
+})
+
+
+local Apollo11Lem = {
+  Identifier = "Apollo11Lem",
+  Parent = moonAsset.Moon.Identifier,
+  Transform = {
+    Translation = {
+      Type = "GlobeTranslation",
+      Globe = moonAsset.Moon.Identifier,
+      Longitude = 23.47306,
+      Latitude = 0.67402,
+      Altitude = -1927.65,
+      UseHeightMap = false
+    },
+    Rotation = {
+      Type = "GlobeRotation",
+      Globe = moonAsset.Moon.Identifier,
+      Longitude = 23.47306,
+      Latitude = 0.67402
+    }
+  },
+  GUI = {
+    Name = "Apollo 11 Lem Position",
+    Path = "/Solar System/Missions/Apollo/11"
+  }
+}
+
+local Apollo11LemModel = {
+  Identifier = "Apollo11LemModel",
+  Parent = Apollo11Lem.Identifier,
+  Transform = {
+      Scale = {
+      Type = "StaticScale",
+      Scale = 0.24
+    }
+  },
+  Renderable = {
+    Type = "RenderableModel",
+    GeometryFile = lemModel .. "LM-2_ver2clean.obj",
+    RotationVector = { -90.0, 283.86999, 0 },
+    LightSources = {
+      sunAsset.LightSource,
+      {
+        Identifier = "Camera",
+        Type = "CameraLightSource",
+        Intensity = 0.5
+      }
+    },
+    EnableFaceCulling = false
+  },
+  GUI = {
+    Name = "Apollo 11 Lem",
+    Path = "/Solar System/Missions/Apollo/11"
+  }
+}
+
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(Apollo11Lem)
+  openspace.addSceneGraphNode(Apollo11LemModel)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(Apollo11LemModel)
+  openspace.removeSceneGraphNode(Apollo11Lem)
+end)
+
+asset.export(Apollo11Lem)
+asset.export(Apollo11LemModel)
+
+
+
+asset.meta = {
+  Name = "Apollo 11 Lunar Module",
+  Description = [[This asset provides a 3D model of the Apollo Lunar Module/Lunar
+    Excursion Module.]],
+  Author = "OpenSpace Team",
+  URL = "https://openspaceproject.com",
+  License = "MIT license"
+}

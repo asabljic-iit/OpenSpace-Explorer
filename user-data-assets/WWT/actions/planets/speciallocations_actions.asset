@@ -1,0 +1,108 @@
+-- Earth Special Locations
+local FlyToAdler = {
+    Identifier = "FlyToAdler",
+    Name = "Fly to Adler Planetarium",
+    Command = [[
+        openspace.setPropertyValueSingle("NavigationHandler.OrbitalNavigator.IdleMotion.Apply", false)
+        openspace.setPropertyValueSingle("NavigationHandler.OrbitalNavigator.IdleMotion.ShouldTriggerWhenIdle", false)
+        openspace.navigation.flyToGeo("Earth",41.8660,-87.6073,600,10)
+    ]],
+    GuiPath = "/Solar System/Earth/Special Locations",
+    IsLocal = false
+}
+
+local FlyToBean = {
+    Identifier = "FlyToBean",
+    Name = "Fly to the Bean",
+    Command = [[
+        openspace.setPropertyValueSingle("NavigationHandler.OrbitalNavigator.IdleMotion.Motion", 2.00000); 
+        openspace.scheduleScript("openspace.setPropertyValueSingle('NavigationHandler.OrbitalNavigator.IdleMotion.Apply', true)", 15.5); 
+        openspace.navigation.flyToGeo("Earth", 41.8826, -87.6235, 350, 10); 
+        openspace.scheduleScript([=[openspace.navigation.setNavigationState({Anchor = "bean", Pitch = -0.000944798776315691, Position = {-87.64505004882812, -90.15288543701172, 9.566390991210938 }, ReferenceFrame = "Root", Timestamp = "2026 AUG 02 21:19:42", Up = {-0.13849929255298576, 0.23669146532033625, 0.9616626727740009}, Yaw = 6.306831097846107e-05}, true)]=], 15) 
+    ]],
+    GuiPath = "/Solar System/Earth/Special Locations",
+    IsLocal = false
+}
+
+-- Mars Special Locations
+
+local FlyToVallesMarineris = {
+    Identifier = "FlyToVallesMarineris",
+    Name = "Go to Valles Marineris",
+    Command = [[
+        openspace.navigation.flyToGeo('Mars', -14.01, -58.589999999999975, 0, 10)
+        openspace.scheduleScript("openspace.action.triggerAction('os.nightsky.LevelHorizonPitch')", 10.5)
+        openspace.setPropertyValueSingle("Scene.Mars.Renderable.PerformShading", false)
+        openspace.scheduleScript("openspace.fadeIn('Scene.Mars.Renderable.Layers.ColorLayers.CTX_Mosaic_NewYork')", 9)
+        openspace.setPropertyValueSingle("NavigationHandler.OrbitalNavigator.IdleMotion.Motion", 1.000000)
+        openspace.scheduleScript("openspace.setPropertyValueSingle('NavigationHandler.OrbitalNavigator.IdleMotion.Apply', true)", 10.5)
+
+        openspace.MarsLocationTimerTicket = (openspace.MarsLocationTimerTicket or 0) + 1
+        local currentTicket = openspace.MarsLocationTimerTicket
+
+        local MarsReset = "if openspace.MarsLocationTimerTicket == " .. currentTicket .. " and openspace.navigation.getNavigationState().Anchor == 'Mars' then openspace.setPropertyValueSingle('Scene.Mars.Renderable.PerformShading', true); openspace.fadeOut('Scene.Mars.Renderable.Layers.ColorLayers.CTX_Mosaic_NewYork'); openspace.setPropertyValueSingle('NavigationHandler.OrbitalNavigator.IdleMotion.Motion', 0.000000); openspace.navigation.jumpTo('Mars') end"
+
+        openspace.scheduleScript(MarsReset, 41)
+    ]],
+    GuiPath = "/Solar System/Mars/Special Locations",
+    IsLocal = false
+}
+
+local FlyToMarsNorthPole = {
+    Identifier = "FlyToMarsNorthPole",
+    Name = "Fly To Mars North Pole",
+    Command = [[
+        openspace.navigation.flyToGeo("Mars",87.38181651722302,2.1923980934504925,6300000,10)
+        openspace.setPropertyValueSingle("Scene.Mars.Renderable.PerformShading", false)
+        openspace.fadeOut("Scene.Mars.Renderable.Layers.ColorLayers.CTX_Mosaic_NewYork")
+        openspace.setPropertyValueSingle("NavigationHandler.OrbitalNavigator.IdleMotion.Motion", 1.000000)
+        openspace.setPropertyValueSingle("NavigationHandler.OrbitalNavigator.IdleMotion.Apply", true)
+
+        openspace.MarsLocationTimerTicket = (openspace.MarsLocationTimerTicket or 0) + 1
+        local currentTicket = openspace.MarsLocationTimerTicket
+
+        local MarsReset = "if openspace.MarsLocationTimerTicket == " .. currentTicket .. " and openspace.navigation.getNavigationState().Anchor == 'Mars' then openspace.setPropertyValueSingle('Scene.Mars.Renderable.PerformShading', true); openspace.setPropertyValueSingle('NavigationHandler.OrbitalNavigator.IdleMotion.Motion', 0.000000); openspace.navigation.jumpTo('Mars') end"
+
+        openspace.scheduleScript(MarsReset, 41)
+    ]],
+    GuiPath = "/Solar System/Mars/Special Locations",
+    IsLocal = false
+}
+
+local FlyToMarsSouthPole = {
+    Identifier = "FlyToMarsSouthPole",
+    Name = "Fly To Mars South Pole",
+    Command = [[
+        openspace.navigation.flyToGeo("Mars",-90,-5.48117086768147,6300000, 10)
+        openspace.setPropertyValueSingle("Scene.Mars.Renderable.PerformShading", false)
+        openspace.fadeOut("Scene.Mars.Renderable.Layers.ColorLayers.CTX_Mosaic_NewYork")
+        openspace.setPropertyValueSingle("NavigationHandler.OrbitalNavigator.IdleMotion.Motion", 1.000000)
+        openspace.setPropertyValueSingle("NavigationHandler.OrbitalNavigator.IdleMotion.Apply", true)
+
+        openspace.MarsLocationTimerTicket = (openspace.MarsLocationTimerTicket or 0) + 1
+        local currentTicket = openspace.MarsLocationTimerTicket
+
+        local MarsReset = "if openspace.MarsLocationTimerTicket == " .. currentTicket .. " and openspace.navigation.getNavigationState().Anchor == 'Mars' then openspace.setPropertyValueSingle('Scene.Mars.Renderable.PerformShading', true); openspace.setPropertyValueSingle('NavigationHandler.OrbitalNavigator.IdleMotion.Motion', 0.000000); openspace.navigation.jumpTo('Mars') end"
+
+        openspace.scheduleScript(MarsReset, 41)
+    ]],
+    GuiPath = "/Solar System/Mars/Special Locations",
+    IsLocal = false
+}
+
+asset.onInitialize(function()
+    openspace.action.registerAction(FlyToAdler)
+    openspace.action.registerAction(FlyToBean)
+    openspace.action.registerAction(FlyToVallesMarineris)
+    openspace.action.registerAction(FlyToMarsNorthPole)
+    openspace.action.registerAction(FlyToMarsSouthPole)
+end)
+
+asset.onDeinitialize(function()
+    openspace.action.removeAction(FlyToAdler)
+    openspace.action.removeAction(FlyToBean)
+    openspace.action.removeAction(FlyToVallesMarineris)
+    openspace.action.removeAction(FlyToMarsNorthPole)
+    openspace.action.removeAction(FlyToMarsSouthPole)
+end)
+

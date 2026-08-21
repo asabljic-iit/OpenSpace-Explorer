@@ -1,0 +1,45 @@
+local SetupCrash = {
+  Identifier = "os.beresheet.SetupCrash",
+  Name = "Set to time of Beresheet crash",
+  Command = "openspace.time.setTime('2019-04-11T07:25:00')",
+  Documentation = "Set the time to the crash time of Beresheet",
+  GuiPath = "/Missions/Beresheet",
+  IsLocal = false
+}
+
+local FocusLander = {
+  Identifier = "os.beresheet.FocusLander",
+  Name = "Fly to Tardigrades",
+  Command = [[
+  openspace.setPropertyValueSingle("NavigationHandler.OrbitalNavigator.IdleMotion.Motion", 2.00000)
+  openspace.navigation.flyTo("BeresheetLander", 10)
+  
+  openspace.scheduleScript([=[openspace.setPropertyValueSingle("NavigationHandler.OrbitalNavigator.IdleMotion.Apply", true); openspace.setPropertyValueSingle("NavigationHandler.OrbitalNavigator.IdleMotion.Motion", 2.000000); openspace.navigation.setNavigationState({["Anchor"] = "BeresheetLander",["Pitch"] = 3.6243810817600777e-06 ,["Position"] = {-28.442352294921875, -22.553794860839844, 5.30108642578125},["ReferenceFrame"] = "Root", ["Timestamp"] = "2026 AUG 02 21:19:42", ["Up"] = {0.01099525700967885, 0.21563190486708161, 0.9764128153228454},["Yaw"] = 6.641141086472804e-07},true)]=], 10.5) ]],
+  Documentation = "Set camera focus on the Moon",
+  GuiPath = "/Missions/Beresheet",
+  IsLocal = false
+}
+
+
+asset.onInitialize(function()
+  -- openspace.action.registerAction(SetupCrash)
+  openspace.action.registerAction(FocusLander)
+end)
+
+asset.onDeinitialize(function()
+  -- openspace.action.removeAction(FocusTardigrade1)
+  openspace.action.removeAction(FocusLander)
+end)
+
+-- asset.export("SetupCrash", SetupCrash.Identifier)
+asset.export("FocusLander", FocusLander.Identifier)
+
+
+
+asset.meta = {
+  Name = "Actions - Beresheet",
+  Description = "Actions related to the Beresheet mission",
+  Author = "Vanessa Garcia",
+  URL = "",
+  License = "MIT license"
+}

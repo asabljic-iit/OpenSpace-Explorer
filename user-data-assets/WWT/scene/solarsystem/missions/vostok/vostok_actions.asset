@@ -1,0 +1,22 @@
+local FlyToVostok = {
+    Identifier = "FlyToVostok",
+    Name = "Fly to Vostok 1",
+    Command = [[
+        openspace.setPropertyValueSingle("NavigationHandler.OrbitalNavigator.IdleMotion.ShouldTriggerWhenIdle", true)
+        openspace.setPropertyValueSingle("NavigationHandler.OrbitalNavigator.IdleMotion.Apply", false)
+        openspace.navigation.flyTo("Vostok", 10)
+    ]],
+    GuiPath = "/Missions",
+    IsLocal = false
+}
+
+
+
+asset.onInitialize(function()
+    openspace.action.registerAction(FlyToVostok)
+end)
+
+asset.onDeinitialize(function()
+    openspace.action.removeAction(FlyToVostok)
+end)
+

@@ -1,0 +1,32 @@
+-- This is an asset file that loads all the extra addons to the WWT. It is called by base_light_WWT
+
+
+-- Adding telescopes
+asset.require("./scene/solarsystem/telescopes/WWT_telescopes")
+asset.require("./actions/planets/telescopes_actions")
+-- Adding telescope images
+asset.require("./scene/telescopeimages/telescope_images")
+-- Adding tardigrades
+asset.require("./scene/solarsystem/extremophiles/beresheet")
+-- Adding asteroids
+asset.require("./scene/solarsystem/asteroids/asteroids")
+-- Adding dwarf planets
+asset.require("./scene/solarsystem/dwarfplanets/ceres/ceres")
+asset.require("./scene/solarsystem/dwarfplanets/makemake/makemake")
+asset.require("./scene/solarsystem/dwarfplanets/vesta/vesta")
+-- Adding missions
+asset.require("./scene/solarsystem/missions/WWT_missions")
+-- Adding misc
+asset.require("./scene/solarsystem/misc/WWT_misc")
+-- Adding satellites
+asset.require("./scene/solarsystem/planets/earth/satellites/satellites_interesting")
+asset.require("./actions/planets/satellites_actions")
+
+
+
+
+
+
+
+
+

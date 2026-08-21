@@ -1,0 +1,44 @@
+group,uniqueAbbrv,name,ra,dec,vertSize(arcmin),scale,angleDeg(N right of vert),imageName
+Nebulae,M1,Crab Nebula (M1),05h34m32.53s,+22d00m54.87s,6.41,1.0,+0.0,M1.jpg
+Nebulae,M8,Lagoon Nebula (M8),18h03m40.44s,-24d22m32.15s,2.81,1.0,+55.6,M8.jpg
+Nebulae,M16,Pillars of Creation (M16),18h18m55.18s,-13d51m06.26s,7.30,1.0,+2.6,JWSTM16.jpg
+Nebulae,M17,Omega/Swan Nebula (M17),18h20m34.37s,-16d09m23.70s,3.70,1.0,-93.0,M17.jpg
+Nebulae,M20,Trifid Nebula (M20),18h02m28.65s,-23d04m27.03s,2.60,1.0,-44.9,M20.jpg
+Nebulae,M27,Dumbbell Nebula (M27),19h59m36.92s,+22d43m16.38s,7.63,1.0,-2.1,noao-m27.jpg
+Nebulae,M42,Orion Nebula (M42),05h35m09.73s,-05d24m50.32s,30.03,1.0,+0.0,M42.jpg
+Nebulae,M57,Ring Nebula (M57),18h53m35.21s,+33d01m44.13s,2.10,1.0,-11.7,M57.jpg
+Nebulae,M76,Little Dumbbell Nebula (M76),01h42m19.75s,+51d34m30.86s,3.16,1.0,+19.1,M76.jpg
+Nebulae,JWSTNGC1333,NGC 1333,03h28m59.76s,+31d19m35.04s,3.65,1.0,-18.8,JWSTNGC1333.jpg
+Nebulae,JWSTSouthernRing,Southern Ring Nebula,10h07m01.69s,-40d26m11.16s,2.25,1.0,+112.0,JWSTSouthernRing.jpg
+Nebulae,JWSTCarina,Carina Nebula,10h36m51.03s,-58d37m12.06s,4.23,1.0,+103.0,JWSTCarina.jpg
+Nebulae,JWSTNGC604,NGC 604,01h34m33.94s,+30d46m57.12s,1.76,1.0,+65.3,JWSTNGC604.jpg
+Nebulae,VISTAHelix,Helix Nebula,22h29m39.01s,-20d50m22.00s,37.51,1.0,+0.0,VISTAHelix.jpg
+Nebulae,Horsehead,Horsehead Nebula,05h41m04.52s,-02d27m24.91s,11.74,1.0,-89.2,eso1839i.jpg
+Nebulae,Rosette,Rosette Nebula,06h32m13.59s,+04d58m36.15s,67.28,1.0,-2.0,noao-rosette.jpg
+Nebulae,Veil,Veil Nebula,20h45m43.52s,+30d44m04.83s,53.04,1.0,-89.8,noao-veil-wiyn-0-9-m.jpg
+Nebulae,CasA,Cassiopeia A,23h23m25.20s,+58d49m12.09s,5.00,1.0,+41.8,weic2330e.jpg
+Galaxies,Eyes,Eyes Galaxies,12h27m45.67s,+13d00m31.02s,6.30,1.0,+120.0,eso1131a.jpg
+Galaxies,M31,Andromeda Galaxy (M31),00h42m30.04s,+41d19m35.65s,140.76,1.0,+180.4,M31.jpg
+Galaxies,M51,Whirlpool Galaxy (M51),13h29m52.34s,+47d12m47.43s,6.64,1.0,+91.9,M51.jpg
+Galaxies,M63,Sunflower Galaxy (M63),13h15m50.09s,+42d01m39.01s,1.71,1.0,+11.6,M63.jpg
+Galaxies,M64,Black Eye Galaxy (M64),12h56m43.34s,+21d41m02.35s,1.77,1.0,+155.4,M64.jpg
+Galaxies,M82,Cigar Galaxy (M82),09h55m55.00s,+69d40m54.17s,6.17,1.0,-50.1,M82.jpg
+Galaxies,M83,Southern Pinwheel Galaxy (M83),13h37m00.37s,-29d51m47.48s,4.89,1.0,+84.7,M83.jpg
+Galaxies,JWSTStephan,Stephan's Quintet,22h35m59.57s,+33d57m30.24s,6.08,1.0,+62.0,JWSTStephan.jpg
+Galaxies,M81,Bode's Galaxy (M81),09h55m33.86s,+69d04m20.12s,12.67,1.0,-114.0,heic0710a.jpg
+Galaxies,GalacticCenter,Center of the Milky Way,17h45m40.14s,-29d00m24.57s,2.38,1.0,+0.2,potw1047a.jpg
+Galaxies,LMC,Large Magellanic Cloud,05h20m04.71s,-69d22m21.22s,403.56,1.0,+170.2,iotw2547a.jpg
+Galaxies,LeoTriplet,Leo Triplet (M66 Group),11h19m48.73s,+13d17m16.16s,50.76,1.0,-2.0,noao-m65a66.jpg
+Galaxies,M101,Pinwheel Galaxy (M101),14h03m12.03s,+54d21m05.42s,10.32,1.0,+3.5,heic0602a.jpg
+Galaxies,SMC,Small Magellanic Cloud,00h55m03.16s,-72d57m50.57s,313.48,1.0,-1.2,eso1714a.jpg
+Galaxies,M33,Triangulum Galaxy (M33),01h33m52.12s,+30d40m26.17s,57.04,1.0,-90.0,eso1424a.jpg
+Stars,M45,Pleiades (M45),03h46m50.98s,+24d09m12.79s,59.0,1.0,+0.0,M45.jpg
+Stars,JWSTDustyDisc,Dusty Disc,04h33m16.60s,+22d53m21.98s,0.43,1.0,+83.9,JWSTDustyDisc.jpg
+Stars,JWSTHH30,HH 30,04h31m37.49s,+18d12m24.03s,0.17,1.0,+33.4,JWSTHH30.jpg
+Stars,M6,Butterfly Cluster (M6),17h40m14.71s,-32d14m26.44s,43.99,1.0,-2.0,noao-02637.jpg
+Stars,M3,Messier 3,13h42m11.80s,+28d22m31.69s,2.43,1.0,+10.5,potw1914a.jpg
+Stars,M4,Messier 4,16h23m56.88s,-26d31m37.27s,1.22,1.0,-35.7,opo0210c.jpg
+Stars,M9,Messier 9,17h19m11.98s,-18d30m57.55s,2.92,1.0,-109.6,heic1205a.jpg
+Stars,NGC602,NGC 602,01h29m28.65s,-73d33m40.84s,2.45,1.0,+0.1,weic2425c.jpg
+Stars,M7,Ptolemy's Cluster (M7),17h53m51.21s,-34d47m34.34s,32.12,1.0,+0.0,eso1406a.jpg
+Black Holes,M87,Messier 87,12h30m49.42s,+12d23m28.04s,0.01,1.0,+0.0,M87.jpg

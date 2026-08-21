@@ -1,0 +1,1129 @@
+local earthAsset = asset.require('scene/solarsystem/planets/earth/globe') -- was .../earth but got error, testing .../globe
+local sunAsset = asset.require('scene/solarsystem/sun/sun')
+
+
+  
+local vla1 = {
+	Identifier = "vla1",
+	Parent = earthAsset.Earth.Identifier,
+	Transform = {
+		Translation = {
+			Type = "GlobeTranslation",
+			Globe = earthAsset.Earth.Identifier,
+            Latitude = 34.083610, 
+            Longitude = -107.618904,
+            Altitude = 0,
+			UseHeightmap = true
+		},
+		Rotation = {
+			Type = "GlobeRotation",
+			Globe = earthAsset.Earth.Identifier,
+            Latitude = 34.083610, 
+            Longitude = -107.618904,
+			UseHeightmap = false
+		}
+		
+	},
+	Renderable = {
+		Type = "RenderableModel",
+		GeometryFile = asset.resource("vla.glb"),
+		forceRenderInvisible = true,
+		ModelScale = 1,  
+		RotationVector = {00.00,00.00,00.00},   
+		LightSources = { sunAsset.LightSource }
+	},
+	GUI = {
+		Name = "VLA A1",
+		Path = "/Solar System/Telescopes/Very Large Array",
+		Description = [[
+			The Very Large Array is a centimeter-wavelength radio astronomy observatory located in Magdalena, New Mexico. 
+		]],
+	}
+}
+
+local vla2 = {
+	Identifier = "vla2",
+	Parent = earthAsset.Earth.Identifier, 
+	Transform = {
+		Translation = {
+			Type = "GlobeTranslation",
+			Globe = earthAsset.Earth.Identifier,
+            Latitude = 34.082753, 
+            Longitude = -107.618744,
+            Altitude = 0,
+			UseHeightmap = true
+		},
+		Rotation = {
+			Type = "GlobeRotation",
+			Globe = earthAsset.Earth.Identifier,
+            Latitude = 34.082770, 
+            Longitude = -107.68728,
+			UseHeightmap = false
+		}
+		
+	},
+	Renderable = {
+		Type = "RenderableModel",
+		GeometryFile = asset.resource("vla.glb"),
+		forceRenderInvisible = true,
+		ModelScale = 1,  
+		RotationVector = {00.00,00.00,00.00},   
+		LightSources = { sunAsset.LightSource }
+	},
+	GUI = {
+		Name = "VLA A2",
+		Path = "/Solar System/Telescopes/Very Large Array",
+		Description = [[
+			The Very Large Array is a centimeter-wavelength radio astronomy observatory located in Magdalena, New Mexico. 
+		]],
+	}
+}
+
+local vla3 = {
+	Identifier = "vla3",
+	Parent = earthAsset.Earth.Identifier, 
+	Transform = {
+		Translation = {
+			Type = "GlobeTranslation",
+			Globe = earthAsset.Earth.Identifier,
+            Latitude = 34.081933, 
+            Longitude = -107.618728,
+            Altitude = 0,
+			UseHeightmap = true
+		},
+		Rotation = {
+			Type = "GlobeRotation",
+			Globe = earthAsset.Earth.Identifier,
+            Latitude = 34.081933, 
+            Longitude = -107.618728,
+			UseHeightmap = false
+		}
+		
+	},
+	Renderable = {
+		Type = "RenderableModel",
+		GeometryFile = asset.resource("vla.glb"),
+		forceRenderInvisible = true,
+		ModelScale = 1,  
+		RotationVector = {00.00,00.00,00.00},   
+		LightSources = { sunAsset.LightSource }
+	},
+	GUI = {
+		Name = "VLA A3",
+		Path = "/Solar System/Telescopes/Very Large Array",
+		Description = [[
+			The Very Large Array is a centimeter-wavelength radio astronomy observatory located in Magdalena, New Mexico. 
+		]],
+	}
+}
+
+local vla4 = {
+	Identifier = "vla4",
+	Parent = earthAsset.Earth.Identifier,
+	Transform = {
+		Translation = {
+			Type = "GlobeTranslation",
+			Globe = earthAsset.Earth.Identifier,
+            Latitude = 34.081208, 
+            Longitude = -107.618651,
+            Altitude = 0,
+			UseHeightmap = true
+		},
+		Rotation = {
+			Type = "GlobeRotation",
+			Globe = earthAsset.Earth.Identifier,
+            Latitude = 34.081208, 
+            Longitude = -107.618651,
+			UseHeightmap = false
+		}
+		
+	},
+	Renderable = {
+		Type = "RenderableModel",
+		GeometryFile = asset.resource("vla.glb"),
+		forceRenderInvisible = true,
+		ModelScale = 1,  
+		RotationVector = {00.00,00.00,00.00},   
+		LightSources = { sunAsset.LightSource }
+	},
+	GUI = {
+		Name = "VLA A4",
+		Path = "/Solar System/Telescopes/Very Large Array",
+		Description = [[
+			The Very Large Array is a centimeter-wavelength radio astronomy observatory located in Magdalena, New Mexico. 
+		]],
+	}
+}
+
+local vla5 = {
+	Identifier = "vla5",
+	Parent = earthAsset.Earth.Identifier,
+	Transform = {
+		Translation = {
+			Type = "GlobeTranslation",
+			Globe = earthAsset.Earth.Identifier,
+            Latitude = 34.080569, 
+            Longitude = -107.618579,
+            Altitude = 0,
+			UseHeightmap = true
+		},
+		Rotation = {
+			Type = "GlobeRotation",
+			Globe = earthAsset.Earth.Identifier,
+            Latitude = 34.080569, 
+            Longitude = -107.618579,
+			UseHeightmap = false
+		}
+		
+	},
+	Renderable = {
+		Type = "RenderableModel",
+		GeometryFile = asset.resource("vla.glb"),
+		forceRenderInvisible = true,
+		ModelScale = 1,  
+		RotationVector = {00.00,00.00,00.00},   
+		LightSources = { sunAsset.LightSource }
+	},
+	GUI = {
+		Name = "VLA A5",
+		Path = "/Solar System/Telescopes/Very Large Array",
+		Description = [[
+			The Very Large Array is a centimeter-wavelength radio astronomy observatory located in Magdalena, New Mexico. 
+		]],
+	}
+}
+
+local vla6 = {
+	Identifier = "vla6",
+	Parent = earthAsset.Earth.Identifier,
+	Transform = {
+		Translation = {
+			Type = "GlobeTranslation",
+			Globe = earthAsset.Earth.Identifier,
+            Latitude = 34.080027, 
+            Longitude = -107.618529,
+            Altitude = 0,
+			UseHeightmap = true
+		},
+		Rotation = {
+			Type = "GlobeRotation",
+			Globe = earthAsset.Earth.Identifier,
+            Latitude = 34.080027, 
+            Longitude = -107.618529,
+			UseHeightmap = false
+		}
+		
+	},
+	Renderable = {
+		Type = "RenderableModel",
+		GeometryFile = asset.resource("vla.glb"),
+		forceRenderInvisible = true,
+		ModelScale = 1,  
+		RotationVector = {00.00,00.00,00.00},   
+		LightSources = { sunAsset.LightSource }
+	},
+	GUI = {
+		Name = "VLA A6",
+		Path = "/Solar System/Telescopes/Very Large Array",
+		Description = [[
+			The Very Large Array is a centimeter-wavelength radio astronomy observatory located in Magdalena, New Mexico. 
+		]],
+	}
+}
+
+local vla7 = {
+	Identifier = "vla7",
+	Parent = earthAsset.Earth.Identifier, 
+	Transform = {
+		Translation = {
+			Type = "GlobeTranslation",
+			Globe = earthAsset.Earth.Identifier,
+            Latitude = 34.079669, 
+            Longitude = -107.618493,
+            Altitude = 0,
+			UseHeightmap = true
+		},
+		Rotation = {
+			Type = "GlobeRotation",
+			Globe = earthAsset.Earth.Identifier,
+            Latitude = 34.079669, 
+            Longitude = -107.618493,
+			UseHeightmap = false
+		}
+		
+	},
+	Renderable = {
+		Type = "RenderableModel",
+		GeometryFile = asset.resource("vla.glb"),
+		forceRenderInvisible = true,
+		ModelScale = 1,  
+		RotationVector = {00.00,00.00,00.00},   
+		LightSources = { sunAsset.LightSource }
+	},
+	GUI = {
+		Name = "VLA A7",
+		Path = "/Solar System/Telescopes/Very Large Array",
+		Description = [[
+			The Very Large Array is a centimeter-wavelength radio astronomy observatory located in Magdalena, New Mexico. 
+		]],
+	}
+}
+
+local vla8 = {
+	Identifier = "vla8",
+	Parent = earthAsset.Earth.Identifier,
+	Transform = {
+		Translation = {
+			Type = "GlobeTranslation",
+			Globe = earthAsset.Earth.Identifier,
+            Latitude = 34.079306, 
+            Longitude = -107.618448,
+            Altitude = 0,
+			UseHeightmap = true
+		},
+		Rotation = {
+			Type = "GlobeRotation",
+			Globe = earthAsset.Earth.Identifier,
+            Latitude = 34.079306, 
+            Longitude = -107.618448,
+			UseHeightmap = false
+		}
+		
+	},
+	Renderable = {
+		Type = "RenderableModel",
+		GeometryFile = asset.resource("vla.glb"),
+		forceRenderInvisible = true,
+		ModelScale = 1,  
+		RotationVector = {00.00,00.00,00.00},  
+		LightSources = { sunAsset.LightSource }
+	},
+	GUI = {
+		Name = "VLA A8",
+		Path = "/Solar System/Telescopes/Very Large Array",
+		Description = [[
+			The Very Large Array is a centimeter-wavelength radio astronomy observatory located in Magdalena, New Mexico. 
+		]],
+	}
+}
+
+local vla9 = {
+	Identifier = "vla9",
+	Parent = earthAsset.Earth.Identifier,
+	Transform = {
+		Translation = {
+			Type = "GlobeTranslation",
+			Globe = earthAsset.Earth.Identifier,
+            Latitude = 34.078841, 
+            Longitude = -107.618397,
+            Altitude = 0,
+			UseHeightmap = true
+		},
+		Rotation = {
+			Type = "GlobeRotation",
+			Globe = earthAsset.Earth.Identifier,
+             Latitude = 34.078841, 
+            Longitude = -107.618397,
+			UseHeightmap = false
+		}
+		
+	},
+	Renderable = {
+		Type = "RenderableModel",
+		GeometryFile = asset.resource("vla.glb"),
+		forceRenderInvisible = true,
+		ModelScale = 1,  
+		RotationVector = {00.00,00.00,00.00},   
+		LightSources = { sunAsset.LightSource }
+	},
+	GUI = {
+		Name = "VLA A9",
+		Path = "/Solar System/Telescopes/Very Large Array",
+		Description = [[
+			The Very Large Array is a centimeter-wavelength radio astronomy observatory located in Magdalena, New Mexico. 
+		]],
+	}
+}
+
+local vla10 = {
+	Identifier = "vla10",
+	Parent = earthAsset.Earth.Identifier,
+	Transform = {
+		Translation = {
+			Type = "GlobeTranslation",
+			Globe = earthAsset.Earth.Identifier,
+            Latitude = 34.078484, 
+            Longitude = -107.618359,
+            Altitude = 0,
+			UseHeightmap = true
+		},
+		Rotation = {
+			Type = "GlobeRotation",
+			Globe = earthAsset.Earth.Identifier,
+            Latitude = 34.078484, 
+            Longitude = -107.618359,
+			UseHeightmap = false
+		}
+		
+	},
+	Renderable = {
+		Type = "RenderableModel",
+		GeometryFile = asset.resource("vla.glb"),
+		forceRenderInvisible = true,
+		ModelScale = 1,  
+		RotationVector = {00.00,00.00,00.00},   
+		LightSources = { sunAsset.LightSource }
+	},
+	GUI = {
+		Name = "VLA A10",
+		Path = "/Solar System/Telescopes/Very Large Array",
+		Description = [[
+			The Very Large Array is a centimeter-wavelength radio astronomy observatory located in Magdalena, New Mexico. 
+		]],
+	}
+}
+
+local vla11 = {
+	Identifier = "vla11",
+	Parent = earthAsset.Earth.Identifier, 
+	Transform = {
+		Translation = {
+			Type = "GlobeTranslation",
+			Globe = earthAsset.Earth.Identifier,
+            Latitude = 34.078123, 
+            Longitude = -107.618321,
+            Altitude = 0,
+			UseHeightmap = true
+		},
+		Rotation = {
+			Type = "GlobeRotation",
+			Globe = earthAsset.Earth.Identifier,
+            Latitude = 34.078123, 
+            Longitude = -107.618321,
+			UseHeightmap = false
+		}
+		
+	},
+	Renderable = {
+		Type = "RenderableModel",
+		GeometryFile = asset.resource("vla.glb"),
+		forceRenderInvisible = true,
+		ModelScale = 1,  
+		RotationVector = {00.00,00.00,00.00},   
+		LightSources = { sunAsset.LightSource }
+	},
+	GUI = {
+		Name = "VLA A11",
+		Path = "/Solar System/Telescopes/Very Large Array",
+		Description = [[
+			The Very Large Array is a centimeter-wavelength radio astronomy observatory located in Magdalena, New Mexico. 
+		]],
+	}
+}
+
+local vla12 = {
+	Identifier = "vla12",
+	Parent = earthAsset.Earth.Identifier, 
+	Transform = {
+		Translation = {
+			Type = "GlobeTranslation",
+			Globe = earthAsset.Earth.Identifier,
+            Latitude = 34.078605, 
+            Longitude = -107.617924,
+            Altitude = 0,
+			UseHeightmap = true
+		},
+		Rotation = {
+			Type = "GlobeRotation",
+			Globe = earthAsset.Earth.Identifier,
+            Latitude = 34.078605, 
+            Longitude = -107.617924,
+			UseHeightmap = false
+		}
+		
+	},
+	Renderable = {
+		Type = "RenderableModel",
+		GeometryFile = asset.resource("vla.glb"),
+		forceRenderInvisible = true,
+		ModelScale = 1,  
+		RotationVector = {00.00,00.00,00.00},   
+		LightSources = { sunAsset.LightSource }
+	},
+	GUI = {
+		Name = "VLA A12",
+		Path = "/Solar System/Telescopes/Very Large Array",
+		Description = [[
+			The Very Large Array is a centimeter-wavelength radio astronomy observatory located in Magdalena, New Mexico. 
+		]],
+	}
+}
+
+local vla13 = {
+	Identifier = "vla13",
+	Parent = earthAsset.Earth.Identifier,
+	Transform = {
+		Translation = {
+			Type = "GlobeTranslation",
+			Globe = earthAsset.Earth.Identifier,
+            Latitude = 34.078434, 
+            Longitude = -107.617484,
+            Altitude = 0,
+			UseHeightmap = true
+		},
+		Rotation = {
+			Type = "GlobeRotation",
+			Globe = earthAsset.Earth.Identifier,
+            Latitude = 34.078434, 
+            Longitude = -107.617484,
+			UseHeightmap = false
+		}
+		
+	},
+	Renderable = {
+		Type = "RenderableModel",
+		GeometryFile = asset.resource("vla.glb"),
+		forceRenderInvisible = true,
+		ModelScale = 1,  
+		RotationVector = {00.00,00.00,00.00},   
+		LightSources = { sunAsset.LightSource }
+	},
+	GUI = {
+		Name = "VLA A13",
+		Path = "/Solar System/Telescopes/Very Large Array",
+		Description = [[
+			The Very Large Array is a centimeter-wavelength radio astronomy observatory located in Magdalena, New Mexico. 
+		]],
+	}
+}
+
+local vla14 = {
+	Identifier = "vla14",
+	Parent = earthAsset.Earth.Identifier,
+	Transform = {
+		Translation = {
+			Type = "GlobeTranslation",
+			Globe = earthAsset.Earth.Identifier,
+            Latitude = 34.078241, 
+            Longitude = -107.616916,
+            Altitude = 0,
+			UseHeightmap = true
+		},
+		Rotation = {
+			Type = "GlobeRotation",
+			Globe = earthAsset.Earth.Identifier,
+            Latitude = 34.078241, 
+            Longitude = -107.616916,
+			UseHeightmap = false
+		}
+		
+	},
+	Renderable = {
+		Type = "RenderableModel",
+		GeometryFile = asset.resource("vla.glb"),
+		forceRenderInvisible = true,
+		ModelScale = 1,  
+		RotationVector = {00.00,00.00,00.00},   
+		LightSources = { sunAsset.LightSource }
+	},
+	GUI = {
+		Name = "VLA A14",
+		Path = "/Solar System/Telescopes/Very Large Array",
+		Description = [[
+			The Very Large Array is a centimeter-wavelength radio astronomy observatory located in Magdalena, New Mexico. 
+		]],
+	}
+}
+
+local vla15 = {
+	Identifier = "vla15",
+	Parent = earthAsset.Earth.Identifier,
+	Transform = {
+		Translation = {
+			Type = "GlobeTranslation",
+			Globe = earthAsset.Earth.Identifier,
+            Latitude = 34.077953, 
+            Longitude = -107.616243,
+            Altitude = 0,
+			UseHeightmap = true
+		},
+		Rotation = {
+			Type = "GlobeRotation",
+			Globe = earthAsset.Earth.Identifier,
+            Latitude = 34.077953, 
+            Longitude = -107.616243,
+			UseHeightmap = false
+		}
+		
+	},
+	Renderable = {
+		Type = "RenderableModel",
+		GeometryFile = asset.resource("vla.glb"),
+		forceRenderInvisible = true,
+		ModelScale = 1,  
+		RotationVector = {00.00,00.00,00.00},   
+		LightSources = { sunAsset.LightSource }
+	},
+	GUI = {
+		Name = "VLA A15",
+		Path = "/Solar System/Telescopes/Very Large Array",
+		Description = [[
+			The Very Large Array is a centimeter-wavelength radio astronomy observatory located in Magdalena, New Mexico. 
+		]],
+	}
+}
+
+local vla16 = {
+	Identifier = "vla16",
+	Parent = earthAsset.Earth.Identifier, 
+	Transform = {
+		Translation = {
+			Type = "GlobeTranslation",
+			Globe = earthAsset.Earth.Identifier,
+            Latitude = 34.077650, 
+            Longitude = -107.615465,
+            Altitude = 0,
+			UseHeightmap = true
+		},
+		Rotation = {
+			Type = "GlobeRotation",
+			Globe = earthAsset.Earth.Identifier,
+            Latitude = 34.077650, 
+            Longitude = -107.615465,
+			UseHeightmap = false
+		}
+		
+	},
+	Renderable = {
+		Type = "RenderableModel",
+		GeometryFile = asset.resource("vla.glb"),
+		forceRenderInvisible = true,
+		ModelScale = 1,  
+		RotationVector = {00.00,00.00,00.00},   
+		LightSources = { sunAsset.LightSource }
+	},
+	GUI = {
+		Name = "VLA A16",
+		Path = "/Solar System/Telescopes/Very Large Array",
+		Description = [[
+			The Very Large Array is a centimeter-wavelength radio astronomy observatory located in Magdalena, New Mexico. 
+		]],
+	}
+}
+
+local vla17 = {
+	Identifier = "vla17",
+	Parent = earthAsset.Earth.Identifier, 
+	Transform = {
+		Translation = {
+			Type = "GlobeTranslation",
+			Globe = earthAsset.Earth.Identifier,
+            Latitude = 34.077308, 
+            Longitude = -107.614587,
+            Altitude = 0,
+			UseHeightmap = true
+		},
+		Rotation = {
+			Type = "GlobeRotation",
+			Globe = earthAsset.Earth.Identifier,
+            Latitude = 34.077308, 
+            Longitude = -107.614587,
+			UseHeightmap = false
+		}
+		
+	},
+	Renderable = {
+		Type = "RenderableModel",
+		GeometryFile = asset.resource("vla.glb"),
+		forceRenderInvisible = true,
+		ModelScale = 1,  
+		RotationVector = {00.00,00.00,00.00},   
+		LightSources = { sunAsset.LightSource }
+	},
+	GUI = {
+		Name = "VLA A17",
+		Path = "/Solar System/Telescopes/Very Large Array",
+		Description = [[
+			The Very Large Array is a centimeter-wavelength radio astronomy observatory located in Magdalena, New Mexico. 
+		]],
+	}
+}
+
+local vla18 = {
+	Identifier = "vla18",
+	Parent = earthAsset.Earth.Identifier, 
+	Transform = {
+		Translation = {
+			Type = "GlobeTranslation",
+			Globe = earthAsset.Earth.Identifier,
+            Latitude = 34.076975, 
+            Longitude = -107.613580,
+            Altitude = 0,
+			UseHeightmap = true
+		},
+		Rotation = {
+			Type = "GlobeRotation",
+			Globe = earthAsset.Earth.Identifier,
+            Latitude = 34.076975, 
+            Longitude = -107.613580,
+			UseHeightmap = false
+		}
+		
+	},
+	Renderable = {
+		Type = "RenderableModel",
+		GeometryFile = asset.resource("vla.glb"),
+		forceRenderInvisible = true,
+		ModelScale = 1,  
+		RotationVector = {00.00,00.00,00.00},   
+		LightSources = { sunAsset.LightSource }
+	},
+	GUI = {
+		Name = "VLA A18",
+		Path = "/Solar System/Telescopes/Very Large Array",
+		Description = [[
+			The Very Large Array is a centimeter-wavelength radio astronomy observatory located in Magdalena, New Mexico. 
+		]],
+	}
+}
+
+local vla19 = {
+	Identifier = "vla19",
+	Parent = earthAsset.Earth.Identifier, 
+	Transform = {
+		Translation = {
+			Type = "GlobeTranslation",
+			Globe = earthAsset.Earth.Identifier,
+            Latitude = 34.076518, 
+            Longitude = -107.612549,
+            Altitude = 0,
+			UseHeightmap = true
+		},
+		Rotation = {
+			Type = "GlobeRotation",
+			Globe = earthAsset.Earth.Identifier,
+            Latitude = 34.076518, 
+            Longitude = -107.612549,
+			UseHeightmap = false
+		}
+		
+	},
+	Renderable = {
+		Type = "RenderableModel",
+		GeometryFile = asset.resource("vla.glb"),
+		forceRenderInvisible = true,
+		ModelScale = 1,  
+		RotationVector = {00.00,00.00,00.00},   
+		LightSources = { sunAsset.LightSource }
+	},
+	GUI = {
+		Name = "VLA A19",
+		Path = "/Solar System/Telescopes/Very Large Array",
+		Description = [[
+			The Very Large Array is a centimeter-wavelength radio astronomy observatory located in Magdalena, New Mexico. 
+		]],
+	}
+}
+
+local vla20 = {
+	Identifier = "vla20",
+	Parent = earthAsset.Earth.Identifier, 
+	Transform = {
+		Translation = {
+			Type = "GlobeTranslation",
+			Globe = earthAsset.Earth.Identifier,
+            Latitude = 34.078553, 
+            Longitude = -107.618705,
+            Altitude = 0,
+			UseHeightmap = true
+		},
+		Rotation = {
+			Type = "GlobeRotation",
+			Globe = earthAsset.Earth.Identifier,
+            Latitude = 34.078553, 
+            Longitude = -107.618705,
+			UseHeightmap = false
+		}
+		
+	},
+	Renderable = {
+		Type = "RenderableModel",
+		GeometryFile = asset.resource("vla.glb"),
+		forceRenderInvisible = true,
+		ModelScale = 1,  
+		RotationVector = {00.00,00.00,00.00},   
+		LightSources = { sunAsset.LightSource }
+	},
+	GUI = {
+		Name = "VLA A20",
+		Path = "/Solar System/Telescopes/Very Large Array",
+		Description = [[
+			The Very Large Array is a centimeter-wavelength radio astronomy observatory located in Magdalena, New Mexico. 
+		]],
+	}
+}
+
+local vla21 = {
+	Identifier = "vla21",
+	Parent = earthAsset.Earth.Identifier,
+	Transform = {
+		Translation = {
+			Type = "GlobeTranslation",
+			Globe = earthAsset.Earth.Identifier,
+            Latitude = 34.078327, 
+            Longitude = -107.619113,
+            Altitude = 0,
+			UseHeightmap = true
+		},
+		Rotation = {
+			Type = "GlobeRotation",
+			Globe = earthAsset.Earth.Identifier,
+            Latitude = 34.078327, 
+            Longitude = -107.619113,
+			UseHeightmap = false
+		}
+		
+	},
+	Renderable = {
+		Type = "RenderableModel",
+		GeometryFile = asset.resource("vla.glb"),
+		forceRenderInvisible = true,
+		ModelScale = 1,  
+		RotationVector = {00.00,00.00,00.00},   
+		LightSources = { sunAsset.LightSource }
+	},
+	GUI = {
+		Name = "VLA A21",
+		Path = "/Solar System/Telescopes/Very Large Array",
+		Description = [[
+			The Very Large Array is a centimeter-wavelength radio astronomy observatory located in Magdalena, New Mexico. 
+		]],
+	}
+}
+
+local vla22 = {
+	Identifier = "vla22",
+	Parent = earthAsset.Earth.Identifier, 
+	Transform = {
+		Translation = {
+			Type = "GlobeTranslation",
+			Globe = earthAsset.Earth.Identifier,
+            Latitude = 34.078036, 
+            Longitude = -107.619626,
+            Altitude = 0,
+			UseHeightmap = true
+		},
+		Rotation = {
+			Type = "GlobeRotation",
+			Globe = earthAsset.Earth.Identifier,
+            Latitude = 34.078036, 
+            Longitude = -107.619626,
+			UseHeightmap = false
+		}
+		
+	},
+	Renderable = {
+		Type = "RenderableModel",
+		GeometryFile = asset.resource("vla.glb"),
+		forceRenderInvisible = true,
+		ModelScale = 1,  
+		RotationVector = {00.00,00.00,00.00},   
+		LightSources = { sunAsset.LightSource }
+	},
+	GUI = {
+		Name = "VLA A22",
+		Path = "/Solar System/Telescopes/Very Large Array",
+		Description = [[
+			The Very Large Array is a centimeter-wavelength radio astronomy observatory located in Magdalena, New Mexico. 
+		]],
+	}
+}
+
+local vla23 = {
+	Identifier = "vla23",
+	Parent = earthAsset.Earth.Identifier, 
+	Transform = {
+		Translation = {
+			Type = "GlobeTranslation",
+			Globe = earthAsset.Earth.Identifier,
+            Latitude = 34.077689, 
+            Longitude = -107.620247,
+            Altitude = 0,
+			UseHeightmap = true
+		},
+		Rotation = {
+			Type = "GlobeRotation",
+			Globe = earthAsset.Earth.Identifier,
+            Latitude = 34.077689, 
+            Longitude = -107.620247,
+			UseHeightmap = false
+		}
+		
+	},
+	Renderable = {
+		Type = "RenderableModel",
+		GeometryFile = asset.resource("vla.glb"),
+		forceRenderInvisible = true,
+		ModelScale = 1,  
+		RotationVector = {00.00,00.00,00.00},   
+		LightSources = { sunAsset.LightSource }
+	},
+	GUI = {
+		Name = "VLA A23",
+		Path = "/Solar System/Telescopes/Very Large Array",
+		Description = [[
+			The Very Large Array is a centimeter-wavelength radio astronomy observatory located in Magdalena, New Mexico. 
+		]],
+	}
+}
+
+local vla24 = {
+	Identifier = "vla24",
+	Parent = earthAsset.Earth.Identifier, 
+	Transform = {
+		Translation = {
+			Type = "GlobeTranslation",
+			Globe = earthAsset.Earth.Identifier,
+            Latitude = 34.077287, 
+            Longitude = -107.620957,
+            Altitude = 0,
+			UseHeightmap = true
+		},
+		Rotation = {
+			Type = "GlobeRotation",
+			Globe = earthAsset.Earth.Identifier,
+            Latitude = 34.077287, 
+            Longitude = -107.620957,
+			UseHeightmap = false
+		}
+		
+	},
+	Renderable = {
+		Type = "RenderableModel",
+		GeometryFile = asset.resource("vla.glb"),
+		forceRenderInvisible = true,
+		ModelScale = 1,  
+		RotationVector = {00.00,00.00,00.00},   
+		LightSources = { sunAsset.LightSource }
+	},
+	GUI = {
+		Name = "VLA A24",
+		Path = "/Solar System/Telescopes/Very Large Array",
+		Description = [[
+			The Very Large Array is a centimeter-wavelength radio astronomy observatory located in Magdalena, New Mexico. 
+		]],
+	}
+}
+
+local vla25 = {
+	Identifier = "vla25",
+	Parent = earthAsset.Earth.Identifier,
+	Transform = {
+		Translation = {
+			Type = "GlobeTranslation",
+			Globe = earthAsset.Earth.Identifier,
+            Latitude = 34.076837, 
+            Longitude = -107.621759,
+            Altitude = 0,
+			UseHeightmap = true
+		},
+		Rotation = {
+			Type = "GlobeRotation",
+			Globe = earthAsset.Earth.Identifier,
+            Latitude = 34.076837, 
+            Longitude = -107.621759,
+			UseHeightmap = false
+		}
+		
+	},
+	Renderable = {
+		Type = "RenderableModel",
+		GeometryFile = asset.resource("vla.glb"),
+		forceRenderInvisible = true,
+		ModelScale = 1,  
+		RotationVector = {00.00,00.00,00.00},   
+		LightSources = { sunAsset.LightSource }
+	},
+	GUI = {
+		Name = "VLA A25",
+		Path = "/Solar System/Telescopes/Very Large Array",
+		Description = [[
+			The Very Large Array is a centimeter-wavelength radio astronomy observatory located in Magdalena, New Mexico. 
+		]],
+	}
+}
+
+local vla26 = {
+	Identifier = "vla26",
+	Parent = earthAsset.Earth.Identifier,
+	Transform = {
+		Translation = {
+			Type = "GlobeTranslation",
+			Globe = earthAsset.Earth.Identifier,
+            Latitude = 34.076383, 
+            Longitude = -107.622685,
+            Altitude = 0,
+			UseHeightmap = true
+		},
+		Rotation = {
+			Type = "GlobeRotation",
+			Globe = earthAsset.Earth.Identifier,
+            Latitude = 34.076383, 
+            Longitude = -107.622685,
+			UseHeightmap = false
+		}
+		
+	},
+	Renderable = {
+		Type = "RenderableModel",
+		GeometryFile = asset.resource("vla.glb"),
+		forceRenderInvisible = true,
+		ModelScale = 1,  
+		RotationVector = {00.00,00.00,00.00},   
+		LightSources = { sunAsset.LightSource }
+	},
+	GUI = {
+		Name = "VLA A26",
+		Path = "/Solar System/Telescopes/Very Large Array",
+		Description = [[
+			The Very Large Array is a centimeter-wavelength radio astronomy observatory located in Magdalena, New Mexico. 
+		]],
+	}
+}
+
+local vla27 = {
+	Identifier = "vla27",
+	Parent = earthAsset.Earth.Identifier, 
+	Transform = {
+		Translation = {
+			Type = "GlobeTranslation",
+			Globe = earthAsset.Earth.Identifier,
+            Latitude = 34.075792, 
+            Longitude = -107.623623,
+            Altitude = 0,
+			UseHeightmap = true
+		},
+		Rotation = {
+			Type = "GlobeRotation",
+			Globe = earthAsset.Earth.Identifier,
+            Latitude = 34.075792, 
+            Longitude = -107.623623,
+			UseHeightmap = false
+		}
+		
+	},
+	Renderable = {
+		Type = "RenderableModel",
+		GeometryFile = asset.resource("vla.glb"),
+		forceRenderInvisible = true,
+		ModelScale = 1,  
+		RotationVector = {00.00,00.00,00.00},   
+		LightSources = { sunAsset.LightSource }
+	},
+	GUI = {
+		Name = "VLA A27",
+		Path = "/Solar System/Telescopes/Very Large Array",
+		Description = [[
+			The Very Large Array is a centimeter-wavelength radio astronomy observatory located in Magdalena, New Mexico. 
+		]],
+	}
+}
+
+
+asset.onInitialize(function()
+	openspace.addSceneGraphNode(vla1)
+	openspace.addSceneGraphNode(vla2)
+	openspace.addSceneGraphNode(vla3)
+	openspace.addSceneGraphNode(vla4)
+	openspace.addSceneGraphNode(vla5)
+	openspace.addSceneGraphNode(vla6)
+	openspace.addSceneGraphNode(vla7)
+	openspace.addSceneGraphNode(vla8)
+	openspace.addSceneGraphNode(vla9)
+	openspace.addSceneGraphNode(vla10)
+	openspace.addSceneGraphNode(vla11)
+	openspace.addSceneGraphNode(vla12)
+	openspace.addSceneGraphNode(vla13)
+	openspace.addSceneGraphNode(vla14)
+	openspace.addSceneGraphNode(vla15)
+	openspace.addSceneGraphNode(vla16)
+	openspace.addSceneGraphNode(vla17)
+	openspace.addSceneGraphNode(vla18)
+	openspace.addSceneGraphNode(vla19)
+	openspace.addSceneGraphNode(vla20)
+	openspace.addSceneGraphNode(vla21)
+	openspace.addSceneGraphNode(vla22)
+	openspace.addSceneGraphNode(vla23)
+	openspace.addSceneGraphNode(vla24)
+	openspace.addSceneGraphNode(vla25)
+	openspace.addSceneGraphNode(vla26)
+	openspace.addSceneGraphNode(vla27)
+end)
+	
+asset.onDeinitialize(function()
+	openspace.removeSceneGraphNode(vla27)
+	openspace.removeSceneGraphNode(vla26)
+	openspace.removeSceneGraphNode(vla25)
+	openspace.removeSceneGraphNode(vla24)
+	openspace.removeSceneGraphNode(vla23)
+	openspace.removeSceneGraphNode(vla22)
+	openspace.removeSceneGraphNode(vla21)
+	openspace.removeSceneGraphNode(vla20)
+	openspace.removeSceneGraphNode(vla19)
+	openspace.removeSceneGraphNode(vla18)
+	openspace.removeSceneGraphNode(vla17)
+	openspace.removeSceneGraphNode(vla16)
+	openspace.removeSceneGraphNode(vla15)
+	openspace.removeSceneGraphNode(vla14)
+	openspace.removeSceneGraphNode(vla13)
+	openspace.removeSceneGraphNode(vla12)
+	openspace.removeSceneGraphNode(vla11)
+	openspace.removeSceneGraphNode(vla10)
+	openspace.removeSceneGraphNode(vla9)
+	openspace.removeSceneGraphNode(vla8)
+	openspace.removeSceneGraphNode(vla7)
+	openspace.removeSceneGraphNode(vla6)
+	openspace.removeSceneGraphNode(vla5)
+	openspace.removeSceneGraphNode(vla4)
+	openspace.removeSceneGraphNode(vla3)
+	openspace.removeSceneGraphNode(vla2)
+	openspace.removeSceneGraphNode(vla1)
+end)
+	
+asset.export(vla1)
+asset.export(vla2)
+asset.export(vla3)
+asset.export(vla4)
+asset.export(vla5)
+asset.export(vla6)
+asset.export(vla7)
+asset.export(vla8)
+asset.export(vla9)
+asset.export(vla10)
+asset.export(vla11)
+asset.export(vla12)
+asset.export(vla13)
+asset.export(vla14)
+asset.export(vla15)
+asset.export(vla16)
+asset.export(vla17)
+asset.export(vla18)
+asset.export(vla19)
+asset.export(vla20)
+asset.export(vla21)
+asset.export(vla22)
+asset.export(vla23)
+asset.export(vla24)
+asset.export(vla25)
+asset.export(vla26)
+asset.export(vla27)
+
+asset.meta = {
+    Name = "Karl G. Jansky Very Large Array",
+    Version = "1.0",
+    Description = [[ The Very Large Array is a centimeter-wavelength radio astronomy observatory located in Magdalena, New Mexico. Model from the National Radio Astronomy Oberservatory.]],
+    Author = "Vanessa Garcia :)",
+    URL = "",
+    License = "CC-BY"
+}
+

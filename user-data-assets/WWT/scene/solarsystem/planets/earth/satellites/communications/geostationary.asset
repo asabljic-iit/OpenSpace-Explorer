@@ -1,0 +1,58 @@
+local earthAsset = asset.require("scene/solarsystem/planets/earth/transforms")
+
+
+
+local omm = asset.resource({
+  Name = "Satellite CSV Data (Geostationary)",
+  Type = "UrlSynchronization",
+  Identifier = "satellite_csv_data_geo",
+  Url = "https://liu-se.relay.openspaceproject.com/celestrak?GROUP=geo&FORMAT=csv",
+  Filename = "geo.txt",
+  SecondsUntilResync = openspace.time.secondsPerDay()
+})
+
+
+local GeoStationarySatellites = {
+  Identifier = "GeoStationarySatellites",
+  Parent = earthAsset.EarthInertial.Identifier,
+  Renderable = {
+    Type = "RenderableOrbitalKepler",
+    Path = omm .. "geo.txt",
+    Format = "CSV",
+    SegmentQuality = 3,
+    Color = { 0.9, 0.9, 0.0 },
+    TrailFade = 5,
+    PointSizeExponent = 5.2,
+    RenderBinMode = "PostDeferredTransparent"
+  },
+  Tag = { "earth_satellites" },
+  GUI = {
+    Name = "Geostationary",
+    Path = "/Solar System/Planets/Earth/Satellites",
+    Focusable = false,
+    Description = [[Satellites that are currently active and in a Geosynchronous orbit,
+      meaning their orbital period matches Earth's rotation.]]
+  }
+}
+
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(GeoStationarySatellites)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(GeoStationarySatellites)
+end)
+
+asset.export(GeoStationarySatellites)
+
+
+
+asset.meta = {
+  Name = "Satellites Communications - Geostationary",
+  Description = [[Satellites asset for Communications - Geostationary. Data from
+    Celestrak]],
+  Author = "OpenSpace Team",
+  URL = "https://celestrak.org/NORAD/elements/",
+  License = "Celestrak"
+}

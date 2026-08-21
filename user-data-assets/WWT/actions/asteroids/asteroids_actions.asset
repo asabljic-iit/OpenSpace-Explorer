@@ -1,0 +1,148 @@
+local ShowAsteroidBelt = {
+    Identifier = "ShowAsteroidBelt",
+    Name = "Show Asteroid Belt",
+    Command = [[
+        openspace.navigation.setFocus("Sun",true,true)
+        openspace.scheduleScript("openspace.navigation.zoomToDistance(2159000000000, 10)", 0.1)
+        openspace.setPropertyValueSingle("NavigationHandler.OrbitalNavigator.IdleMotion.Motion", 0.000000)
+        openspace.scheduleScript("openspace.setPropertyValueSingle('NavigationHandler.OrbitalNavigator.IdleMotion.Apply', true)", 0.5)
+
+        openspace.action.triggerAction('os.constellation.focus.Clear')
+
+        openspace.fadeIn("Scene.SunGlare.Renderable")
+
+        openspace.fadeIn("Scene.MercuryLabel.Renderable")
+        openspace.fadeIn("Scene.VenusLabel.Renderable")
+        openspace.fadeIn("Scene.EarthLabel.Renderable")
+        openspace.fadeIn("Scene.MarsLabel.Renderable")
+
+        openspace.setPropertyValueSingle("Scene.MercuryLabel.Renderable.Size", 8.6)
+        openspace.setPropertyValueSingle("Scene.VenusLabel.Renderable.Size", 8.6)
+        openspace.setPropertyValueSingle("Scene.EarthLabel.Renderable.Size", 8.6)
+        openspace.setPropertyValueSingle("Scene.MarsLabel.Renderable.Size", 8.6)
+
+        openspace.fadeOut("Scene.SSSB_PHA_Asteroid.Renderable")
+        openspace.fadeIn("Scene.SSSB_Inner_Main_Belt_Asteroid.Renderable")
+        openspace.fadeIn("Scene.SSSB_Main_Belt_Asteroid.Renderable")
+        openspace.fadeIn("Scene.SSSB_Outer_Main_Belt_Asteroid.Renderable")
+        openspace.scheduleScript("openspace.setPropertyValueSingle('NavigationHandler.OrbitalNavigator.IdleMotion.Apply', true)", 10.5)
+
+        openspace.AsteroidBeltCounter = (openspace.AsteroidBeltCounter or 0) + 1
+        openspace.AsteroidCounter = (openspace.AsteroidCounter or 0) + 1
+
+        local clearAsteroidBelt = [=[if openspace.AsteroidBeltCounter == ]=] .. openspace.AsteroidBeltCounter .. [=[ and openspace.AsteroidCounter == ]=] .. openspace.AsteroidCounter .. [=[ then 
+            openspace.fadeOut('Scene.SSSB_Inner_Main_Belt_Asteroid.Renderable')
+            openspace.fadeOut('Scene.SSSB_Main_Belt_Asteroid.Renderable')
+            openspace.fadeOut('Scene.SSSB_Outer_Main_Belt_Asteroid.Renderable')
+            openspace.fadeOut('Scene.MercuryLabel.Renderable')
+            openspace.fadeOut('Scene.VenusLabel.Renderable')
+            openspace.fadeOut('Scene.EarthLabel.Renderable')
+            openspace.fadeOut('Scene.MarsLabel.Renderable')
+            openspace.fadeIn('Scene.SunGlare.Renderable')
+        end]=]
+        openspace.scheduleScript(clearAsteroidBelt, 30)
+
+    ]],
+    GuiPath = "/Solar System/Asteroids",
+    IsLocal = false
+}
+
+local TurnOnPHA = {
+    Identifier = "TurnOnPHA",
+    Name = "Show Potentially Hazardous Asteroids",
+    Command = [[
+        openspace.navigation.setFocus("Sun",true,true)
+        openspace.scheduleScript("openspace.navigation.zoomToDistance(2159000000000, 10)", 0.1)
+        openspace.setPropertyValueSingle("NavigationHandler.OrbitalNavigator.IdleMotion.Motion", 0.000000)
+        openspace.scheduleScript("openspace.setPropertyValueSingle('NavigationHandler.OrbitalNavigator.IdleMotion.Apply', true)", 0.5)
+
+        openspace.action.triggerAction('os.constellation.focus.Clear')
+        
+        openspace.fadeIn("Scene.SunGlare.Renderable")
+
+        openspace.fadeIn("Scene.EarthLabel.Renderable")
+        openspace.setPropertyValueSingle("Scene.EarthLabel.Renderable.Size", 9)
+
+        openspace.fadeIn("Scene.SSSB_PHA_Asteroid.Renderable")
+
+        openspace.fadeOut("Scene.SSSB_Inner_Main_Belt_Asteroid.Renderable")
+        openspace.fadeOut("Scene.SSSB_Main_Belt_Asteroid.Renderable")
+        openspace.fadeOut("Scene.SSSB_Outer_Main_Belt_Asteroid.Renderable")
+
+        openspace.fadeOut("Scene.MercuryLabel.Renderable")
+        openspace.fadeOut("Scene.VenusLabel.Renderable")
+        openspace.fadeOut("Scene.MarsLabel.Renderable")
+
+        openspace.scheduleScript("openspace.setPropertyValueSingle('NavigationHandler.OrbitalNavigator.IdleMotion.Apply', true)", 10.5)
+
+        openspace.PHACounter = (openspace.PHACounter or 0) + 1
+        openspace.AsteroidCounter = (openspace.AsteroidCounter or 0) + 1
+
+        local clearPHA = [=[if openspace.PHACounter == ]=] .. openspace.PHACounter .. [=[ and openspace.AsteroidCounter == ]=] .. openspace.AsteroidCounter .. [=[ then 
+            openspace.fadeOut('Scene.SSSB_PHA_Asteroid.Renderable')
+            openspace.fadeOut('Scene.EarthLabel.Renderable')
+            openspace.fadeIn('Scene.SunGlare.Renderable')
+        end]=]
+        openspace.scheduleScript(clearPHA, 30)
+    ]],
+    GuiPath = "/Solar System/Asteroids",
+    IsLocal = false
+}
+
+local FlyToOumuamua = {
+    Identifier = "FlyToOumuamua",
+    Name = "Fly to Oumuamua",
+    Command = [[
+        openspace.setPropertyValueSingle("NavigationHandler.OrbitalNavigator.IdleMotion.Motion", 0.000000)
+        openspace.scheduleScript("openspace.setPropertyValueSingle('NavigationHandler.OrbitalNavigator.IdleMotion.Apply', true)", 10.5)
+        openspace.navigation.setFocus("Oumuamua",true,true)
+        openspace.setPropertyValueSingle("Scene.Oumuamua.Renderable.EnableFaceCulling", false)
+        openspace.navigation.flyTo("Oumuamua", 10)
+    ]],
+    GuiPath = "/Solar System/Asteroids",
+    IsLocal = false
+}
+
+local FlyToPsyche = {
+    Identifier = "FlyToPsyche",
+    Name = "Fly to Psyche",
+    Command = [[
+        openspace.setPropertyValueSingle("NavigationHandler.OrbitalNavigator.IdleMotion.Motion", 0.000000)
+        openspace.scheduleScript("openspace.setPropertyValueSingle('NavigationHandler.OrbitalNavigator.IdleMotion.Apply', true)", 10.5)
+        openspace.navigation.setFocus("Psyche",true,true)
+        openspace.setPropertyValueSingle("Scene.Psyche.Renderable.EnableFaceCulling", false)
+        openspace.navigation.flyTo("Psyche", 10)
+    ]],
+    GuiPath = "/Solar System/Asteroids",
+    IsLocal = false
+}
+
+local FlyToVesta = {
+    Identifier = "FlyToVesta",
+    Name = "Fly to Vesta",
+    Command = [[
+        openspace.setPropertyValueSingle("NavigationHandler.OrbitalNavigator.IdleMotion.Motion", 0.000000)
+        openspace.scheduleScript("openspace.setPropertyValueSingle('NavigationHandler.OrbitalNavigator.IdleMotion.Apply', true)", 10.5)
+        openspace.navigation.setFocus("VestaModel",true,true)
+        openspace.navigation.flyTo("VestaModel", 10)
+    ]],
+    GuiPath = "/Solar System/Asteroids",
+    IsLocal = false
+}
+
+asset.onInitialize(function()
+    openspace.action.registerAction(ShowAsteroidBelt)
+    openspace.action.registerAction(TurnOnPHA)
+    openspace.action.registerAction(FlyToOumuamua)
+    openspace.action.registerAction(FlyToPsyche)
+    openspace.action.registerAction(FlyToVesta)
+end)
+
+asset.onDeinitialize(function()
+    openspace.action.removeAction(ShowAsteroidBelt)
+    openspace.action.removeAction(TurnOnPHA)
+    openspace.action.removeAction(FlyToOumuamua)
+    openspace.action.removeAction(FlyToPsyche)
+    openspace.action.removeAction(FlyToVesta)
+end)
+

@@ -1,0 +1,60 @@
+local earthAsset = asset.require('scene/solarsystem/planets/earth/globe')
+local sunAsset = asset.require('scene/solarsystem/sun/sun')
+
+
+  
+local bean = {
+	Identifier = "bean",
+	Parent = earthAsset.Earth.Identifier,
+	--Note: Lat/Lon/Scale values comes from alignment with Esri World Imagery 2D layer
+	Transform = {
+		Translation = {
+			Type = "GlobeTranslation",
+			Globe = earthAsset.Earth.Identifier,
+            Latitude = 41.882701, 
+            Longitude = -87.62329,
+            Altitude = 0,
+			UseHeightmap = true
+		},
+		Rotation = {
+			Type = "GlobeRotation",
+			Globe = earthAsset.Earth.Identifier,
+            Latitude = 41.882701,
+            Longitude = -87.62329,
+			UseHeightmap = false
+		}
+		
+	},
+	Renderable = {
+		Type = "RenderableModel",
+		GeometryFile = asset.resource("chicago_bean.obj"),
+		forceRenderInvisible = true,
+		ModelScale = 2,
+		RotationVector = {0.000000,90,00.00},
+		Pivot = {0.000000,0.000000,0.000000},
+		LightSources = { sunAsset.LightSource },
+		OverrideColor = {1.00,1.00,1.00,0.8},
+        UseOverrideColor = true
+	},
+	GUI = {
+		Name = "The Bean",
+		Path = "/Solar System/Earth/Special Locations",
+		Description = [[
+			Cloud Gate, more commonly known as "The Bean", is a public sculpture by artist Anish Kapoor that is the centerpiece of Grainger Plaza at Millennium Park in the Loop community area of Chicago, Illinois, United States
+		]],
+	}
+}
+
+
+
+
+asset.onInitialize(function()
+	openspace.addSceneGraphNode(bean)
+end)
+	
+asset.onDeinitialize(function()
+	openspace.removeSceneGraphNode(bean)
+end)
+	
+asset.export(bean)
+

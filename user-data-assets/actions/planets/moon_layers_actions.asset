@@ -1,0 +1,217 @@
+local CTXFadeIn = {
+  Identifier = "os.mars.CTXFadeIn",
+  Name = "Fade in CTX",
+  Command = [[
+openspace.setPropertyValueSingle("Scene.Mars.Renderable.Layers.ColorLayers.CTX_blended_01.Enabled", true)
+openspace.setPropertyValueSingle("Scene.Mars.Renderable.Layers.ColorLayers.CTX_blended_01.Settings.Opacity", 0.0)
+openspace.setPropertyValueSingle("Scene.Mars.Renderable.Layers.ColorLayers.CTX_blended_01.Settings.Opacity", 1.0, 2.0)]],
+  Documentation = "Enables and fades in CTX layer for Mars",
+  GuiPath = "/Solar System/Mars",
+  IsLocal = false
+}
+
+local CTXFadeOut = {
+  Identifier = "os.mars.CTXFadeOut",
+  Name = "Fade out CTX layer",
+  Command = [[openspace.setPropertyValueSingle("Scene.Mars.Renderable.Layers.ColorLayers.CTX_blended_01.Settings.Opacity", 0.0, 2.0)]],
+  Documentation = "Fade out CTX",
+  GuiPath = "/Solar System/Mars",
+  IsLocal = false
+}
+
+local HiriseFadeIn = {
+  Identifier = "os.mars.HiriseFadeIn",
+  Name = "Fade in HiRISE",
+  Command = [[
+openspace.setPropertyValueSingle("Scene.Mars.Renderable.Layers.ColorLayers.HiRISE-PSP.Enabled", true)
+openspace.setPropertyValueSingle("Scene.Mars.Renderable.Layers.ColorLayers.HiRISE-PSP.Settings.Opacity", 0.0)
+openspace.setPropertyValueSingle("Scene.Mars.Renderable.Layers.ColorLayers.HiRISE-PSP.Settings.Opacity", 1.0, 2.0)]],
+  Documentation = "Enables and fades in HiRise layer for Mars",
+  GuiPath = "/Solar System/Mars",
+  IsLocal = false
+}
+
+local HiriseFadeOut = {
+  Identifier = "os.mars.HiriseFadeOut",
+  Name = "Fade out HiRISE",
+  Command = [[openspace.setPropertyValueSingle("Scene.Mars.Renderable.Layers.ColorLayers.HiRISE-PSP.Settings.Opacity", 0.0, 2.0)]],
+  Documentation = "Fade out HiRISE layer for Mars",
+  GuiPath = "/Solar System/Mars",
+  IsLocal = false
+}
+
+local LocalSetHiriseFadeIn = {
+  Identifier = "os.mars.LocalSetHiriseFadeIn",
+  Name = "Fade in HiRISE local set",
+  Command = [[
+openspace.setPropertyValueSingle("Scene.Mars.Renderable.Layers.ColorLayers.HiRISE-LS.Enabled", true)
+openspace.setPropertyValueSingle("Scene.Mars.Renderable.Layers.HeightLayers.HiRISE-LS-DEM.Enabled", true)
+openspace.setPropertyValueSingle("Scene.Mars.Renderable.Layers.ColorLayers.HiRISE-LS.Settings.Opacity", 0.0)
+openspace.setPropertyValueSingle("Scene.Mars.Renderable.Layers.ColorLayers.HiRISE-LS.Settings.Opacity", 1.0, 2.0)]],
+  Documentation = "Enables and fades in HiRise local set layers for Mars (including height)",
+  GuiPath = "/Solar System/Mars",
+  IsLocal = false
+}
+
+local LocalSetHiriseFadeOut = {
+  Identifier = "os.mars.LocalSetHiriseFadeOut",
+  Name = "Fade out HiRISE local set",
+  Command = [[
+openspace.setPropertyValueSingle("Scene.Mars.Renderable.Layers.ColorLayers.HiRISE-LS.Settings.Opacity", 0.0, 2.0)
+openspace.setPropertyValueSingle("Scene.Mars.Renderable.Layers.HeightLayers.HiRISE-LS-DEM.Enabled", false)
+]],
+  Documentation = "Fade out HiRISE local set layer for Mars",
+  GuiPath = "/Solar System/Mars",
+  IsLocal = false
+}
+
+
+asset.onInitialize(function()
+  openspace.action.registerAction(CTXFadeIn)
+  openspace.action.registerAction(CTXFadeOut)
+  openspace.action.registerAction(HiriseFadeIn)
+  openspace.action.registerAction(HiriseFadeOut)
+  openspace.action.registerAction(LocalSetHiriseFadeIn)
+  openspace.action.registerAction(LocalSetHiriseFadeOut)
+end)
+
+asset.onDeinitialize(function()
+  openspace.action.removeAction(LocalSetHiriseFadeOut)
+  openspace.action.removeAction(LocalSetHiriseFadeIn)
+  openspace.action.removeAction(HiriseFadeOut)
+  openspace.action.removeAction(HiriseFadeIn)
+  openspace.action.removeAction(CTXFadeOut)
+  openspace.action.removeAction(CTXFadeIn)
+end)
+
+asset.export("CTXFadeIn", CTXFadeIn.Identifier)
+asset.export("CTXFadeOut", CTXFadeOut.Identifier)
+asset.export("HiriseFadeIn", HiriseFadeIn.Identifier)
+asset.export("HiriseFadeOut", HiriseFadeOut.Identifier)
+asset.export("LocalSetHiriseFadeIn", LocalSetHiriseFadeIn.Identifier)
+asset.export("LocalSetHiriseFadeOut", LocalSetHiriseFadeOut.Identifier)
+
+-- Has been changed thus far --
+local ToggleMoonLayer = {
+  Identifier = "os.ToggleMoonLayer",
+  Name = "Toggle Moon layer",
+  Command = [[
+    local node
+    if is_declared("args") then
+      node = args.Node
+    else
+      node = openspace.navigation.getNavigationState().Anchor
+    end
+
+    local layer
+    if openspace.hasSceneGraphNode(node .. "Layer") then
+      layer = node .. "Layer"
+    elseif openspace.hasSceneGraphNode(node .. "_layer") then
+      layer = node .. "_layer"
+    else
+      -- No layer found, so nothing more to do here
+      return
+    end
+
+    local visibility
+    if is_declared("args") then
+      if args.Transition == "Approaching" then
+        visibility = false
+      elseif args.Transition == "Exiting" then
+        visibility = true
+      else
+        return
+      end
+    else
+      visibility = not openspace.propertyValue("Scene." .. layer .. ".Renderable.Enabled")
+    end
+
+    if visibility then
+      openspace.setPropertyValueSingle("Scene." .. layer .. ".Renderable.Fade", 1.0, 1.0)
+    else
+      openspace.setPropertyValueSingle("Scene." .. layer .. ".Renderable.Fade", 0.0, 1.0)
+    end
+  ]],
+  Documentation = [[Toggles the visibility of the associated layer of a scene graph node.
+    This action takes optional arguments to 1) determine which trail to hide (as the
+    'Node') and 2) the transition direction (as 'After' and 'Before')]],
+  GuiPath = "/Layers",
+  IsLocal = false
+}
+-- End of Nycole Changes thus far --
+
+
+local HideTrail = {
+  Identifier = "os.HideTrail",
+  Name = "Hide trail",
+  Command = [[
+    local node
+    if is_declared("args") then
+      node = args.Node
+    else
+      node = openspace.navigation.getNavigationState().Anchor
+    end
+
+    if openspace.hasSceneGraphNode(node .. "Trail") then
+      openspace.setPropertyValueSingle("Scene." .. node .. "Trail.Renderable.Fade", 0.0, 1.0)
+    elseif openspace.hasSceneGraphNode(node .. "_trail") then
+      openspace.setPropertyValueSingle("Scene." .. node .. "_trail.Renderable.Fade", 0.0, 1.0)
+    end
+  ]],
+  Documentation = [[Hides the associated trail of a scene graph node. This action takes an
+    optional argument to determine whose trail to hide. If no argument is provided, the
+    current focus node is used instead]],
+  GuiPath = "/Trails",
+  IsLocal = false
+}
+
+local ShowTrail = {
+  Identifier = "os.ShowTrail",
+  Name = "Show trail",
+  Command = [[
+    local node
+    if is_declared("args") then
+      node = args.Node
+    else
+      node = openspace.navigation.getNavigationState().Anchor
+    end
+
+    if openspace.hasSceneGraphNode(node .. "Trail") then
+      openspace.setPropertyValueSingle("Scene." .. node .. "Trail.Renderable.Fade", 1.0, 1.0)
+    elseif openspace.hasSceneGraphNode(node .. "_trail") then
+      openspace.setPropertyValueSingle("Scene." .. node .. "_trail.Renderable.Fade", 1.0, 1.0)
+    end
+  ]],
+  Documentation = [[Shows the associated trail of a scene graph node. This action takes an
+    optional argument to determine whose trail to hide. If no argument is provided, the
+    current focus node is used instead]],
+  GuiPath = "/Trails",
+  IsLocal = false
+}
+
+
+asset.onInitialize(function()
+  openspace.action.registerAction(ToggleTrail)
+  openspace.action.registerAction(HideTrail)
+  openspace.action.registerAction(ShowTrail)
+end)
+
+asset.onDeinitialize(function()
+  openspace.action.removeAction(ShowTrail)
+  openspace.action.removeAction(HideTrail)
+  openspace.action.removeAction(ToggleTrail)
+end)
+
+asset.export("ToggleTrail", ToggleTrail.Identifier)
+asset.export("HideTrail", HideTrail.Identifier)
+asset.export("ShowTrail", ShowTrail.Identifier)
+
+
+
+asset.meta = {
+  Name = "Actions - Toggle current layers",
+  Description = "Asset providing actions to toggle trails",
+  Author = "Nycole Wenner",
+  URL = "http://openspaceproject.com",
+  License = "MIT license"
+}

@@ -1,0 +1,12 @@
+-- asset.require("./spaceexplorationvehicle/sev")
+-- asset.require("./gravitationalwaves/gw")
+asset.require("./bean/bean")
+
+
+asset.meta = {
+  Name = "Asset files misc additions",
+  Description = [[]],
+  Author = "Vanessa :)",
+  URL = "https://www.openspaceproject.com",
+  License = "MIT"
+}

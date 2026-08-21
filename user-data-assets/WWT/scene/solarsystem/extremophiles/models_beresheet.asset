@@ -1,0 +1,199 @@
+local earthAsset = asset.require('scene/solarsystem/planets/earth/globe')
+local sunAsset = asset.require('scene/solarsystem/sun/sun')
+local sunTransforms = asset.require('scene/solarsystem/sun/transforms')
+local moon = asset.require('scene/solarsystem/planets/earth/moon/globe')
+local transforms = asset.require('scene/solarsystem/sun/transforms')
+local textures = asset.resource("data")
+local model = asset.resource("data")
+local Tmodel = asset.resource("data/tardigrade_model/tardigrade")
+  
+local BeresheetLander = {
+	Identifier = "BeresheetLander",
+	Parent = moon.Moon.Identifier,
+	Transform = {
+		Translation = {
+			Type = "GlobeTranslation",
+			Globe = moon.Moon.Identifier,
+            Latitude = 19.3496, 
+            Longitude = -32.5956,
+            Altitude = 5.47,
+			UseHeightmap = true
+		},
+		Rotation = {
+			Type = "GlobeRotation",
+			Globe = moon.Moon.Identifier,
+            Latitude = 19.3496,
+            Longitude = -32.5956,
+			UseHeightmap = false
+		}
+		
+	},
+	Renderable = {
+		Type = "RenderableModel",
+		GeometryFile = model .. "/Beresheet.fbx",
+		forceRenderInvisible = true,
+		ModelScale = 1,
+		RotationVector = {00.00,00.00,00.00},
+		LightSources = { sunAsset.LightSource },
+        BlendingOption = "Additive",
+        OverrideColor = {0.298039,0.431373,0.960784,1.00000},
+        UseOverrideColor = true
+	},
+	GUI = {
+		Name = "Beresheet Lander",
+		Path = "/Solar System/Missions/Beresheet",
+		Description = [[
+			
+		]],
+	}
+}
+
+-- ==========================================
+-- PURE LUA DATE CALCULATOR
+-- ==========================================
+local months = {"JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"}
+
+local function isLeapYear(year)
+    return (year % 4 == 0 and year % 100 ~= 0) or (year % 400 == 0)
+end
+
+local function getDaysInMonth(month, year)
+    if month == 2 then
+        return isLeapYear(year) and 29 or 28
+    elseif month == 4 or month == 6 or month == 9 or month == 11 then
+        return 30
+    else
+        return 31
+    end
+end
+
+local function addDays(y, m, d, daysToAdd)
+    d = d + daysToAdd
+    while d > getDaysInMonth(m, y) do
+        d = d - getDaysInMonth(m, y)
+        m = m + 1
+        if m > 12 then
+            m = 1
+            y = y + 1
+        end
+    end
+    return y, m, d
+end
+
+local function formatSpiceDate(y, m, d)
+    return string.format("%04d %s %02d 07:25:00", y, months[m], d)
+end
+
+
+-- ==========================================
+-- TARDIGRADE MODEL GENERATION
+-- ==========================================
+local nodes = {}
+local tardigradeCounter = 1
+
+local currentYear, currentMonth, currentDay = 2019, 4, 11
+local endTimeStr = "2500 JAN 01 00:00:00" 
+local batch_size = 5
+
+-- Loop 26 times (26 iterations * 14 days = 364 days, approx 1 year)
+for eventIdx = 1, 26 do
+
+    -- Generate a properly formatted OpenSpace date string for this specific 14-day jump
+    local startTimeStr = formatSpiceDate(currentYear, currentMonth, currentDay)
+    
+    for i = 1, batch_size do
+        
+        -- Randomize physical placement within a 5-meter radius
+        local maxRadius = 10.0
+        local angle = math.random() * math.pi * 2
+        local distance = maxRadius * math.sqrt(math.random())
+        
+        local posX = distance * math.cos(angle)
+        local posY = -1.9 
+        local posZ = distance * math.sin(angle)
+        
+        local rotX = 0
+        local rotY = 0 
+        local rotZ = math.random() * math.pi * 2 
+
+        local tardigradeNode = {
+            Identifier = "Tardigrade_" .. tardigradeCounter,
+            Parent = BeresheetLander.Identifier, 
+            TimeFrame = {
+                Type = "TimeFrameInterval",
+                Start = startTimeStr,
+                End = endTimeStr
+            },
+            Transform = {
+                Scale = {
+                    Type = "StaticScale",
+                    Scale = 0.1
+                },
+                Rotation = {
+                    Type = "StaticRotation",
+                    Rotation = {rotX, rotY, rotZ}
+                },
+                Translation = {
+                    Type = "StaticTranslation",
+                    Position = {posX, posY, posZ}
+                }
+            },
+            Renderable = {
+                Type = "RenderableModel",
+                GeometryFile = Tmodel .. "/tardigrade.x",
+                EnableFaceCulling = false,
+                ModelScale = 1,
+                LightSources = {
+                    {
+                        Type = "SceneGraphLightSource",
+                        Identifier = "Sun",
+                        Node = sunTransforms.SolarSystemBarycenter.Identifier,
+                        Intensity = 1.0
+                    }
+                }
+            },
+            GUI = {
+                Name = "Tardigrade " .. tardigradeCounter,
+                Path = "/Solar System/Missions/Beresheet/Dehydrated Crew" 
+            }
+        }
+        
+        table.insert(nodes, tardigradeNode)
+        tardigradeCounter = tardigradeCounter + 1
+    end
+    
+    -- Advance the calendar by exactly 14 days for the next loop
+    currentYear, currentMonth, currentDay = addDays(currentYear, currentMonth, currentDay, 14)
+end
+
+
+asset.onInitialize(function()
+	openspace.addSceneGraphNode(BeresheetLander)
+    
+    for _, node in ipairs(nodes) do
+        openspace.addSceneGraphNode(node)
+    end
+end)
+	
+asset.onDeinitialize(function()
+	for _, node in ipairs(nodes) do
+        openspace.removeSceneGraphNode(node.Identifier)
+    end
+
+    openspace.removeSceneGraphNode(BeresheetLander.Identifier)
+end)
+	
+asset.export(BeresheetLander)
+
+for _, node in ipairs(nodes) do
+    asset.export(node)
+end
+
+asset.meta = {
+    Name = "Tardigrades on the Moon!",
+    Version = "1.0",
+    Description = [[Tardirades on the Moon after the private Israeli lunar lander, Beresheet, crashed]],
+    Author = "Vanessa Garcia",
+    URL = "",
+    License = "CC-BY"
+}

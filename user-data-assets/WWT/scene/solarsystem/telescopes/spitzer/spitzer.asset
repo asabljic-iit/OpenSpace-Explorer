@@ -1,0 +1,106 @@
+local sunTransforms = asset.require('scene/solarsystem/sun/transforms')
+local transforms = asset.require('scene/solarsystem/sun/transforms')
+local kernels = asset.resource("data/spitzer.bsp")
+local textures = asset.resource("data")
+local models = asset.resource("data")
+local coreKernels = asset.require("spice/core")
+
+
+local Spitzer = {
+    Identifier = "Spitzer",
+    Parent = transforms.SolarSystemBarycenter.Identifier,
+    InteractionSphere = 1,
+	Renderable = {
+        Type = "RenderableModel",
+		--Body = "-79",
+		Enabled = true,
+		
+        GeometryFile = models .. "/spitzer.fbx",
+        EnableFaceCulling = false,
+         LightSources = {
+      {
+        Type = "SceneGraphLightSource",
+        Identifier = "Sun",
+        Node = sunTransforms.SolarSystemBarycenter.Identifier,
+        Intensity = 1.0
+      }
+    },
+		AmbientIntensity = 0,
+		DiffuseIntensity = 0.65
+    },
+	Transform = {
+		Scale = {
+            Type = "StaticScale",
+            Scale = 10
+        },
+        Translation = {
+            Type = "SpiceTranslation",
+            Target = "-79",
+            Observer = "SUN",
+			Kernels = kernels
+		},
+		Rotation = {
+                  Type = "FixedRotation",
+				  Attached = "Spitzer",
+				  YAxis = { -1.0, 0.0, 0.0 },
+				  YAxisOrthogonal = true,
+				  ZAxis = "Sun",
+
+				  YAxisInverted = false
+			}
+        },
+        
+    GUI = {
+        Path = "/Solar System/Telescopes/Spitzer"
+    }
+}
+
+local SpitzerTrail = {
+    Identifier = "SpitzerTrail",
+    Parent = transforms.SolarSystemBarycenter.Identifier,
+    Renderable = {
+        Type = "RenderableTrailOrbit",
+        Translation = {
+            Type = "SpiceTranslation",
+            Target = "-79",
+            Observer = "SUN",
+			Kernels = kernels
+        },
+		Enabled = false,
+        Color = { 1.0, 0.6, 0.2},   
+        StartTime = "2003 AUG 25 06:28:00",
+        EndTime = "2022 JAN 01 00:05:00",
+        Period = 365.25,
+        Resolution = 3600 * 24
+    },
+    GUI = {
+        Name = "Spitzer Trail",
+        Path = "/Solar System/Telescopes/Spitzer"
+    }
+}
+
+asset.onInitialize(function()
+  openspace.spice.loadKernel(kernels)
+  openspace.addSceneGraphNode(Spitzer)
+  openspace.addSceneGraphNode(SpitzerTrail)
+end)
+  
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(Spitzer)
+  openspace.removeSceneGraphNode(SpitzerTrail)
+  openspace.spice.unloadKernel(kernels)
+end)
+  
+asset.export(Spitzer)
+asset.export(SpitzerTrail)
+
+
+asset.meta = {
+    Name = "Spitzer Space Telescope",
+    Version = "1.0",
+    Description = [[ Model and Trail for NASA. Model from Spitzer/CalTech, trail from
+    JPL Horizons]],
+    Author = "Dan Tell",
+    URL = "www.calacademy.org",
+    License = "CC-BY"
+}

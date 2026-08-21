@@ -1,0 +1,90 @@
+local FocusOnPluto = {
+    Identifier = "FocusOnPluto",
+    Name = "Face Pluto",
+    Command = [[
+        openspace.navigation.setFocus("Pluto",true,true)
+    ]],
+    GuiPath = "/Solar System/Dwarf Planets/Pluto",
+    IsLocal = false
+}
+
+local FlyToPluto = {
+    Identifier = "FlyToPluto",
+    Name = "Fly to Pluto",
+    Command = [[
+        openspace.setPropertyValueSingle("NavigationHandler.OrbitalNavigator.IdleMotion.Motion", 0.000000)
+        openspace.scheduleScript("openspace.setPropertyValueSingle('NavigationHandler.OrbitalNavigator.IdleMotion.Apply', true)", 10.5)
+        openspace.navigation.setFocus("Pluto",true,true)
+        openspace.navigation.flyTo("Pluto", 10)
+    ]],
+    GuiPath = "/Solar System/Dwarf Planets/Pluto",
+    IsLocal = false
+}
+
+local FocusOnCeres = {
+    Identifier = "FocusOnCeres",
+    Name = "Face Ceres",
+    Command = [[
+        openspace.navigation.setFocus("Ceres",true,true)
+    ]],
+    GuiPath = "/Solar System/Dwarf Planets/Ceres",
+    IsLocal = false
+}
+
+local FlyToCeres = {
+    Identifier = "FlyToCeres",
+    Name = "Fly to Ceres",
+    Command = [[
+        openspace.setPropertyValueSingle("NavigationHandler.OrbitalNavigator.IdleMotion.Motion", 0.000000)
+        openspace.scheduleScript("openspace.setPropertyValueSingle('NavigationHandler.OrbitalNavigator.IdleMotion.Apply', true)", 10.5)
+        openspace.navigation.setFocus("Ceres",true,true)
+        openspace.navigation.flyTo("Ceres", 10)
+    ]],
+    GuiPath = "/Solar System/Dwarf Planets/Ceres",
+    IsLocal = false
+}
+
+local FocusOnMakeMake = {
+    Identifier = "FocusOnMakeMake",
+    Name = "Face Makemake",
+    Command = [[
+        openspace.navigation.setFocus("MakemakeModel",true,true)
+    ]],
+    GuiPath = "/Solar System/Dwarf Planets/Makemake",
+    IsLocal = false
+}
+
+local FlyToMakemake = {
+    Identifier = "FlyToMakemake",
+    Name = "Fly to Makemake",
+    Command = [[
+        openspace.setPropertyValueSingle("NavigationHandler.OrbitalNavigator.IdleMotion.Motion", 0.000000)
+        openspace.scheduleScript("openspace.setPropertyValueSingle('NavigationHandler.OrbitalNavigator.IdleMotion.Apply', true)", 10.5)
+        openspace.navigation.setFocus("MakemakeModel",true,true)
+        openspace.navigation.flyTo("MakemakeModel", 10)
+    ]],
+    GuiPath = "/Solar System/Dwarf Planets/Makemake",
+    IsLocal = false
+}
+
+
+
+asset.onInitialize(function()
+    openspace.action.registerAction(FocusOnPluto)
+    openspace.action.registerAction(FlyToPluto)
+    openspace.action.registerAction(FocusOnCeres)
+    openspace.action.registerAction(FlyToCeres)
+    openspace.action.registerAction(FocusOnMakeMake)
+    openspace.action.registerAction(FlyToMakemake)
+end)
+
+asset.onDeinitialize(function()
+    openspace.action.removeAction(FocusOnPluto)
+    openspace.action.removeAction(FlyToPluto)
+    openspace.action.removeAction(FocusOnCeres)
+    openspace.action.removeAction(FlyToCeres)
+    openspace.action.removeAction(FocusOnMakeMake)
+    openspace.action.removeAction(FlyToMakemake)
+
+end)
+

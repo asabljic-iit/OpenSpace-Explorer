@@ -1,0 +1,505 @@
+{
+  "ui": {
+    "aimingAt": {
+      "en": "Aiming at:",
+      "es": "Apuntando a:"
+    },
+    "focusedOn": {
+      "en": "Focused on:",
+      "es": "Enfocado en:"
+    }
+  },
+  "folders": {
+    "Solar System": {
+      "en": "Solar System",
+      "es": "Sistema Solar"
+    },
+    "Spacecrafts": {
+      "en": "Spacecrafts",
+      "es": "Naves Espaciales"
+    },
+    "Constellations": {
+      "en": "Constellations",
+      "es": "Constelaciones"
+    }
+  },
+  "actions": {
+    "Toggle all constellation art": {
+      "en": "Toggle all constellation art",
+      "es": "Alternar arte de constelaciones"
+    }
+  },
+  "openspace": {
+    "Solar System": {
+      "Sun": {
+        "en": "The Sun is the star at the center of the Solar System. It is a nearly perfect sphere of hot plasma, heated to incandescence by nuclear fusion reactions."
+      },
+      "Earth": {
+        "en": "Earth is the third planet from the Sun and the only astronomical object known to harbor life. About 29.2% of Earth's surface is land."
+      },
+      "Moon": {
+        "en": "The Moon is Earth's only natural satellite. It orbits Earth at an average distance of 384,400 km."
+      },
+      "Jupiter": {
+        "en": "Jupiter is the fifth planet from the Sun and the largest in the Solar System. It is a gas giant with a mass more than two and a half times that of all the other planets combined."
+      },
+      "Mars": {
+        "en": "Mars is the fourth planet from the Sun. It is a dusty, cold, desert world with a very thin atmosphere and two small moons, Phobos and Deimos."
+      },
+      "Mercury": {
+        "en": "Mercury is the smallest planet in the Solar System and the closest to the Sun. It has a very thin atmosphere and experiences extreme temperature variations."
+      },
+      "Neptune": {
+        "en": "Neptune is the eighth and farthest known planet from the Sun in the Solar System. It is a gas giant and is known for its deep blue color and strong winds."
+      },
+      "Saturn": {
+        "en": "Saturn is the sixth planet from the Sun and the second-largest in the Solar System. It is a gas giant known for its extensive ring system."
+      },
+      "Uranus": {
+        "en": "Uranus is the seventh planet from the Sun. It is a gas giant with a unique blue-green color due to methane in its atmosphere and has a tilted rotation axis."
+      },
+      "Venus": {
+        "en": "Venus is the second planet from the Sun and is similar in size and structure to Earth. It has a thick, toxic atmosphere and surface temperatures hot enough to melt lead."
+      },
+      "Vesta": {
+        "en": "Vesta is one of the largest objects in the asteroid belt, with a mean diameter of about 525 kilometers. It is a differentiated body, with a crust, mantle, and core."
+      },
+      "Oumuamua": {
+        "en": "Oumuamua is an interstellar object that passed through the Solar System in 2017. It is the first known object of its kind, and its elongated shape and unusual trajectory have sparked much scientific interest."
+      },
+      "Psyche": {
+        "en": "Psyche is a metallic asteroid located in the asteroid belt. It is thought to be the exposed core of a protoplanet and is the target of NASA's Psyche mission, which aims to study its composition and history."
+      },
+      "Ceres": {
+        "en": "Ceres is the largest object in the asteroid belt between Mars and Jupiter. It is classified as a dwarf planet and is composed of a mixture of water ice and rock."
+      },
+      "Makemake": {
+        "en": "Makemake is a dwarf planet in the outer Solar System. It is one of the largest known objects in the Kuiper Belt and has a very bright surface, likely covered in methane ice."
+      },
+      "Pluto": {
+        "en": "Pluto is a dwarf planet in the Kuiper Belt, a region of the Solar System beyond Neptune. It was the first Kuiper Belt object to be discovered and was considered the ninth planet from the Sun until 2006."
+      }
+    },
+    "Missions": {
+      "Beresheet Lander": {
+        "en": "The Beresheet mission was the first privately funded spacecraft to attempt a lunar landing on February 22, 2019. After a two-month, looping journey, the lander experienced an engine failure and crashed into the Sea of Serenity on April 11, 2019, leaving several thousand dehydrated tardigrades on the Moon."
+      }
+    },
+    "Satellites": {
+      "Tiangong": {
+        "en": "The Tiangong space station ('Heavenly Palace') is China's permanently crewed outpost in low Earth orbit since 2021. It is a modular space station that consists of a core module and two laboratory modules."
+      },
+      "ISS": {
+        "en": "The International Space Station (ISS) is a modular space station in low Earth orbit since 1998. It is a multinational collaborative project involving five space agencies."
+      }
+    },
+    "Telescopes": {
+      "GBT": {
+        "en": "The Green Bank Telescope (GBT) is a radio telescope located in Green Bank, West Virginia. It is the world's largest fully steerable radio telescope and is used for a wide range of astronomical observations."
+      },
+      "VLA A9": {
+        "en": "The Very Large Array (VLA) is a radio astronomy observatory located in New Mexico. It consists of 27 radio antennas arranged in a Y-shaped configuration and is used for a wide range of astronomical observations."
+      },
+      "Vera Rubin Telescope": {
+        "en": "The Vera C. Rubin Observatory is an astronomical observatory in Chile. It will conduct a 10-year survey of the sky, known as the Legacy Survey of Space and Time (LSST), and is expected to revolutionize our understanding of the universe."
+      },
+      "Hubble": {
+        "en": "The Hubble Space Telescope is a space telescope that was launched into low Earth orbit in 1990. It has provided some of the most detailed images of the universe and has contributed to many important discoveries in astronomy."
+      },
+      "James Webb Space Telescope Model": {
+        "en": "The James Webb Space Telescope (JWST) is a space telescope that was launched in 2021. It is the largest and most powerful space telescope ever built and is designed to observe the universe in infrared light."
+      },
+      "Spitzer": {
+        "en": "The Spitzer Space Telescope was an infrared space telescope that was launched in 2003 and operated until 2020. It provided important observations of the universe in infrared light, including the study of distant galaxies and the formation of stars and planets."
+      }
+    },
+    "Deep Space Objects": {
+      "Crab Nebula (M1)": {
+        "en": "The Crab Nebula is a supernova remnant in the constellation of Taurus. It is the result of a supernova explosion observed in 1054 AD."
+      },
+      "Lagoon Nebula (M8)": {
+        "en": "The Lagoon Nebula is a giant interstellar cloud in the constellation Sagittarius. It is classified as an emission nebula and is one of the brightest and most massive star-forming regions in our galaxy."
+      },
+      "Pillars of Creation (M16)": {
+        "en": "The Pillars of Creation are part of the Eagle Nebula, a star-forming region in the constellation Serpens. They are columns of interstellar gas and dust that are being eroded by the intense radiation from nearby young stars."
+      },
+      "Omega/Swan Nebula (M17)": {
+        "en": "The Omega Nebula, also known as the Swan Nebula, is an H II region in the constellation Sagittarius. It is a region of active star formation and is one of the brightest nebulae in the sky."
+      },
+      "Trifid Nebula (M20)": {
+        "en": "The Trifid Nebula is a star-forming region in the constellation Sagittarius. It is a combination of an emission nebula, a reflection nebula, and a dark nebula, making it a unique and visually striking object in the night sky."
+      },
+      "Dumbbell Nebula (M27)": {
+        "en": "The Dumbbell Nebula is a planetary nebula in the constellation Vulpecula. It is the result of a dying star shedding its outer layers, creating a glowing shell of ionized gas."
+      },
+      "Orion Nebula (M42)": {
+        "en": "The Orion Nebula is a diffuse nebula situated in the Milky Way, being south of Orion's Belt in the constellation of Orion. It is one of the brightest nebulae and is visible to the naked eye."
+      },
+      "Ring Nebula (M57)": {
+        "en": "The Ring Nebula is a planetary nebula in the constellation Lyra. It is the result of a dying star shedding its outer layers, creating a glowing ring of ionized gas. The Ring Nebula is one of the most famous and well-studied planetary nebulae in the night sky, and it is often used as a reference object for studying the late stages of stellar evolution."
+      },
+      "Little Dumbbell Nebula (M76)": {
+        "en": "The Little Dumbbell Nebula is a planetary nebula in the constellation Perseus. It is the result of a dying star shedding its outer layers, creating a glowing shell of ionized gas. The Little Dumbbell Nebula is a smaller and less well-known planetary nebula compared to the Dumbbell Nebula, but it is still an interesting object for astronomers to study."
+      },
+      "NGC 1333": {
+        "en": "NGC 1333 is a reflection nebula in the constellation Perseus. It is a region of active star formation and is part of the larger Perseus molecular cloud complex."
+      },
+      "Southern Ring Nebula": {
+        "en": "The Southern Ring Nebula is a planetary nebula in the constellation Vela. It is the result of a dying star shedding its outer layers, creating a glowing shell of ionized gas. The Southern Ring Nebula is one of the most well-known and studied planetary nebulae in the southern hemisphere."
+      },
+      "Carina Nebula": {
+        "en": "The Carina Nebula is a large, complex area of bright and dark nebulosity in the constellation Carina. It is one of the largest star-forming regions in our galaxy and contains several massive stars and star clusters."
+      },
+      "NGC 604": {
+        "en": "NGC 604 is a giant H II region in the Triangulum Galaxy (M33). It is one of the largest known star-forming regions in the Local Group of galaxies and contains many young, massive stars."
+      },
+      "Helix Nebula": {
+        "en": "The Helix Nebula is a planetary nebula in the constellation Aquarius. It is the result of a dying star shedding its outer layers, creating a glowing shell of ionized gas. The Helix Nebula is one of the closest and most well-known planetary nebulae to Earth."
+      },
+      "Horsehead Nebula": {
+        "en": "The Horsehead Nebula is a dark nebula in the constellation Orion. It is a small, dense cloud of gas and dust that appears as a silhouette against the bright emission nebula IC 434. The Horsehead Nebula is one of the most recognizable and iconic nebulae in the night sky."
+      },
+      "Rosette Nebula": {
+        "en": "The Rosette Nebula is a large, circular H II region in the constellation Monoceros. It is a region of active star formation and contains several young star clusters."
+      },
+      "Veil Nebula": {
+        "en": "The Veil Nebula is a supernova remnant in the constellation Cygnus. It is the result of a massive star that exploded thousands of years ago, creating a complex network of glowing filaments and clouds of gas and dust."
+      },
+      "Cassiopeia A": {
+        "en": "Cassiopeia A is a supernova remnant in the constellation Cassiopeia. It is the result of a massive star that exploded around 11,000 years ago, creating a complex structure of expanding gas and dust."
+      },
+      "Eyes Galaxies": {
+        "en": "The Eyes Galaxies, also known as NGC 4435 and NGC 4438, are a pair of interacting galaxies in the constellation Virgo. They are part of the Virgo Cluster and are located approximately 50 million light-years from Earth."
+      },
+      "Andromeda Galaxy (M31)": {
+        "en": "The Andromeda Galaxy, also known as M31, is a spiral galaxy located approximately 2.537 million light-years from Earth. It is the nearest major galaxy to the Milky Way and is on a collision course with our galaxy, expected to merge in about 4.5 billion years."
+      },
+      "Whirlpool Galaxy (M51)": {
+        "en": "The Whirlpool Galaxy, also known as M51, is a classic spiral galaxy located approximately 23 million light-years from Earth in the constellation Canes Venatici. It is interacting with a smaller companion galaxy, NGC 5195, which is causing its distinctive spiral structure."
+      },
+      "Sunflower Galaxy (M63)": {
+        "en": "The Sunflower Galaxy, also known as M63, is a spiral galaxy located approximately 27 million light-years from Earth in the constellation Canes Venatici. It is characterized by its bright, tightly wound spiral arms and is part of the M51 Group of galaxies."
+      },
+      "Black Eye Galaxy (M64)": {
+        "en": "The Black Eye Galaxy, also known as M64, is a spiral galaxy located approximately 17 million light-years from Earth in the constellation Coma Berenices. It is notable for its dark band of absorbing dust in front of the galaxy's bright nucleus, giving it the appearance of a black eye."
+      },
+      "Cigar Galaxy (M82)": {
+        "en": "The Cigar Galaxy, also known as M82, is a starburst galaxy located approximately 12 million light-years from Earth in the constellation Ursa Major. It is undergoing a period of intense star formation, likely triggered by gravitational interactions with its neighboring galaxy, M81."
+      },
+      "Southern Pinwheel Galaxy (M83)": {
+        "en": "The Southern Pinwheel Galaxy, also known as M83, is a barred spiral galaxy located approximately 15 million light-years from Earth in the constellation Hydra. It is one of the closest and brightest barred spiral galaxies in the sky."
+      },
+      "Stephan's Quintet": {
+        "en": "Stephan's Quintet is a visual grouping of five galaxies located in the constellation Pegasus. Four of the galaxies are physically close to each other and are interacting gravitationally, while the fifth galaxy is a foreground object."
+      },
+      "Bode's Galaxy (M81)": {
+        "en": "Bode's Galaxy, also known as M81, is a spiral galaxy located approximately 12 million light-years from Earth in the constellation Ursa Major. It is one of the brightest galaxies in the sky and is part of the M81 Group of galaxies."
+      },
+      "Center of the Milky Way": {
+        "en": "The center of the Milky Way is a region located in the constellation Sagittarius. It contains a supermassive black hole known as Sagittarius A*, as well as a dense concentration of stars, gas, and dust."
+      },
+      "Large Magellanic Cloud": {
+        "en": "The Large Magellanic Cloud (LMC) is a satellite galaxy of the Milky Way, located approximately 163,000 light-years from Earth. It is the fourth largest galaxy in the Local Group and is visible to the naked eye from the Southern Hemisphere."
+      },
+      "Leo Triplet (M66 Group)": {
+        "en": "The Leo Triplet is a group of three interacting spiral galaxies located in the constellation Leo. The galaxies are M65, M66, and NGC 3628, and they are approximately 35 million light-years from Earth."
+      },
+      "Pinwheel Galaxy (M101)": {
+        "en": "The Pinwheel Galaxy, also known as M101, is a face-on spiral galaxy located approximately 21 million light-years from Earth in the constellation Ursa Major. It is one of the largest and most prominent spiral galaxies in the sky."
+      },
+      "Small Magellanic Cloud": {
+        "en": "The Small Magellanic Cloud (SMC) is a dwarf galaxy and a satellite of the Milky Way, located approximately 200,000 light-years from Earth. It is the third closest galaxy to the Milky Way and is visible to the naked eye from the Southern Hemisphere."
+      },
+      "Triangulum Galaxy (M33)": {
+        "en": "The Triangulum Galaxy, also known as M33, is a spiral galaxy located approximately 2.73 million light-years from Earth in the constellation Triangulum. It is the third largest member of the Local Group of galaxies, which includes the Milky Way and the Andromeda Galaxy."
+      },
+      "Pleiades (M45)": {
+        "en": "The Pleiades, also known as M45 or the Seven Sisters, is an open star cluster located in the constellation Taurus. It is one of the nearest star clusters to Earth and is easily visible to the naked eye."
+      },
+      "Dusty Disc": {
+        "en": "IRAS 04302+2247, or IRAS 04302 for short, is a beautiful example of a protostar - a young star that is still gathering mass from its environment - surrounded by a protoplanetary disc in which baby planets might be forming."
+      },
+      "HH 30": {
+        "en": "HH 30 is a young star system located in the constellation Taurus. It is known for its prominent bipolar jets and a circumstellar disc of gas and dust, which is seen edge-on from our perspective."
+      },
+      "Butterfly Cluster (M6)": {
+        "en": "The Butterfly Cluster, also known as M6, is an open star cluster located in the constellation Scorpius. It is named for its butterfly-like shape and contains a large number of bright stars."
+      },
+      "Messier 3": {
+        "en": "Messier 3, also known as M3, is a globular cluster located in the constellation Canes Venatici. It is one of the largest and brightest globular clusters in the Milky Way, containing hundreds of thousands of stars."
+      },
+      "Messier 4": {
+        "en": "Messier 4, also known as M4, is a globular cluster located in the constellation Scorpius. It is one of the closest globular clusters to Earth and contains a large number of old stars."
+      },
+      "Messier 9": {
+        "en": "Messier 9, also known as M9, is a globular cluster located in the constellation Ophiuchus. It is one of the more distant globular clusters in the Milky Way and contains a large number of stars."
+      },
+      "NGC 602": {
+        "en": "NGC 602 is a young star cluster located in the Small Magellanic Cloud. It is surrounded by a bright nebula and is an active region of star formation."
+      },
+      "Ptolemy's Cluster (M7)": {
+        "en": "The Ptolemy Cluster, also known as M7, is an open star cluster located in the constellation Scorpius. It is one of the brightest open clusters in the sky and contains a large number of stars."
+      },
+      "Messier 87": {
+        "en": "The supermassive black hole at the center of Messier 87, also known as M87*, is one of the most massive black holes known, with a mass of about 6.5 billion times that of the Sun. It was the first black hole to be directly imaged by the Event Horizon Telescope in 2019."
+      }
+    },
+    "Constellations": {
+      "Antlia": {
+        "en": "Antlia is a small and faint constellation in the southern sky. Its name is Latin for 'pump', and it was introduced by the French astronomer Nicolas-Louis de Lacaille in the 18th century."
+      },
+      "Andromeda": {
+        "en": "Andromeda is a constellation in the northern sky, named after the princess Andromeda in Greek mythology. It is home to the Andromeda Galaxy (M31), the nearest spiral galaxy to the Milky Way."
+      },
+      "Coma Berenices": {
+        "en": "Coma Berenices is a constellation in the northern sky, named after Queen Berenice II of Egypt. It is known for its rich star cluster, the Coma Star Cluster, and the Coma Cluster of galaxies."
+      },
+      "Triangulum Australe": {
+        "en": "Triangulum Australe is a small constellation in the southern sky. Its name is Latin for 'the southern triangle', and it was introduced by the Dutch astronomer Petrus Plancius in the late 16th century."
+      },
+      "Cepheus": {
+        "en": "Cepheus is a constellation in the northern sky, named after the mythical king Cepheus of Aethiopia. It is home to several notable deep-sky objects, including the variable star Delta Cephei, which is the prototype of the Cepheid variable stars."
+      },
+      "Mensa": {
+        "en": "Mensae is a small constellation in the southern sky. Its name is Latin for 'table', and it was introduced by the French astronomer Nicolas-Louis de Lacaille in the 18th century."
+      },
+      "Aquarius": {
+        "en": "Aquarius is a constellation of the zodiac, located in the southern sky. Its name is Latin for 'water-bearer' or 'cup-bearer', and it is often depicted as a man pouring water from a jug."
+      },
+      "Hydra": {
+        "en": "Hydra is the largest of the 88 modern constellations, stretching across the southern sky. Its name is Latin for 'water snake', and it is associated with the mythological Lernaean Hydra, a serpent-like creature with multiple heads."
+      },
+      "Hercules": {
+        "en": "Hercules is a constellation in the northern sky, named after the Roman mythological hero Hercules. It is home to several notable deep-sky objects, including the Great Hercules Cluster (M13) and the Hercules Globular Cluster (M92)."
+      },
+      "Equuleus": {
+        "en": "Equuleus is a small constellation in the northern sky. Its name is Latin for 'little horse', and it is one of the 88 modern constellations recognized by the International Astronomical Union."
+      },
+      "Carina": {
+        "en": "Carina is a constellation in the southern sky, representing the keel of the ship Argo Navis. It is home to several notable deep-sky objects, including the Carina Nebula and the star Canopus, the second-brightest star in the night sky."
+      },
+      "Draco": {
+        "en": "Draco is a constellation in the northern sky, representing a dragon. It is one of the largest constellations and contains several notable deep-sky objects, including the Cat's Eye Nebula and the Draco Dwarf Galaxy."
+      },
+      "Canis Major": {
+        "en": "Canis Major is a constellation in the southern sky, representing the 'greater dog'. It is home to Sirius, the brightest star in the night sky, and several notable deep-sky objects, including the open cluster M41."
+      },
+      "Sagitta": {
+        "en": "Sagitta is a small constellation in the northern sky, representing an arrow. It is one of the 88 modern constellations recognized by the International Astronomical Union."
+      },
+      "Apus": {
+        "en": "Apus is a small constellation in the southern sky, representing a bird of paradise. Its name is derived from the Greek word 'apous', meaning 'without feet', and it was introduced by the Dutch astronomer Petrus Plancius in the late 16th century."
+      },
+      "Lyra": {
+        "en": "Lyra is a small constellation in the northern sky, representing a lyre, a musical instrument. It is home to the bright star Vega and several notable deep-sky objects, including the Ring Nebula (M57)."
+      },
+      "Ara": {
+        "en": "Ara is a small constellation in the southern sky, representing an altar. Its name is Latin for 'altar', and it was introduced by the Greek astronomer Ptolemy in the 2nd century."
+      },
+      "Aquila": {
+        "en": "Aquila is a constellation in the northern sky, representing an eagle. It is home to the bright star Altair and several notable deep-sky objects, including the open cluster M11."
+      },
+      "Aries": {
+        "en": "Aries is a constellation of the zodiac, located in the northern sky. Its name is Latin for 'ram', and it is associated with the mythological story of the Golden Fleece."
+      },
+      "Capricornus": {
+        "en": "Capricornus is a constellation of the zodiac, located in the southern sky. Its name is Latin for 'horned goat' or 'goat horn', and it is associated with the mythological creature known as the sea-goat."
+      },
+      "Auriga": {
+        "en": "Auriga is a constellation in the northern sky, representing a charioteer. It is home to the bright star Capella and several notable deep-sky objects, including the open cluster M37."
+      },
+      "Bootes": {
+        "en": "Bootes is a constellation in the northern sky, representing a herdsman or plowman. It is home to the bright star Arcturus and several notable deep-sky objects, including the Bootes Void."
+      },
+      "Caelum": {
+        "en": "Caelum is a small constellation in the southern sky, representing a chisel. Its name is Latin for 'chisel', and it was introduced by the French astronomer Nicolas-Louis de Lacaille in the 18th century."
+      },
+      "Horologium": {
+        "en": "Horologium is a small constellation in the southern sky, representing a clock. Its name is Latin for 'clock', and it was introduced by the French astronomer Nicolas-Louis de Lacaille in the 18th century."
+      },
+      "Camelopardalis": {
+        "en": "Camelopardalis is a large but faint constellation in the northern sky, representing a giraffe. Its name is derived from the Latin words 'camelus' (camel) and 'pardalis' (leopard), reflecting the animal's long neck and spotted coat."
+      },
+      "Cancer": {
+        "en": "Cancer is a constellation of the zodiac, located in the northern sky. Its name is Latin for 'crab', and it is associated with the mythological story of the crab that attacked Hercules during his battle with the Hydra."
+      },
+      "Corona Borealis": {
+        "en": "Corona Borealis is a small constellation in the northern sky, representing a crown. Its name is Latin for 'northern crown', and it is associated with the mythological story of Ariadne, who was given a crown by Dionysus."
+      },
+      "Columba": {
+        "en": "Columba is a small constellation in the southern sky, representing a dove. Its name is Latin for 'dove', and it was introduced by the Dutch astronomer Petrus Plancius in the late 16th century."
+      },
+      "Canes Venatici": {
+        "en": "Canes Venatici is a small constellation in the northern sky, representing hunting dogs. Its name is Latin for 'hunting dogs', and it was introduced by the Polish astronomer Johannes Hevelius in the 17th century."
+      },
+      "Canis Minor": {
+        "en": "Canis Minor is a small constellation in the northern sky, representing the 'lesser dog'. It is home to the bright star Procyon and is one of the 88 modern constellations recognized by the International Astronomical Union."
+      },
+      "Cassiopeia": {
+        "en": "Cassiopeia is a constellation in the northern sky, representing the mythological queen Cassiopeia. It is easily recognizable due to its distinctive 'W' shape formed by five bright stars."
+      },
+      "Centaurus": {
+        "en": "Centaurus is a large constellation in the southern sky, representing a centaur. It is home to several notable deep-sky objects, including the bright star Alpha Centauri and the globular cluster Omega Centauri."
+      },
+      "Cetus": {
+        "en": "Cetus is a large constellation in the southern sky, representing a sea monster or whale. It is home to several notable deep-sky objects, including the variable star Mira and the barred spiral galaxy Messier 77."
+      },
+      "Chamaeleon": {
+        "en": "Chamaeleon is a small constellation in the southern sky, representing a chameleon. Its name is Latin for 'chameleon', and it was introduced by the Dutch astronomer Petrus Plancius in the late 16th century."
+      },
+      "Circinus": {
+        "en": "Circinus is a small constellation in the southern sky, representing a compass. Its name is Latin for 'compass', and it was introduced by the French astronomer Nicolas-Louis de Lacaille in the 18th century."
+      },
+      "Corona Australis": {
+        "en": "Corona Australis is a small constellation in the southern sky, representing a crown. Its name is Latin for 'southern crown', and it is associated with the mythological story of the crown of the god Bacchus."
+      },
+      "Corvus": {
+        "en": "Corvus is a small constellation in the southern sky, representing a crow or raven. Its name is Latin for 'crow', and it is associated with the mythological story of Apollo and the crow."
+      },
+      "Crux": {
+        "en": "Crux, also known as the Southern Cross, is a small but prominent constellation in the southern sky. It is easily recognizable due to its distinctive cross shape and is an important navigational aid in the Southern Hemisphere."
+      },
+      "Crater": {
+        "en": "Crater is a small constellation in the southern sky, representing a cup or goblet. Its name is Latin for 'cup', and it is associated with the mythological story of Apollo and the crow."
+      },
+      "Indus": {
+        "en": "Indus is a small constellation in the southern sky, representing an Indian or native of the Indies. Its name is Latin for 'Indian', and it was introduced by the Dutch astronomer Petrus Plancius in the late 16th century."
+      },
+      "Cygnus": {
+        "en": "Cygnus is a constellation in the northern sky, representing a swan. It is home to several notable deep-sky objects, including the North America Nebula and the Cygnus X star-forming region."
+      },
+      "Delphinus": {
+        "en": "Delphinus is a small constellation in the northern sky, representing a dolphin. Its name is Latin for 'dolphin', and it is one of the 88 modern constellations recognized by the International Astronomical Union."
+      },
+      "Dorado": {
+        "en": "Dorado is a small constellation in the southern sky, representing a dolphinfish or swordfish. Its name is Latin for 'dolphinfish', and it was introduced by the Dutch astronomer Petrus Plancius in the late 16th century."
+      },
+      "Eridanus": {
+        "en": "Eridanus is a large constellation in the southern sky, representing a river. It is home to several notable deep-sky objects, including the bright star Achernar and the Eridanus Supervoid."
+      },
+      "Gemini": {
+        "en": "Gemini is a constellation of the zodiac, located in the northern sky. Its name is Latin for 'twins', and it is associated with the mythological story of Castor and Pollux, the twin brothers who were placed in the sky as stars."
+      },
+      "Fornax": {
+        "en": "Fornax is a small constellation in the southern sky, representing a furnace. Its name is Latin for 'furnace', and it was introduced by the French astronomer Nicolas-Louis de Lacaille in the 18th century."
+      },
+      "Phoenix": {
+        "en": "Phoenix is a small constellation in the southern sky, representing a mythical bird that is reborn from its ashes. Its name is Latin for 'phoenix', and it was introduced by the Dutch astronomer Petrus Plancius in the late 16th century."
+      },
+      "Grus": {
+        "en": "Grus is a small constellation in the southern sky, representing a crane. Its name is Latin for 'crane', and it was introduced by the Dutch astronomer Petrus Plancius in the late 16th century."
+      },
+      "Hydrus": {
+        "en": "Hydrus is a small constellation in the southern sky, representing a water snake. Its name is Latin for 'water snake', and it was introduced by the Dutch astronomer Petrus Plancius in the late 16th century."
+      },
+      "Lacerta": {
+        "en": "Lacerta is a small constellation in the northern sky, representing a lizard. Its name is Latin for 'lizard', and it was introduced by the Polish astronomer Johannes Hevelius in the 17th century."
+      },
+      "Leo": {
+        "en": "Leo is a constellation of the zodiac, located in the northern sky. Its name is Latin for 'lion', and it is associated with the mythological story of the Nemean Lion, which was slain by Hercules as one of his twelve labors."
+      },
+      "Leo Minor": {
+        "en": "Leo Minor is a small constellation in the northern sky, representing a small lion. Its name is Latin for 'small lion', and it was introduced by the Polish astronomer Johannes Hevelius in the 17th century."
+      },
+      "Scutum": {
+        "en": "Scutum is a small constellation in the southern sky, representing a shield. Its name is Latin for 'shield', and it was introduced by the Polish astronomer Johannes Hevelius in the 17th century."
+      },
+      "Lepus": {
+        "en": "Lepus is a constellation in the southern sky, representing a hare. Its name is Latin for 'hare', and it is located just south of the constellation Orion."
+      },
+      "Libra": {
+        "en": "Libra is a constellation of the zodiac, located in the southern sky. Its name is Latin for 'scales', and it is associated with the mythological story of Astraea, the goddess of justice, who is often depicted holding a pair of scales."
+      },
+      "Lupus": {
+        "en": "Lupus is a constellation in the southern sky, representing a wolf. Its name is Latin for 'wolf', and it was introduced by the Greek astronomer Ptolemy in the 2nd century."
+      },
+      "Lynx": {
+        "en": "Lynx is a constellation in the northern sky, representing a lynx. Its name is Latin for 'lynx', and it was introduced by the Polish astronomer Johannes Hevelius in the 17th century."
+      },
+      "Volans": {
+        "en": "Volans is a small constellation in the southern sky, representing a flying fish. Its name is Latin for 'flying', and it was introduced by the Dutch astronomer Petrus Plancius in the late 16th century."
+      },
+      "Microscopium": {
+        "en": "Microscopium is a small constellation in the southern sky, representing a microscope. Its name is Latin for 'microscope', and it was introduced by the French astronomer Nicolas-Louis de Lacaille in the 18th century."
+      },
+      "Monoceros": {
+        "en": "Monoceros is a constellation in the northern sky, representing a unicorn. Its name is Latin for 'unicorn', and it was introduced by the Dutch astronomer Petrus Plancius in the late 16th century. It is home to several notable deep-sky objects, including the Rosette Nebula and the Christmas Tree Cluster."
+      },
+      "Musca": {
+        "en": "Musca is a small constellation in the southern sky, representing a fly. Its name is Latin for 'fly', and it was introduced by the Dutch astronomer Petrus Plancius in the late 16th century."
+      },
+      "Norma": {
+        "en": "Norma is a small constellation in the southern sky, representing a carpenter's square or a set square. Its name is Latin for 'normal' or 'right angle', and it was introduced by the French astronomer Nicolas-Louis de Lacaille in the 18th century."
+      },
+      "Octans": {
+        "en": "Octans is a small constellation in the southern sky, representing an octant, a navigational instrument. Its name is Latin for 'octant', and it was introduced by the French astronomer Nicolas-Louis de Lacaille in the 18th century."
+      },
+      "Ophiuchus": {
+        "en": "Ophiuchus is a large constellation in the northern sky, representing a man holding a serpent. Its name is Latin for 'serpent-bearer', and it is associated with the mythological figure Asclepius, the god of medicine."
+      },
+      "Orion": {
+        "en": "Orion is a prominent constellation located on the celestial equator and visible throughout the world. It is named after Orion, a hunter in Greek mythology. It contains two of the ten brightest stars in the sky: Rigel and Betelgeuse."
+      },
+      "Pavo": {
+        "en": "Pavo is a small constellation in the southern sky, representing a peacock. Its name is Latin for 'peacock', and it was introduced by the Dutch astronomer Petrus Plancius in the late 16th century."
+      },
+      "Pegasus": {
+        "en": "Pegasus is a constellation in the northern sky, representing a winged horse. Its name is Latin for 'Pegasus', and it is associated with the mythological creature Pegasus, which was said to have sprung from the blood of Medusa when she was slain by Perseus."
+      },
+      "Perseus": {
+        "en": "Perseus is a constellation in the northern sky, representing the mythological hero Perseus. It is home to several notable deep-sky objects, including the variable star Algol and the Perseus Double Cluster."
+      },
+      "Pictor": {
+        "en": "Pictor is a small constellation in the southern sky, representing a painter's easel. Its name is Latin for 'painter', and it was introduced by the French astronomer Nicolas-Louis de Lacaille in the 18th century."
+      },
+      "Pisces": {
+        "en": "Pisces is a constellation of the zodiac, located in the northern sky. Its name is Latin for 'fish', and it is associated with the mythological story of Aphrodite and Eros, who transformed into fish to escape the monster Typhon. Pisces is also home to several notable deep-sky objects, including the Ring Nebula (M57) and the spiral galaxy NGC 488."
+      },
+      "Piscis Austrinus": {
+        "en": "Piscis Austrinus is a constellation in the southern sky, representing a fish. Its name is Latin for 'southern fish', and it is associated with the mythological story of the fish that saved the goddess Aphrodite and her son Eros from the monster Typhon. The brightest star in Piscis Austrinus is Fomalhaut, which is one of the brightest stars in the night sky."
+      },
+      "Pyxis": {
+        "en": "Pyxis is a small constellation in the southern sky, representing a mariner's compass. Its name is Latin for 'compass', and it was introduced by the French astronomer Nicolas-Louis de Lacaille in the 18th century."
+      },
+      "Reticulum": {
+        "en": "Reticulum is a small constellation in the southern sky, representing a reticle or net. Its name is Latin for 'reticle', and it was introduced by the French astronomer Nicolas-Louis de Lacaille in the 18th century. It is home to several notable deep-sky objects, including the Reticulum Galaxy and the Reticulum Cluster."
+      },
+      "Sagittarius": {
+        "en": "Sagittarius is a constellation of the zodiac, located in the southern sky. Its name is Latin for 'archer', and it is associated with the mythological centaur Chiron, who was known for his wisdom and skill in archery. Sagittarius is home to several notable deep-sky objects, including the Lagoon Nebula (M8) and the Trifid Nebula (M20)."
+      },
+      "Scorpius": {
+        "en": "Scorpius is a constellation of the zodiac, located in the southern sky. Its name is Latin for 'scorpion', and it is associated with the mythological story of Orion, who was killed by a scorpion sent by the goddess Artemis. Scorpius is home to several notable deep-sky objects, including the Butterfly Cluster (M6) and the Ptolemy Cluster (M7)."
+      },
+      "Sculptor": {
+        "en": "Sculptor is a small constellation in the southern sky, representing a sculptor's studio. Its name is Latin for 'sculptor', and it was introduced by the French astronomer Nicolas-Louis de Lacaille in the 18th century. It is home to several notable deep-sky objects, including the Sculptor Galaxy (NGC 253) and the Sculptor Dwarf Galaxy."
+      },
+      "Sextans": {
+        "en": "Sextans is a small constellation in the southern sky, representing a sextant, a navigational instrument. Its name is Latin for 'sextant', and it was introduced by the French astronomer Nicolas-Louis de Lacaille in the 18th century."
+      },
+      "Taurus": {
+        "en": "Taurus is a constellation of the zodiac, located in the northern sky. Its name is Latin for 'bull', and it is associated with the mythological story of Zeus transforming into a bull to abduct Europa. Taurus is home to several notable deep-sky objects, including the Pleiades (M45) and the Crab Nebula (M1)."
+      },
+      "Telescopium": {
+        "en": "Telescopium is a small constellation in the southern sky, representing a telescope. Its name is Latin for 'telescope', and it was introduced by the French astronomer Nicolas-Louis de Lacaille in the 18th century. It is home to several notable deep-sky objects, including the Telescopium Galaxy (NGC 6868) and the Telescopium Cluster."
+      },
+      "Triangulum": {
+        "en": "Triangulum is a small constellation in the northern sky, representing a triangle. Its name is Latin for 'triangle', and it was introduced by the Greek astronomer Ptolemy in the 2nd century. It is home to several notable deep-sky objects, including the Triangulum Galaxy (M33) and the Triangulum Cluster."
+      },
+      "Tucana": {
+        "en": "Tucana is a small constellation in the southern sky, representing a toucan. Its name is Latin for 'toucan', and it was introduced by the Dutch astronomer Petrus Plancius in the late 16th century. It is home to several notable deep-sky objects, including the Small Magellanic Cloud and the Tucana Dwarf Galaxy."
+      },
+      "Ursa Major": {
+        "en": "Ursa Major is a large constellation in the northern sky, representing a great bear. It is home to several notable deep-sky objects, including the Whirlpool Galaxy (M51) and the Pinwheel Galaxy (M101). The constellation is also known for the asterism called the Big Dipper, which is part of Ursa Major and is one of the most recognizable patterns in the night sky."
+      },
+      "Ursa Minor": {
+        "en": "Ursa Minor is a small constellation in the northern sky, representing a little bear. It is home to the North Star, Polaris, which is located at the end of the constellation's tail. Ursa Minor is also known for the asterism called the Little Dipper, which is part of Ursa Minor and is a useful navigational aid in the northern hemisphere."
+      },
+      "Virgo": {
+        "en": "Virgo is a constellation of the zodiac, located in the southern sky. Its name is Latin for 'virgin', and it is associated with the mythological figure of Astraea, the goddess of justice. Virgo is home to several notable deep-sky objects, including the Virgo Cluster of galaxies and the bright star Spica."
+      },
+      "Vulpecula": {
+        "en": "Vulpecula is a small constellation in the northern sky, representing a little fox. Its name is Latin for 'little fox', and it was introduced by the Polish astronomer Johannes Hevelius in the 17th century. It is home to several notable deep-sky objects, including the Dumbbell Nebula (M27) and the Coathanger Cluster (Collinder 399)."
+      }
+    }
+  }
+}

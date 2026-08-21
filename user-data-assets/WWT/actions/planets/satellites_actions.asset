@@ -1,0 +1,432 @@
+local ToggleStarlink = {
+    Identifier = "ToggleStarlink",
+    Name = "Starlink",
+    Command = [[
+        openspace.setPropertyValueSingle("NavigationHandler.OrbitalNavigator.IdleMotion.Motion", 0.000000)
+        
+        local othersOn = openspace.is100BrightestOn or openspace.isGeostationaryOn or openspace.isGPSOn or openspace.isLast30DaysOn or openspace.isSpaceStationsOn
+        
+        if othersOn then
+            openspace.isStarlinkOn = true
+        else
+            openspace.isStarlinkOn = not openspace.isStarlinkOn
+        end
+
+        openspace.is100BrightestOn = false
+        openspace.isGeostationaryOn = false
+        openspace.isGPSOn = false
+        openspace.isLast30DaysOn = false
+        openspace.isSpaceStationsOn = false
+        openspace.isAllSatellitesOn = false
+        
+        if not openspace.isStarlinkOn then
+            openspace.fadeOut("Scene.StarlinkSatellites.Renderable")
+        else
+            local state = openspace.navigation.getNavigationState()
+            if state.Anchor ~= "Earth" then
+                openspace.navigation.setFocus("Earth", true, true)
+                openspace.navigation.flyTo("Earth", 10)
+            end
+
+            openspace.navigation.zoomToDistance(19134411, 1.5)     
+
+            openspace.fadeIn("Scene.StarlinkSatellites.Renderable")
+            
+            openspace.fadeOut("Scene.BrightestSatellites.Renderable")
+            openspace.fadeOut("Scene.GeoStationarySatellites.Renderable")
+            openspace.fadeOut("Scene.GpsSatellites.Renderable")
+            openspace.fadeOut("Scene.Last30DaysSatellites.Renderable")
+            openspace.fadeOut("Scene.SpaceStations.Renderable")
+
+            openspace.setPropertyValueSingle("NavigationHandler.OrbitalNavigator.IdleMotion.Apply", true)
+
+            openspace.satelliteCounter = (openspace.satelliteCounter or 0) + 1
+            local clearLogic = "if openspace.satelliteCounter == " .. openspace.satelliteCounter .. " then openspace.action.triggerAction('ClearSatellites') end"
+            openspace.scheduleScript(clearLogic, 15)
+        end
+    ]],
+    GuiPath = "/Satellites",
+    IsLocal = false
+}
+
+local Toggle100Brightest = {
+    Identifier = "Toggle100Brightest",
+    Name = "100 Brightest Satellites",
+    Command = [[
+        openspace.setPropertyValueSingle("NavigationHandler.OrbitalNavigator.IdleMotion.Motion", 0.000000)
+
+        local othersOn = openspace.isStarlinkOn or openspace.isGeostationaryOn or openspace.isGPSOn or openspace.isLast30DaysOn or openspace.isSpaceStationsOn
+        
+        if othersOn then
+            openspace.is100BrightestOn = true
+        else
+            openspace.is100BrightestOn = not openspace.is100BrightestOn
+        end
+
+        openspace.isStarlinkOn = false
+        openspace.isGeostationaryOn = false
+        openspace.isGPSOn = false
+        openspace.isLast30DaysOn = false
+        openspace.isSpaceStationsOn = false
+        openspace.isAllSatellitesOn = false
+        
+        if not openspace.is100BrightestOn then
+            openspace.fadeOut("Scene.BrightestSatellites.Renderable")
+        else
+            local state = openspace.navigation.getNavigationState()
+            if state.Anchor ~= "Earth" then
+                openspace.navigation.setFocus("Earth", true, true)
+                openspace.navigation.flyTo("Earth", 10)
+            end
+
+            openspace.navigation.zoomToDistance(25512548, 1.5)     
+
+            openspace.fadeIn("Scene.BrightestSatellites.Renderable")
+            openspace.fadeOut("Scene.StarlinkSatellites.Renderable")
+            openspace.fadeOut("Scene.GeoStationarySatellites.Renderable")
+            openspace.fadeOut("Scene.GpsSatellites.Renderable")
+            openspace.fadeOut("Scene.Last30DaysSatellites.Renderable")
+            openspace.fadeOut("Scene.SpaceStations.Renderable")
+
+            openspace.setPropertyValueSingle("NavigationHandler.OrbitalNavigator.IdleMotion.Apply", true)
+
+            openspace.satelliteCounter = (openspace.satelliteCounter or 0) + 1
+            local clearLogic = "if openspace.satelliteCounter == " .. openspace.satelliteCounter .. " then openspace.action.triggerAction('ClearSatellites') end"
+            openspace.scheduleScript(clearLogic, 15)
+        end
+    ]],
+    GuiPath = "/Satellites",
+    IsLocal = false
+}
+
+local ToggleGeostationary = {
+    Identifier = "ToggleGeostationary",
+    Name = "Geostationary Satellites",
+    Command = [[
+        openspace.setPropertyValueSingle("NavigationHandler.OrbitalNavigator.IdleMotion.Motion", 0.000000)
+
+        local othersOn = openspace.is100BrightestOn or openspace.isStarlinkOn or openspace.isGPSOn or openspace.isLast30DaysOn or openspace.isSpaceStationsOn
+       
+        if othersOn then
+            openspace.isGeostationaryOn = true
+        else
+            openspace.isGeostationaryOn = not openspace.isGeostationaryOn
+        end
+
+        openspace.is100BrightestOn = false
+        openspace.isStarlinkOn = false
+        openspace.isGPSOn = false
+        openspace.isLast30DaysOn = false
+        openspace.isSpaceStationsOn = false
+        openspace.isAllSatellitesOn = false
+       
+        if not openspace.isGeostationaryOn then
+            openspace.fadeOut("Scene.GeoStationarySatellites.Renderable")
+        else
+            local state = openspace.navigation.getNavigationState()
+            if state.Anchor ~= "Earth" then
+                openspace.navigation.setFocus("Earth", true, true)
+                openspace.navigation.flyTo("Earth", 10)
+            end
+
+            openspace.navigation.zoomToDistance(116378137, 1.5)    
+
+            openspace.fadeIn("Scene.GeoStationarySatellites.Renderable")
+           
+            openspace.fadeOut("Scene.BrightestSatellites.Renderable")
+            openspace.fadeOut("Scene.StarlinkSatellites.Renderable")
+            openspace.fadeOut("Scene.GpsSatellites.Renderable")
+            openspace.fadeOut("Scene.Last30DaysSatellites.Renderable")
+            openspace.fadeOut("Scene.SpaceStations.Renderable")
+
+            openspace.setPropertyValueSingle("NavigationHandler.OrbitalNavigator.IdleMotion.Apply", true)
+
+            openspace.satelliteCounter = (openspace.satelliteCounter or 0) + 1
+            local clearLogic = "if openspace.satelliteCounter == " .. openspace.satelliteCounter .. " then openspace.action.triggerAction('ClearSatellites') end"
+            openspace.scheduleScript(clearLogic, 15)
+        end
+
+    ]],
+    GuiPath = "/Satellites",
+    IsLocal = false
+}
+
+local ToggleGPS = {
+    Identifier = "ToggleGPS",
+    Name = "GPS Satellites",
+    Command = [[
+        openspace.setPropertyValueSingle("NavigationHandler.OrbitalNavigator.IdleMotion.Motion", 0.000000)
+
+        local othersOn = openspace.is100BrightestOn or openspace.isGeostationaryOn or openspace.isStarlinkOn or openspace.isLast30DaysOn or openspace.isSpaceStationsOn
+       
+        if othersOn then
+            openspace.isStarlinkOn = true
+        else
+            openspace.isStarlinkOn = not openspace.isStarlinkOn
+        end
+
+        openspace.is100BrightestOn = false
+        openspace.isGeostationaryOn = false
+        openspace.isGPSOn = false
+        openspace.isLast30DaysOn = false
+        openspace.isSpaceStationsOn = false
+        openspace.isAllSatellitesOn = false
+       
+        if not openspace.isStarlinkOn then
+            openspace.fadeOut("Scene.GpsSatellites.Renderable")
+        else
+            local state = openspace.navigation.getNavigationState()
+            if state.Anchor ~= "Earth" then
+                openspace.navigation.setFocus("Earth", true, true)
+                openspace.navigation.flyTo("Earth", 10)
+            end
+
+            openspace.navigation.zoomToDistance(90000000, 1.5)    
+
+            openspace.fadeIn("Scene.GpsSatellites.Renderable")
+           
+            openspace.fadeOut("Scene.BrightestSatellites.Renderable")
+            openspace.fadeOut("Scene.GeoStationarySatellites.Renderable")
+            openspace.fadeOut("Scene.StarlinkSatellites.Renderable")
+            openspace.fadeOut("Scene.Last30DaysSatellites.Renderable")
+            openspace.fadeOut("Scene.SpaceStations.Renderable")
+
+            openspace.setPropertyValueSingle("NavigationHandler.OrbitalNavigator.IdleMotion.Apply", true)
+
+            openspace.satelliteCounter = (openspace.satelliteCounter or 0) + 1
+            local clearLogic = "if openspace.satelliteCounter == " .. openspace.satelliteCounter .. " then openspace.action.triggerAction('ClearSatellites') end"
+            openspace.scheduleScript(clearLogic, 15)
+
+        end
+    ]],
+    GuiPath = "/Satellites",
+    IsLocal = false
+}
+
+local ToggleLast30Days = {
+    Identifier = "ToggleLast30Days",
+    Name = "Satellites Launched in the Last 30 Days",
+    Command = [[
+        openspace.setPropertyValueSingle("NavigationHandler.OrbitalNavigator.IdleMotion.Motion", 0.000000)
+
+        local othersOn = openspace.is100BrightestOn or openspace.isGeostationaryOn or openspace.isGPSOn or openspace.isStarlinkOn or openspace.isSpaceStationsOn
+       
+        if othersOn then
+            openspace.isLast30DaysOn = true
+        else
+            openspace.isLast30DaysOn = not openspace.isLast30DaysOn
+        end
+
+        openspace.is100BrightestOn = false
+        openspace.isGeostationaryOn = false
+        openspace.isGPSOn = false
+        openspace.isStarlinkOn = false
+        openspace.isSpaceStationsOn = false
+        openspace.isAllSatellitesOn = false
+       
+        if not openspace.isLast30DaysOn then
+            openspace.fadeOut("Scene.Last30DaysSatellites.Renderable")
+        else
+            local state = openspace.navigation.getNavigationState()
+            if state.Anchor ~= "Earth" then
+                openspace.navigation.setFocus("Earth", true, true)
+                openspace.navigation.flyTo("Earth", 10)
+            end
+
+            openspace.navigation.zoomToDistance(19134411, 1.5)    
+
+            openspace.fadeIn("Scene.Last30DaysSatellites.Renderable")
+           
+            openspace.fadeOut("Scene.BrightestSatellites.Renderable")
+            openspace.fadeOut("Scene.GeoStationarySatellites.Renderable")
+            openspace.fadeOut("Scene.GpsSatellites.Renderable")
+            openspace.fadeOut("Scene.StarlinkSatellites.Renderable")
+            openspace.fadeOut("Scene.SpaceStations.Renderable")
+
+            openspace.setPropertyValueSingle("NavigationHandler.OrbitalNavigator.IdleMotion.Apply", true)
+
+            openspace.satelliteCounter = (openspace.satelliteCounter or 0) + 1
+            local clearLogic = "if openspace.satelliteCounter == " .. openspace.satelliteCounter .. " then openspace.action.triggerAction('ClearSatellites') end"
+            openspace.scheduleScript(clearLogic, 15)
+        end
+    ]],
+    GuiPath = "/Satellites",
+    IsLocal = false
+}
+
+local ToggleSpaceStations = {
+    Identifier = "ToggleSpaceStations",
+    Name = "Space Stations",
+    Command = [[
+        openspace.setPropertyValueSingle("NavigationHandler.OrbitalNavigator.IdleMotion.Motion", 0.000000)
+
+        local othersOn = openspace.is100BrightestOn or openspace.isGeostationaryOn or openspace.isGPSOn or openspace.isLast30DaysOn or openspace.isStarlinkOn
+       
+        if othersOn then
+            openspace.isSpaceStationsOn = true
+        else
+            openspace.isSpaceStationsOn = not openspace.isSpaceStationsOn
+        end
+
+
+        openspace.is100BrightestOn = false
+        openspace.isGeostationaryOn = false
+        openspace.isGPSOn = false
+        openspace.isLast30DaysOn = false
+        openspace.isStarlinkOn = false
+        openspace.isAllSatellitesOn = false
+       
+        if not openspace.isSpaceStationsOn then
+            openspace.fadeOut("Scene.SpaceStations.Renderable")
+        else
+            local state = openspace.navigation.getNavigationState()
+            if state.Anchor ~= "Earth" then
+                openspace.navigation.setFocus("Earth", true, true)
+                openspace.navigation.flyTo("Earth", 10)
+            end
+
+            openspace.navigation.zoomToDistance(19134411, 1.5)    
+
+            openspace.fadeIn("Scene.SpaceStations.Renderable")
+           
+            openspace.fadeOut("Scene.BrightestSatellites.Renderable")
+            openspace.fadeOut("Scene.GeoStationarySatellites.Renderable")
+            openspace.fadeOut("Scene.GpsSatellites.Renderable")
+            openspace.fadeOut("Scene.Last30DaysSatellites.Renderable")
+            openspace.fadeOut("Scene.StarlinkSatellites.Renderable")
+
+            openspace.setPropertyValueSingle("NavigationHandler.OrbitalNavigator.IdleMotion.Apply", true)
+
+            openspace.satelliteCounter = (openspace.satelliteCounter or 0) + 1
+            local clearLogic = "if openspace.satelliteCounter == " .. openspace.satelliteCounter .. " then openspace.action.triggerAction('ClearSatellites') end"
+            openspace.scheduleScript(clearLogic, 15)
+
+        end
+    ]],
+    GuiPath = "/Satellites",
+    IsLocal = false
+}
+
+local ClearSatellites = {
+    Identifier = "ClearSatellites",
+    Name = "Turn off all satellites",
+    Command = [[
+        openspace.setPropertyValueSingle("NavigationHandler.OrbitalNavigator.IdleMotion.Motion", 0.000000)
+
+        openspace.fadeOut("Scene.BrightestSatellites.Renderable")
+        openspace.fadeOut("Scene.GeoStationarySatellites.Renderable")
+        openspace.fadeOut("Scene.GpsSatellites.Renderable")
+        openspace.fadeOut("Scene.Last30DaysSatellites.Renderable")
+        openspace.fadeOut("Scene.SpaceStations.Renderable")
+        openspace.fadeOut("Scene.StarlinkSatellites.Renderable")
+
+        openspace.isStarlinkOn = false
+        openspace.is100BrightestOn = false
+        openspace.isGeostationaryOn = false
+        openspace.isGPSOn = false
+        openspace.isLast30DaysOn = false
+        openspace.isSpaceStationsOn = false
+    ]],
+    GuiPath = "/Satellites",
+    IsLocal = false
+}
+
+local ToggleAllSatellites = {
+    Identifier = "ToggleAllSatellites",
+    Name = "Toggle All Satellites",
+    Command = [[
+        openspace.setPropertyValueSingle("NavigationHandler.OrbitalNavigator.IdleMotion.Motion", 0.000000)
+
+        openspace.isAllSatellitesOn = not openspace.isAllSatellitesOn
+        
+        local state = openspace.isAllSatellitesOn
+        openspace.is100BrightestOn = state
+        openspace.isGeostationaryOn = state
+        openspace.isGPSOn = state
+        openspace.isLast30DaysOn = state
+        openspace.isSpaceStationsOn = state
+        openspace.isStarlinkOn = state
+        
+        if not openspace.isAllSatellitesOn then
+            openspace.fadeOut("Scene.SpaceStations.Renderable")
+            openspace.fadeOut("Scene.BrightestSatellites.Renderable")
+            openspace.fadeOut("Scene.GeoStationarySatellites.Renderable")
+            openspace.fadeOut("Scene.GpsSatellites.Renderable")
+            openspace.fadeOut("Scene.Last30DaysSatellites.Renderable")
+            openspace.fadeOut("Scene.StarlinkSatellites.Renderable")
+        else
+            local navState = openspace.navigation.getNavigationState()
+            if navState.Anchor ~= "Earth" then
+                openspace.navigation.setFocus("Earth", true, true)
+                openspace.navigation.flyTo("Earth", 10)
+            end
+
+            openspace.navigation.zoomToDistance(116378137, 1.5)   
+
+            openspace.fadeIn("Scene.SpaceStations.Renderable")
+            openspace.fadeIn("Scene.BrightestSatellites.Renderable")
+            openspace.fadeIn("Scene.GeoStationarySatellites.Renderable")
+            openspace.fadeIn("Scene.GpsSatellites.Renderable")
+            openspace.fadeIn("Scene.Last30DaysSatellites.Renderable")
+            openspace.fadeIn("Scene.StarlinkSatellites.Renderable")
+
+            openspace.setPropertyValueSingle("NavigationHandler.OrbitalNavigator.IdleMotion.Apply", true)
+
+            openspace.satelliteCounter = (openspace.satelliteCounter or 0) + 1
+            local clearLogic = "if openspace.satelliteCounter == " .. openspace.satelliteCounter .. " then openspace.action.triggerAction('ClearSatellites') end"
+            openspace.scheduleScript(clearLogic, 15)
+        end
+    ]],
+    GuiPath = "/Satellites",
+    IsLocal = false
+}
+
+local FlyToISS = {
+    Identifier = "FlyToISS",
+    Name = "Fly to the International Space Station",
+    Command = [[
+        openspace.setPropertyValueSingle("NavigationHandler.OrbitalNavigator.IdleMotion.Motion", 0.000000)
+        openspace.scheduleScript("openspace.setPropertyValueSingle('NavigationHandler.OrbitalNavigator.IdleMotion.Apply', true)", 11)
+        openspace.navigation.flyTo("ISS", 10)
+    ]],
+    GuiPath = "/Satellites",
+    IsLocal = false
+}
+
+local FlyToTiangong = {
+    Identifier = "FlyToTiangong",
+    Name = "Fly to Tiangong",
+    Command = [[
+        openspace.setPropertyValueSingle("NavigationHandler.OrbitalNavigator.IdleMotion.Motion", 0.000000)
+        openspace.scheduleScript("openspace.setPropertyValueSingle('NavigationHandler.OrbitalNavigator.IdleMotion.Apply', true)", 11)
+        openspace.navigation.flyTo("Tiangong", 10)
+    ]],
+    GuiPath = "/Satellites",
+    IsLocal = false
+}
+
+asset.onInitialize(function()
+    openspace.action.registerAction(ToggleStarlink)
+    openspace.action.registerAction(Toggle100Brightest)
+    openspace.action.registerAction(ToggleGeostationary)
+    openspace.action.registerAction(ToggleGPS)
+    openspace.action.registerAction(ToggleLast30Days)
+    openspace.action.registerAction(ToggleSpaceStations)
+    openspace.action.registerAction(ClearSatellites)
+    openspace.action.registerAction(ToggleAllSatellites)
+    openspace.action.registerAction(FlyToISS)
+    openspace.action.registerAction(FlyToTiangong)
+end)
+
+asset.onDeinitialize(function()
+    openspace.action.removeAction(FlyToTiangong)
+    openspace.action.removeAction(FlyToISS)
+    openspace.action.removeAction(ToggleAllSatellites)
+    openspace.action.removeAction(ClearSatellites)
+    openspace.action.removeAction(ToggleSpaceStations)
+    openspace.action.removeAction(ToggleLast30Days)
+    openspace.action.removeAction(ToggleGPS)
+    openspace.action.removeAction(ToggleGeostationary)
+    openspace.action.removeAction(Toggle100Brightest)
+    openspace.action.removeAction(ToggleStarlink)
+end)

@@ -1,0 +1,84 @@
+local SetupTrajectory = {
+  Identifier = "os.artemis2.SetupTrajectory",
+  Name = "See Artemis II Trajectory",
+  Command = [[
+    openspace.time.setTime("2026-04-10T23:35:00")
+    openspace.setPropertyValue('Scene.Artemis2MoonTrail.Renderable.Enabled', false)
+
+    openspace.setPropertyValueSingle("Scene.Artemis2EarthTrail.Renderable.Appearance.LineWidth", 5.000000)
+    openspace.setPropertyValueSingle("Scene.Artemis2EarthTrail.Renderable.Appearance.LineFadeAmount", 0.100000)
+    openspace.setPropertyValueSingle("Scene.Artemis2EarthTrail.Renderable.Appearance.Rendering", 0.000000)
+  
+    openspace.navigation.setNavigationState({
+      Anchor = "ArtemisModel", 
+      Aim = "ArtemisModel",
+      Position = { 0, 500, 0 } 
+    })
+  ]],
+  Documentation = "Set the time to the launch time of Artemis I",
+  GuiPath = "/Missions/Artemis II",
+  IsLocal = false
+}
+--  openspace.navigation.setFocus('ArtemisModel', true, true)
+
+local SetupArtemisII = {
+  Identifier = "os.artemis2.SetupArtemisII",
+  Name = "Fly to Orion Capsule",
+  Command = [[
+  openspace.time.setTime("2026-04-06T23:36:15")
+  openspace.navigation.jumpTo("Artemis2Model")
+  scheduleScript("openspace.setPropertyValueSingle('NavigationHandler.OrbitalNavigator.IdleMotion.Apply', true)", 1)
+  openspace.setPropertyValueSingle("NavigationHandler.OrbitalNavigator.IdleMotion.SpeedFactor", 5.0)
+  ]],
+  Documentation = "Set the time to the launch time of Artemis I",
+  GuiPath = "/Missions/Artemis II",
+  IsLocal = false
+}
+
+local FocusMoon = {
+  Identifier = "os.artemis2.FocusMoon",
+  Name = "Focus on Moon",
+  Command = "openspace.navigation.setFocus('Moon', true, true)",
+  Documentation = "Set camera focus on the Moon",
+  GuiPath = "/Missions/Artemis II",
+  IsLocal = false
+}
+
+local FocusArtemis = {
+  Identifier = "os.artemis2.FocusArtemis",
+  Name = "Focus on Artemis II",
+  Command = "openspace.navigation.setFocus('ArtemisModel', true, true)",
+  Documentation = "Set camera focus on the Moon",
+  GuiPath = "/Missions/Artemis II",
+  IsLocal = false
+}
+
+
+asset.onInitialize(function()
+  openspace.action.registerAction(SetupTrajectory)
+  openspace.action.registerAction(FocusMoon)
+  openspace.action.registerAction(FocusArtemis)
+  openspace.action.registerAction(SetupArtemisII)
+end)
+
+asset.onDeinitialize(function()
+  openspace.action.removeAction(FocusArtemis)
+  openspace.action.removeAction(FocusMoon)
+  openspace.action.removeAction(SetupTrajectory)
+  openspace.action.removeAction(SetupArtemisII)
+end)
+
+asset.export("SetupTrajectory", SetupTrajectory.Identifier)
+asset.export("FocusMoon", FocusMoon.Identifier)
+asset.export("FocusArtemis", FocusArtemis.Identifier)
+asset.export("SetupArtemisII", SetupArtemisII.Identifier)
+
+
+
+asset.meta = {
+  Name = "Actions - Artemis II",
+  Description = "Actions related to the Artemis II mission",
+  Author = "OpenSpace Team",
+  URL = "https://openspaceproject.com",
+  License = "MIT license"
+}

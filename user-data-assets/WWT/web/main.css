@@ -1,0 +1,524 @@
+/* ==========================================================================
+   1. Adler Font Definitions (@font-face)
+   ========================================================================== */
+
+/* Heroic (Primary Headline Font) */
+@font-face {
+  font-family: 'Heroic Condensed';
+  src: url('fonts/HeroicCondensed-Black.ttf') format('truetype');
+  font-weight: 900;
+  font-style: normal;
+}
+
+/* Montserrat (Secondary / Body Font) */
+@font-face {
+  font-family: 'Montserrat';
+  src: url('fonts/Montserrat-Light.ttf') format('truetype');
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url('fonts/Montserrat-Regular.ttf') format('truetype');
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url('fonts/Montserrat-Medium.ttf') format('truetype');
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url('fonts/Montserrat-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url('fonts/Montserrat-Bold.ttf') format('truetype');
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url('fonts/Montserrat-ExtraBold.ttf') format('truetype');
+  font-weight: 800;
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url('fonts/Montserrat-Black.ttf') format('truetype');
+  font-weight: 900;
+}
+
+/* ==========================================================================
+   2. Adler Design System Variables
+   ========================================================================== */
+:root {
+  /* Brand Colors */
+  --adler-yellow: #FFCE34;
+  --black: #000;
+  --adler-gray: #474C55;
+  --medium-gray: #7A7B7E;
+  --light-gray: #DDDDDA;
+  --white: #FFF;
+
+  /* Complementary Colors */
+  --black-gray: #1E1E1E;
+  --darker-gray: #2A2C2F;
+  --dark-gray: #393C42;
+  --med-light-gray: #ACACAC;
+  
+  --btn-blue: #12588F;
+  --err-red: #6D222B;
+  --err-red-text: #F0D0D4;
+  --icon-bkgd-green: #00695c;
+  --icon-green: #B4E0E4;
+
+  /* Typography Fallbacks */
+  --sans-serif: system-ui, Segoe UI, sans-serif, color-emoji;
+  --montserrat: "Montserrat", "Montserrat-fallback", var(--sans-serif);
+  --heroic-condensed: "Heroic Condensed", "Heroic-Condensed-fallback", var(--sans-serif);
+
+  /* Layout & Z-Index Tokens */
+  --layout-max-width: 75.375rem;
+  --z-index-modal: 900;
+  --z-index-nav: 600;
+  --z-index-header: 700;
+  --z-index-main: 100;
+}
+
+/* Global Reset & Kiosk Touch Protection */
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+  
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+
+  -webkit-touch-callout: none;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: var(--black); /* Black Background */
+  color: var(--white);
+  
+  font-family: var(--montserrat);
+  font-weight: 400;
+  font-size: 18px;
+}
+
+/* ==========================================================================
+   Full-Viewport Layout Hierarchy (Row Direction)
+   ========================================================================== */
+body {
+  display: flex;
+  flex-direction: row; /* Horizontal split: Left workspace, Right sidebar */
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
+
+/* ==========================================================================
+   Left Workspace Area (#container)
+   ========================================================================== */
+#container {
+  flex: 1; /* Takes up all available space to the left of the sidebar */
+  height: 100%;
+  overflow-y: auto;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  position: relative;
+  z-index: var(--z-index-main);
+}
+
+#main-content {
+  max-width: 100%;
+  width: 100%;
+  padding: 1.5rem;
+  box-sizing: border-box;
+}
+
+/* ==========================================================================
+   4. Connection Status Banner
+   ========================================================================== */
+.connection-status {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  border-radius: 0.625rem;
+  margin-bottom: 1.5rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+  text-align: center;
+  transition: opacity 0.3s ease;
+}
+
+#container.connected .connection-status {
+  display: none; 
+}
+
+#container.disconnected .connection-status {
+  display: flex;
+  background-color: var(--err-red);
+  color: var(--err-red-text);
+}
+
+/* ==========================================================================
+   5. Category Cards & Icon Grid
+   ========================================================================== */
+.icon-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 1.2rem;
+}
+
+.icon-card {
+  background-color: var(--darker-gray);
+  border-radius: 1rem;
+  padding: 1.2rem 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+  transition: transform 0.15s ease, background-color 0.15s ease;
+  touch-action: manipulation;
+}
+
+.icon-card:active {
+  transform: scale(0.95);
+  background-color: var(--adler-gray);
+
+}
+
+/* Restored Original Main Icon Colors */
+.icon-wrapper {
+  width: 56px;
+  height: 56px;
+  background-color: var(--adler-yellow);
+  /* #283593; */
+  color: var(--black-gray);
+  /* #80deea; */
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-wrapper svg {
+  width: 28px;
+  height: 28px;
+}
+
+/* Restored Original Subcategory Card & Icon Colors */
+.sub-icon-card {
+  background-color: var(--dark-gray);
+}
+
+.sub-icon-wrapper {
+  background-color: var(--icon-bkgd-green);
+  color: var(--icon-green);
+}
+
+/* Title Styling: SemiBold (600), Non-Uppercase */
+.card-title {
+  font-family: var(--montserrat);
+  font-weight: 700;
+  font-size: 1rem;
+  text-align: center;
+  text-transform: capitalize;
+  color: var(--white);
+}
+
+/* ==========================================================================
+   6. Modal Dialog Views
+   ========================================================================== */
+.modal-overlay {
+  position: absolute; 
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+  z-index: var(--z-index-modal);
+}
+
+.modal-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal-content {
+  background-color: var(--black-gray);
+  border-radius: 1rem;
+  width: 95%;
+  max-width: 800px;
+  max-height: 95%;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+  overflow: hidden;
+}
+
+.modal-header {
+  padding: 1.2rem 1.5rem;
+  background-color: var(--dark-gray);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 3px solid var(--adler-yellow);
+}
+
+.modal-header-left {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+/* Heroic Headline Rule: Heroic Condensed, ALL CAPS, Negative Leading ~85% */
+.modal-header h2 {
+  font-family: var(--heroic-condensed);
+  font-weight: 900;
+  font-size: 2.5rem;
+  text-transform: uppercase;
+  line-height: 1;
+  color: var(--adler-yellow);
+  margin: 0;
+}
+
+.back-btn, .close-btn {
+  background: transparent;
+  border: none;
+  color: var(--white);
+  cursor: pointer;
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+}
+
+.back-btn:active, .close-btn:active {
+  color: var(--adler-yellow);
+}
+
+.modal-body {
+  padding: 1.5rem;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.modal-btn-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 0.8rem;
+}
+
+/* Action Button Base Styling */
+.action-btn {
+  font-family: var(--montserrat);
+  font-weight: 500;
+  min-height: 52px;
+  padding: 0.8rem 1rem;
+  font-size: 1rem;
+  background-color: var(--btn-blue);
+  border: 2px solid transparent;
+  color: var(--white);
+  border-radius: 0.625rem;
+  text-align: center;
+  cursor: pointer;
+  touch-action: manipulation;
+  transition: background-color 0.15s, border-color 0.15s, transform 0.1s, box-shadow 0.15s;
+}
+
+/* Active Highlight State (Stays colored on click until another button is selected or 15s pass) */
+.action-btn.btn-highlight {
+  background-color: var(--adler-yellow);
+  color: var(--black-gray);
+  border-color: var(--adler-yellow);
+  font-weight: 600;
+  box-shadow: 0 0 12px rgba(255, 206, 52, 0.4);
+}
+
+.action-btn:active {
+  transform: scale(0.97);
+}
+
+/* ==========================================================================
+   Right Sidebar Info Panel (.info-panel)
+   ========================================================================== */
+.info-panel {
+  width: 320px; /* Fixed width sidebar (adjust between 300px - 360px as needed) */
+  flex-shrink: 0;
+  height: 100%;
+  background-color: var(--darker-gray);
+  border-left: 3px solid var(--adler-yellow); /* Border on the LEFT edge now */
+  border-top: none; /* Remove old top border */
+  box-shadow: -4px 0 15px rgba(0, 0, 0, 0.6);
+  padding: 1.5rem;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  z-index: var(--z-index-header);
+}
+
+.info-content {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.info-content h3 {
+  font-family: var(--heroic-condensed);
+  font-weight: 700;
+  font-size: 2.5rem;
+  text-transform: uppercase;
+  line-height: 1;
+  margin: 0 0 1rem 0;
+  color: var(--white);
+  flex-shrink: 0;
+}
+
+.info-content h3 span {
+  color: var(--adler-yellow);
+  font-family: var(--montserrat);
+  font-weight: 900;
+  font-size: 1.75rem;
+  text-transform: capitalize;
+  display: block; /* Moves the target name cleanly onto its own line */
+  margin-top: 0.2rem;
+}
+
+/* Vertical scrollable container for target description text */
+.info-content .scroll-area {
+  flex: 1;
+  overflow-y: auto;
+  padding-right: 0.5rem;
+}
+
+.info-content p {
+  font-family: var(--montserrat);
+  font-weight: 400;
+  font-size: 1.15rem;
+  line-height: 1.5;
+  margin: 0;
+  color: var(--light-gray);
+  max-height: none; /* Remove previous line-clamp limit */
+}
+
+.status-msg {
+  font-family: var(--montserrat);
+  font-weight: 400;
+  font-size: 1.2rem;
+  padding: 2rem;
+  text-align: center;
+  color: var(--light-gray);
+}
+
+/* Targets WebKit / Safari browsers specifically */
+@supports (-webkit-touch-callout: none) {
+  .modal-header h2 {
+    transform: translateY(5px); /* Gently nudges title down in Safari */
+  }
+
+  .info-content h3 span {
+    transform: translateY(-5px); /* Gently nudges title down in Safari */
+  }
+}
+
+/* ==========================================================================
+   Idle Inactivity Overlay
+   ========================================================================== */
+.idle-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.72);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+  z-index: 3000; /* Stays on top of modals and sidebar */
+}
+
+/* Active state: displayed and clickable to dismiss */
+.idle-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.idle-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem;
+  animation: pulseTouch 2s infinite ease-in-out;
+}
+
+.idle-content .idle-icon {
+  width: 64px;
+  height: 64px;
+  color: var(--adler-yellow);
+  margin-bottom: 1rem;
+  transform: rotate(330deg);
+  transform-origin: center;
+}
+
+.idle-content h2 {
+  font-family: var(--heroic-condensed);
+  font-weight: 900;
+  font-size: 5rem;
+  text-transform: uppercase;
+  color: var(--adler-yellow);
+  margin: 0 0 0.5rem 0;
+  line-height: 1;
+  letter-spacing: 0.05em;
+}
+
+.idle-content p {
+  font-family: var(--montserrat);
+  font-weight: 400;
+  font-size: 2rem;
+  color: var(--light-gray);
+  margin: 0;
+}
+
+/* Gentle pulse animation to encourage touching the screen */
+@keyframes pulseTouch {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.04);
+  }
+  100% {
+    transform: scale(1);
+  }
+}

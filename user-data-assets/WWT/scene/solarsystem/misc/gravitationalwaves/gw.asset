@@ -1,0 +1,43 @@
+local marsAsset = asset.require('scene/solarsystem/planets/mars/globe') 
+local sunAsset = asset.require('scene/solarsystem/sun/sun')
+local transforms = asset.require("scene/solarsystem/sun/transforms")
+local KiloParsec = 3.086E19
+  
+local gw = {
+	Identifier = "gw",
+	Parent = transforms.SolarSystemBarycenter.identifier,
+	Transform = {
+		Translation = {
+			Type = "StaticTranslation",
+			Position = {8 * KiloParsec, 0, 0}
+		},
+	},
+	Renderable = {
+		Type = "RenderableModel",
+		GeometryFile = asset.resource("testgw.glb"),
+		forceRenderInvisible = true,
+		ModelScale = 10,
+		RotationVector = {0,0,0},
+		Enabled = false, 
+		LightSources = { sunAsset.LightSource }
+	},
+	GUI = {
+		Name = "Gravitation Wave",
+		Path = "/Mily Way",
+		Description = [[
+			
+		]],
+	}
+}
+
+
+asset.onInitialize(function()
+	openspace.addSceneGraphNode(gw)
+end)
+	
+asset.onDeinitialize(function()
+	openspace.removeSceneGraphNode(gw)
+end)
+	
+asset.export(gw)
+

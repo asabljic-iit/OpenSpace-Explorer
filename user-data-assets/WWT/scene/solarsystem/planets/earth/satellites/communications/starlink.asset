@@ -1,0 +1,59 @@
+local earthAsset = asset.require("scene/solarsystem/planets/earth/transforms")
+
+
+
+local omm = asset.resource({
+  Name = "Satellite CSV Data (Starlink)",
+  Type = "UrlSynchronization",
+  Identifier = "satellite_csv_data_starlink",
+  Url = "https://liu-se.relay.openspaceproject.com/celestrak?GROUP=starlink&FORMAT=csv",
+  Filename = "starlink.txt",
+  -- The starlink satellites are updated every 2 hours. We reduce this update rate to
+  -- every 4 hours to ease the load on the servers a bit
+  SecondsUntilResync = 4 * 60 * 60
+})
+
+
+local StarlinkSatellites = {
+  Identifier = "StarlinkSatellites",
+  Parent = earthAsset.EarthInertial.Identifier,
+  Renderable = {
+    Type = "RenderableOrbitalKepler",
+    Path = omm .. "starlink.txt",
+    Format = "CSV",
+    SegmentQuality = 3,
+    Color = { 0.65, 0.55, 0.55 },
+    TrailFade = 5,
+    PointSizeExponent = 5.0,
+    RenderBinMode = "PostDeferredTransparent"
+  },
+  Tag = { "earth_satellites" },
+  GUI = {
+    Name = "Starlink",
+    Path = "/Solar System/Planets/Earth/Satellites",
+    Focusable = false,
+    Description = [[LEO satellite constellation launched by SpaceX to provide broadband
+      internet access.]]
+  }
+}
+
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(StarlinkSatellites)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(StarlinkSatellites)
+end)
+
+asset.export(StarlinkSatellites)
+
+
+
+asset.meta = {
+  Name = "Satellites Communications - Starlink",
+  Description = "Satellites asset for Communications - Starlink. Data from Celestrak",
+  Author = "OpenSpace Team",
+  URL = "https://celestrak.org/NORAD/elements/",
+  License = "Celestrak"
+}

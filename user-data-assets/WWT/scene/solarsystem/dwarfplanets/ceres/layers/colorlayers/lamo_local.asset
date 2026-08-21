@@ -1,0 +1,40 @@
+local ceresAsset = asset.require("scene/solarsystem/dwarf_planets/ceres/globe")
+
+
+
+local textures = asset.resource({
+  Name = "Ceres Textures",
+  Type = "HttpSynchronization",
+  Identifier = "ceres_textures",
+  Version = 2
+})
+
+
+local Layer = {
+  Identifier = "LAMO_Local",
+  Name = "LAMO [Local]",
+  Enabled = asset.enabled,
+  ZIndex = 5,
+  FilePath = textures .. "ceres_lamo_4096x2048.png"
+}
+
+
+asset.onInitialize(function()
+  openspace.globebrowsing.addLayer(ceresAsset.Ceres.Identifier, "ColorLayers", Layer)
+end)
+
+asset.onDeinitialize(function()
+  openspace.globebrowsing.deleteLayer(ceresAsset.Ceres.Identifier, "ColorLayers", Layer)
+end)
+
+asset.export("layer", Layer)
+
+
+
+asset.meta = {
+  Name = "LAMO [Local]",
+  Description = [[]],
+  Author = "",
+  URL = "",
+  License = ""
+}

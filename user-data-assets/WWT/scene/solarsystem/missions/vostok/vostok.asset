@@ -1,0 +1,109 @@
+local sunTransforms = asset.require('scene/solarsystem/sun/transforms')
+local transforms = asset.require('scene/solarsystem/planets/earth/transforms')
+local sun = asset.require("scene/solarsystem/sun/sun")
+local model = asset.resource("data/vostok.fbx")
+local coreKernels = asset.require("spice/core")
+
+  local Vostok = {
+     Identifier = "Vostok",
+      Parent = transforms.EarthInertial.Identifier,
+    BoundingSphere = 1,
+    Transform = {
+     Translation = {
+			Type = "KeplerTranslation",
+				Eccentricity = 0.01024,
+				SemiMajorAxis = 6705,
+				Inclination = 41.6,
+				AscendingNode = 127.9435425061379,
+				ArgumentOfPeriapsis = 142.3497714938621,
+				MeanAnomaly = 92.7197896277346,
+				Epoch = "2014-1-1T00:00:00.000",
+				Period = 5360.4
+				},
+      Rotation = {
+          Type = "SpiceRotation",
+          SourceFrame = "GALACTIC",
+          DestinationFrame = "J2000",
+      },
+	 Scale = {
+      Type = "StaticScale",
+      Scale = 10
+		}
+    },
+    Renderable = {
+    Type = "RenderableModel",
+		Enabled = true,
+		GeometryFile = model,
+		ModelScale = "Meter",
+		 LightSources = {
+		  {
+			Type = "SceneGraphLightSource",
+			Identifier = "Sun",
+			Node = sunTransforms.SolarSystemBarycenter.Identifier,
+			Intensity = 1.0
+		  }
+		 },
+		AmbientIntensity = 0.1,
+		DiffuseIntensity = 0.85,
+		SpecularIntensity = 0.85,
+		PerformShading = true,
+    },
+	
+	GUI = {
+			  Name = "Vostok",
+			  Path = "/Solar System/Missions/Vostok",
+		  }
+}
+
+local VostokTrail = {
+    Identifier = "VostokTrail",
+    Parent = transforms.EarthInertial.Identifier,
+    Renderable = {
+        Type = "RenderableTrailOrbit",
+        Translation = {
+			Type = "KeplerTranslation",
+				Eccentricity = 0.01024,
+				SemiMajorAxis = 6705,
+				Inclination = 41.6,
+				AscendingNode = 127.9435425061379,
+				ArgumentOfPeriapsis = 142.3497714938621,
+				MeanAnomaly = 92.7197896277346,
+				Epoch = "2014-1-1T00:00:00.000",
+				Period = 5360.4
+				},
+		RenderBinMode = "PostDeferredTransparent",
+        Color = { 1.0, 0.6, 0.2},
+        Fade = 1.5,
+        Period = 0.06204166666,
+        Resolution = 320
+      },
+    Tag = { "earth_satellite", "Vostok" },
+    GUI = {
+        Name = "Vostok Trail",
+        Path = "/Solar System/Missions/Vostok"
+    }
+}
+
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(Vostok)
+  openspace.addSceneGraphNode(VostokTrail)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(Vostok)
+  openspace.removeSceneGraphNode(VostokTrail)
+end)
+
+asset.export(Vostok)
+asset.export(VostokTrail)
+  
+
+asset.meta = {
+    Name = "Vostok",
+    Version = "1.0",
+    Description = [[ Model and Trail for Vostok, model by Dan Tell]],
+    Author = "Dan Tell, Tau Immersive LLC",
+    URL = "www.tauimmersive.com",
+    License = "CC-BY"
+}

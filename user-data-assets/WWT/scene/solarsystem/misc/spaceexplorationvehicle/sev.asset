@@ -1,0 +1,57 @@
+local marsAsset = asset.require('scene/solarsystem/planets/mars/globe') 
+local sunAsset = asset.require('scene/solarsystem/sun/sun')
+
+
+  
+local sev = {
+	Identifier = "sev",
+	Parent = marsAsset.Mars.Identifier,
+	--Note: Lat/Lon/Scale values comes from alignment with Esri World Imagery 2D layer
+	Transform = {
+		Translation = {
+			Type = "GlobeTranslation",
+			Globe = marsAsset.Mars.Identifier,
+            Latitude = -3.1582, 
+            Longitude = -67.9028,
+            Altitude = 0,
+			UseHeightmap = true
+		},
+		Rotation = {
+			Type = "GlobeRotation",
+			Globe = marsAsset.Mars.Identifier,
+            Latitude = -3.1582, 
+            Longitude = -67.9028,
+			UseHeightmap = false
+		}
+		
+	},
+	Renderable = {
+		Type = "RenderableModel",
+		GeometryFile = asset.resource("SpaceExplorationVehicle.glb"),
+		forceRenderInvisible = true,
+		ModelScale = 10,
+		RotationVector = {0,0,0},
+		LightSources = { sunAsset.LightSource }
+	},
+	GUI = {
+		Name = "Space Exploration Vehicle",
+		Path = "/Solar System/Planets/Mars",
+		Description = [[
+			The Space Exploration Vehicle (SEV) concept is designed to be flexible depending on the destination; 
+			the pressurized cabin can be used both for in-space missions and for surface exploration of planetary bodies, including near-Earth asteroids and Mars.
+			Credit: NASA/LaRC/Advanced Concepts Lab
+		]],
+	}
+}
+
+
+asset.onInitialize(function()
+	openspace.addSceneGraphNode(sev)
+end)
+	
+asset.onDeinitialize(function()
+	openspace.removeSceneGraphNode(sev)
+end)
+	
+asset.export(sev)
+

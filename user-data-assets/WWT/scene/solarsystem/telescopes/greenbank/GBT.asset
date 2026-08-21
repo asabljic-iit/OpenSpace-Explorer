@@ -1,0 +1,55 @@
+local earthAsset = asset.require('scene/solarsystem/planets/earth/globe') -- was .../earth but got error, testing .../globe
+local sunAsset = asset.require('scene/solarsystem/sun/sun')
+
+local GBT = {
+	Identifier = "GBT",
+	Parent = earthAsset.Earth.Identifier,
+	--Note: Lat/Lon/Scale values comes from alignment with Esri World Imagery 2D layer
+	Transform = {
+		Translation = {
+			Type = "GlobeTranslation",
+			Globe = earthAsset.Earth.Identifier,
+            Latitude = 38.4330, 
+            Longitude = -79.8397,
+            Altitude = -10,
+			UseHeightmap = true
+		},
+		Rotation = {
+			Type = "GlobeRotation",
+			Globe = earthAsset.Earth.Identifier,
+            Latitude = 38.4330,
+            Longitude = -79.8397,
+			UseHeightmap = false
+		}
+		
+	},
+	Renderable = {
+		Type = "RenderableModel",
+		GeometryFile = asset.resource("GBT.stl"),
+		forceRenderInvisible = true,
+		ModelScale = 83000,
+		RotationVector = {0.000000,271.130000,270.000000},
+		LightSources = { sunAsset.LightSource },
+		OverrideColor = {1,1,1,1},
+		UseOverrideColor = true,
+		EnableFaceCulling = false
+	},
+	GUI = {
+		Name = "GBT",
+		Path = "/Solar System/Telescopes/Green Bank",
+		Description = [[
+			The Green Bank Telescope located in Greenbank, West Virginia. "Green Bank Telescope" (https://skfb.ly/oqGUS) by somnbody (sic) is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).
+		]],
+	}
+}
+
+asset.onInitialize(function()
+	openspace.addSceneGraphNode(GBT)
+end)
+	
+asset.onDeinitialize(function()
+	openspace.removeSceneGraphNode(GBT)
+end)
+	
+asset.export(GBT)
+

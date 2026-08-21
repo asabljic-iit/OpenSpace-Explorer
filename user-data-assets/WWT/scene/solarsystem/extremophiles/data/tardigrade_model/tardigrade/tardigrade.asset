@@ -1,0 +1,124 @@
+local model = asset.resource("tardigrade.x")
+local transforms = asset.require("scene/solarsystem/planets/earth/transforms")
+
+local kernels = asset.resource({
+  Name = "ISS Kernels",
+  Type = "HttpSynchronization",
+  Identifier = "iss_kernels",
+  Version = 1
+})
+
+local omm = asset.resource({
+  Name = "Satellite OMM Data (ISS)",
+  Type = "UrlSynchronization",
+  Identifier = "satellite_omm_data_iss",
+  Url = "https://www.celestrak.com/NORAD/elements/gp.php?CATNR=25544&FORMAT=kvn",
+  Filename = "ISS.txt",
+  SecondsUntilResync = openspace.time.secondsPerDay()
+})
+
+local tle = asset.resource({
+  Name = "Satellite TLE Data (ISS)",
+  Type = "UrlSynchronization",
+  Identifier = "satellite_tle_data_iss",
+  Url = "https://www.celestrak.com/NORAD/elements/gp.php?CATNR=25544&FORMAT=tle",
+  Filename = "ISS.txt",
+  SecondsUntilResync = openspace.time.secondsPerDay()
+})
+
+local TardegradePosition = {
+  -- Name is arbitrary
+  Name = "Tardegrade Position",
+  Identifier="TardegradePosition",
+  -- Parent uses the asset.require to retrieve the name from another asset file
+  Parent = transforms.EarthInertial.Identifier,
+  BoundingSphere = .0001, -- half the width
+  Transform = {
+    Translation = {
+      Type = "GPTranslation",
+      Observer = transforms.EarthInertial.Identifier,
+      File = omm .. "ISS.txt",
+      Format = "OMM"
+    }
+  },
+  Tag = { "earth_satellites", "Tardegrade", "space_stations" },
+  -- GuiPath is an arbitrary string that is only used in the user interface to build a tree
+  GuiPath = "/Solar System/Tardegrade"
+}
+
+
+local TardegradeModel = {
+  Identifier="Tardegrade",
+  Name = "Tardegrade",
+  Parent = TardegradePosition.Identifier,
+  Renderable = {
+    Type = "RenderableModel",
+    ModelScale = "Meter",
+    GeometryFile = model,
+    AnimationStartTime = "2026 03 31 02:27:30",
+    AnimationMode = "BounceInfinitely",
+    AnimationTimeScale = 3,
+    EnableAnimation = true
+    --ColorTexture = texture
+  },
+  GuiPath = "/Solar System/Tardegrade"
+}
+
+local FocusTardegrade = {
+  Identifier = "os.solarsystem.FocusTardegrade",
+  Name = "Focus on Tardegrade",
+  Command = [[
+    openspace.setPropertyValueSingle("NavigationHandler.OrbitalNavigator.Aim", "")
+    openspace.setPropertyValueSingle("NavigationHandler.OrbitalNavigator.Anchor", "Tardegrade")
+    openspace.setPropertyValueSingle("NavigationHandler.OrbitalNavigator.RetargetAnchor", nil)
+  ]],
+  Documentation = "Refocuses the camera on the Tardegrade",
+  GuiPath = "/Solar System/Earth",
+  IsLocal = false
+}
+
+
+
+asset.onInitialize(function()
+
+
+
+  openspace.addSceneGraphNode(TardegradePosition)
+  openspace.addSceneGraphNode(TardegradeModel)
+
+  openspace.action.registerAction(FocusTardegrade)
+end)
+
+asset.onDeinitialize(function()
+
+
+  openspace.action.removeAction(FocusTardegrade)
+
+  openspace.removeSceneGraphNode(TardegradeModel)
+  openspace.removeSceneGraphNode(TardegradePosition)
+end)
+
+asset.export(TardegradeModel)
+asset.export(TardegradePosition)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+asset.meta = {
+  Name = "tardigrade model in space",
+  Description = [[puts a tardegrade into orbit around earth
+  ]],
+  Author = "Nycole Wenner",
+  URL = "http://openspaceproject.com",
+  License = "MIT license"
+}

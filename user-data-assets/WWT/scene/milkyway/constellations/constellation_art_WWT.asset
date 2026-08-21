@@ -1,0 +1,372 @@
+local constellationsCSV = asset.resource("constellation_data.csv")
+local transforms = asset.require("scene/solarsystem/sun/transforms")
+local constellations_helper = asset.require("util/constellations_helper")
+
+local images = asset.resource({
+  Name = "Constellation Images",
+  Type = "HttpSynchronization",
+  Identifier = "constellation_images",
+  Version = 4
+})
+
+local data = asset.resource({
+  Name = "Constellation Files",
+  Type = "HttpSynchronization",
+  Identifier = "digitaluniverse_constellations_data",
+  Version = 1
+})
+
+local function createConstellations(baseIdentifier, guiPath, constellationfile)
+  local genConstellations = {}
+  local PARSEC_CONSTANT = 3.0856776E16
+  local distanceMultiplier = 3.2
+  local baseScale = 1e17
+  local lines = openspace.readCSVFile(openspace.absPath(constellationfile))
+  
+  for _, line in ipairs(lines) do
+    local group = line[1]
+    local abbreviation = line[2]
+    local name = line[3]
+    local x = tonumber(line[4])
+    local y = tonumber(line[5])
+    local z = tonumber(line[6])
+    local scale = tonumber(line[7])
+    local imageName = line[8]
+    local rotX = tonumber(line[9])
+    local rotY = tonumber(line[10])
+    local rotZ = tonumber(line[11])
+    local centerStar = line[12]
+    local magVec = math.sqrt(x*x + y*y + z*z)
+    local normx = x / magVec
+    local normy = y / magVec
+    local normz = z / magVec
+
+    local foundName = constellations_helper.findFullName(abbreviation)
+    if foundName ~= nil then
+      name = foundName
+    end
+
+    group = (group == "" and "globe" or group)
+
+    -- Dynamically build tags to isolate zodiac vs non-zodiac
+    local tags = { 
+      "image_constellation", 
+      "constellation_art_" .. string.lower(group), 
+      "daytime_hidden", 
+      "constellation_marking" 
+    }
+
+    -- Apply an exclusion tag to everything that isn't a zodiac
+    if string.lower(group) ~= "zodiac" then
+      table.insert(tags, "constellation_art_non_zodiac")
+    end
+
+    local aconstellation = {
+      Identifier = baseIdentifier .. "-" .. abbreviation,
+      Parent = transforms.SolarSystemBarycenter.Identifier,
+      Transform = {
+        Translation = {
+          Type = "StaticTranslation",
+          Position = {
+            normx * PARSEC_CONSTANT * distanceMultiplier,
+            normy * PARSEC_CONSTANT * distanceMultiplier,
+            normz * PARSEC_CONSTANT * distanceMultiplier
+          }
+        },
+        Rotation = {
+          Type = "StaticRotation",
+          Rotation = { tonumber(rotX), tonumber(rotY), tonumber(rotZ) }
+        }
+      },
+      Renderable = {
+        Type = "RenderablePlaneImageLocal",
+        Enabled = false,
+        Size = tonumber(baseScale * scale * distanceMultiplier / 10),
+        Origin = "Center",
+        Billboard = false,
+        LazyLoading = false,
+        Texture = images .. imageName,
+        BlendMode = "Additive",
+        Opacity = 0.1,
+        DimInAtmosphere = true
+      },
+      Tag = tags,
+      GUI = {
+        Name = name,
+        Path = "/Milky Way/Constellations/" .. guiPath,
+        Description = name .. " Image"
+      }
+    }
+    table.insert(genConstellations, aconstellation)
+  end
+  return genConstellations
+end
+
+-- Constellation Modes: 0 = All Constellations Off, 1 = All Constellations On, 2 = Only Zodiac Constellations On, 3 = Individual Constellation On
+
+-- ===================================================================================================================
+-- Toggle All Constellation Art
+-- ===================================================================================================================
+
+local ToggleArt = {
+  Identifier = "os.constellation_art.ToggleArt",
+  Name = "All Constellation Art",
+  Command = [[
+    openspace.setPropertyValueSingle("NavigationHandler.OrbitalNavigator.IdleMotion.Motion", 0.000000)
+  
+    if openspace.constellationMode == 1 then
+      openspace.constellationMode = 0
+      openspace.constellationTimerTicket = (openspace.constellationTimerTicket or 0) + 1
+      
+      openspace.fadeOut("{constellation_art_non_zodiac}")
+      openspace.fadeOut("{constellation_art_zodiac}")
+      
+      if openspace.constellationLineMode == nil or openspace.constellationLineMode == 0 then
+        openspace.fadeIn("Scene.*Trail.Renderable")
+        openspace.fadeIn("Scene.SunGlare.Renderable")
+      end
+    
+    else
+      openspace.navigation.setFocus("Sun",true,true)
+      openspace.fadeOut("Scene.SunGlare.Renderable")
+      openspace.fadeOut("Scene.*Trail.Renderable")
+      openspace.fadeOut('Scene.MercuryLabel.Renderable')
+      openspace.fadeOut('Scene.VenusLabel.Renderable')
+      openspace.fadeOut('Scene.EarthLabel.Renderable')
+      openspace.fadeOut('Scene.MarsLabel.Renderable')
+      openspace.fadeOut('Scene.JupiterLabel.Renderable')
+      openspace.fadeOut('Scene.SaturnLabel.Renderable')
+      openspace.fadeOut('Scene.UranusLabel.Renderable')
+      openspace.fadeOut('Scene.NeptuneLabel.Renderable')
+      openspace.fadeOut('Scene.PlutoLabel.Renderable')
+      openspace.fadeOut("Scene.SSSB_PHA_Asteroid.Renderable")
+      openspace.fadeOut("Scene.SSSB_Inner_Main_Belt_Asteroid.Renderable")
+      openspace.fadeOut("Scene.SSSB_Main_Belt_Asteroid.Renderable")
+      openspace.fadeOut("Scene.SSSB_Outer_Main_Belt_Asteroid.Renderable")
+      
+      openspace.constellationMode = 1
+      openspace.fadeIn("{constellation_art_non_zodiac}")
+      openspace.fadeIn("{constellation_art_zodiac}")
+      openspace.setPropertyValueSingle("NavigationHandler.OrbitalNavigator.IdleMotion.Apply", true)
+      
+      openspace.constellationTimerTicket = (openspace.constellationTimerTicket or 0) + 1
+      local currentTicket = openspace.constellationTimerTicket
+      
+      local fadeOutNonZodiac = "if openspace.constellationTimerTicket == " .. currentTicket .. " then openspace.fadeOut('{constellation_art_non_zodiac}') end"
+      local fadeOutZodiac = "if openspace.constellationTimerTicket == " .. currentTicket .. " then openspace.fadeOut('{constellation_art_zodiac}') end"
+      
+      local restoreBackgrounds = "if openspace.constellationTimerTicket == " .. currentTicket .. " then openspace.constellationMode = 0; if openspace.constellationLineMode == nil or openspace.constellationLineMode == 0 then openspace.fadeIn('Scene.*Trail.Renderable'); openspace.fadeIn('Scene.SunGlare.Renderable') end end"
+      
+      openspace.scheduleScript(fadeOutNonZodiac, 60)
+      openspace.scheduleScript(fadeOutZodiac, 60)
+      openspace.scheduleScript(restoreBackgrounds, 60)
+    end
+  ]],
+  Documentation = "Toggle all constellation artwork",
+  GuiPath = "/Constellations",
+  IsLocal = false
+}
+
+-- ===================================================================================================================
+-- Toggle Only Zodiac Art
+-- ===================================================================================================================
+
+local ToggleZodiacArt = {
+  Identifier = "os.constellation_art.ToggleZodiacArt",
+  Name = "Zodiac constellation art",
+  Command = [[
+    openspace.setPropertyValueSingle("NavigationHandler.OrbitalNavigator.IdleMotion.Motion", 0.000000)
+
+    if openspace.constellationMode == 2 then
+      openspace.constellationMode = 0
+      openspace.constellationTimerTicket = (openspace.constellationTimerTicket or 0) + 1
+      
+      openspace.fadeOut("{constellation_art_zodiac}")
+      openspace.fadeOut("{constellation_art_non_zodiac}") 
+      
+      if openspace.constellationLineMode == nil or openspace.constellationLineMode == 0 then
+        openspace.fadeIn("Scene.*Trail.Renderable")
+        openspace.fadeIn("Scene.SunGlare.Renderable")
+      end
+      
+    else
+      openspace.navigation.setFocus("Sun",true,true)
+      openspace.fadeOut("Scene.SunGlare.Renderable")
+      openspace.fadeOut("Scene.*Trail.Renderable")
+      openspace.fadeOut('Scene.MercuryLabel.Renderable')
+      openspace.fadeOut('Scene.VenusLabel.Renderable')
+      openspace.fadeOut('Scene.EarthLabel.Renderable')
+      openspace.fadeOut('Scene.MarsLabel.Renderable')
+      openspace.fadeOut('Scene.JupiterLabel.Renderable')
+      openspace.fadeOut('Scene.SaturnLabel.Renderable')
+      openspace.fadeOut('Scene.UranusLabel.Renderable')
+      openspace.fadeOut('Scene.NeptuneLabel.Renderable')
+      openspace.fadeOut('Scene.PlutoLabel.Renderable')
+      openspace.fadeOut("Scene.SSSB_PHA_Asteroid.Renderable")
+      openspace.fadeOut("Scene.SSSB_Inner_Main_Belt_Asteroid.Renderable")
+      openspace.fadeOut("Scene.SSSB_Main_Belt_Asteroid.Renderable")
+      openspace.fadeOut("Scene.SSSB_Outer_Main_Belt_Asteroid.Renderable")
+      
+      openspace.constellationMode = 2
+      openspace.fadeOut("{constellation_art_non_zodiac}")
+      openspace.fadeIn("{constellation_art_zodiac}")
+      openspace.setPropertyValueSingle("NavigationHandler.OrbitalNavigator.IdleMotion.Apply", true)
+      
+      openspace.constellationTimerTicket = (openspace.constellationTimerTicket or 0) + 1
+      local currentTicket = openspace.constellationTimerTicket
+      
+      local fadeOutZodiac = "if openspace.constellationTimerTicket == " .. currentTicket .. " then openspace.fadeOut('{constellation_art_zodiac}') end"
+      
+      local restoreBackgrounds = "if openspace.constellationTimerTicket == " .. currentTicket .. " then openspace.constellationMode = 0; if openspace.constellationLineMode == nil or openspace.constellationLineMode == 0 then openspace.fadeIn('Scene.*Trail.Renderable'); openspace.fadeIn('Scene.SunGlare.Renderable') end end"
+      
+      openspace.scheduleScript(fadeOutZodiac, 60)
+      openspace.scheduleScript(restoreBackgrounds, 60)
+    end
+  ]],
+  Documentation = "Toggle only zodiac constellation artwork",
+  GuiPath = "/Constellations",
+  IsLocal = false
+}
+
+local nodes = {}
+
+-- ===================================================================================================================
+-- Automatically Create an Action to Focus on Each Constellation
+-- ===================================================================================================================
+
+local function createFocusActions(constellationfile)
+  local actions = {}
+  local lines = openspace.readCSVFile(openspace.absPath(constellationfile))
+  
+  for _, line in ipairs(lines) do
+    local abbreviation = line[2]
+    local name = line[3]
+    
+    local foundName = constellations_helper.findFullName(abbreviation)
+    if foundName ~= nil then
+      name = foundName
+    end
+
+    local fadeOutOthersCommand = ""
+    for _, otherLine in ipairs(lines) do
+      local otherAbbr = otherLine[2]
+      if otherAbbr ~= abbreviation then
+        fadeOutOthersCommand = fadeOutOthersCommand .. string.format('openspace.fadeOut("Scene.ImageConstellation-%s.Renderable", 1); ', otherAbbr)
+      end
+    end
+
+   local action = {
+      Identifier = "os.constellation.focus." .. abbreviation,
+      Name = name,
+      Command = string.format([[
+        openspace.setPropertyValueSingle("NavigationHandler.OrbitalNavigator.IdleMotion.Apply", false)
+        openspace.setPropertyValueSingle("NavigationHandler.OrbitalNavigator.IdleMotion.Motion", 0.000000)
+
+        openspace.fadeOut("Scene.SunGlare.Renderable")
+        openspace.action.triggerAction("os.FadeDownTrails")
+        openspace.fadeOut('Scene.MercuryLabel.Renderable')
+        openspace.fadeOut('Scene.VenusLabel.Renderable')
+        openspace.fadeOut('Scene.EarthLabel.Renderable')
+        openspace.fadeOut('Scene.MarsLabel.Renderable')
+        openspace.fadeOut('Scene.JupiterLabel.Renderable')
+        openspace.fadeOut('Scene.SaturnLabel.Renderable')
+        openspace.fadeOut('Scene.UranusLabel.Renderable')
+        openspace.fadeOut('Scene.NeptuneLabel.Renderable')
+        openspace.fadeOut('Scene.PlutoLabel.Renderable')
+
+        openspace.constellationMode = 3
+        openspace.constellationLineMode = 3
+        openspace.constellationTimerTicket = (openspace.constellationTimerTicket or 0) + 1
+        openspace.constellationLineTimerTicket = (openspace.constellationLineTimerTicket or 0) + 1
+        openspace.setPropertyValueSingle("Scene.Constellations.Renderable.ConstellationSelection", {})
+        
+        openspace.fadeIn("Scene.Constellations.Renderable")
+        %s
+        openspace.scheduleScript("openspace.fadeIn('Scene.ImageConstellation-%s.Renderable', 1)", 2.5)
+        
+        openspace.setPropertyValueSingle("NavigationHandler.OrbitalNavigator.Anchor", "SolarSystemBarycenter")
+        openspace.setPropertyValueSingle("NavigationHandler.OrbitalNavigator.Aim", "ImageConstellation-%s")
+
+        openspace.constellationFocusCounter = (openspace.constellationFocusCounter or 0) + 1
+        local clearLogic = "if openspace.constellationFocusCounter == " .. openspace.constellationFocusCounter .. " then openspace.action.triggerAction('os.constellation.focus.Clear') end"
+        openspace.scheduleScript(clearLogic, 15)
+
+        openspace.setPropertyValueSingle("NavigationHandler.OrbitalNavigator.RetargetAnchor", nil)
+        openspace.scheduleScript("openspace.setPropertyValueSingle('NavigationHandler.OrbitalNavigator.RetargetAim', nil)", 1)
+  
+      ]], fadeOutOthersCommand, abbreviation, abbreviation),
+      Documentation = "Turns on lines, isolates " .. name .. " art, and focuses the camera.",
+      GuiPath = "/Constellations/Focus On...", 
+      IsLocal = false
+    }
+    table.insert(actions, action)
+  end
+  return actions
+end
+
+-- ===================================================================================================================
+-- Action that is called by the reset timer to turn off constellations after a set amount of time
+-- ===================================================================================================================
+
+local ClearConstellationFocus = {
+  Identifier = "os.constellation.focus.Clear",
+  Name = "Clear Focus (Turn Everything Off)",
+  Command = [[
+    openspace.fadeOut("Scene.Constellations.Renderable")
+    openspace.fadeOut("{image_constellation}")
+    openspace.setPropertyValueSingle("NavigationHandler.OrbitalNavigator.Aim", "")
+    openspace.fadeIn("Scene.SunGlare.Renderable")
+    openspace.action.triggerAction("os.FadeUpTrails")
+  ]],
+  Documentation = "Turns off constellation lines and art, and clears the camera aim.",
+  GuiPath = "/Constellations/Focus On...",
+  IsLocal = false
+}
+
+local focusActions = {}
+
+asset.onInitialize(function()
+  local constellationsCSV = images .. "constellation_data.csv"
+
+  nodes = createConstellations("ImageConstellation", "Constellation Art", constellationsCSV)
+  for _, n in ipairs(nodes) do
+    openspace.addSceneGraphNode(n)
+  end
+
+  focusActions = createFocusActions(constellationsCSV)
+  for _, act in ipairs(focusActions) do
+    openspace.action.registerAction(act)
+  end
+
+  openspace.action.registerAction(ClearConstellationFocus)
+
+  openspace.action.registerAction(ToggleArt)
+  openspace.action.registerAction(ToggleZodiacArt)
+end)
+
+asset.onDeinitialize(function()
+  for _, n in ipairs(nodes) do
+    openspace.removeSceneGraphNode(n.Identifier)
+  end
+
+  for _, act in ipairs(focusActions) do
+    openspace.action.removeAction(act.Identifier)
+  end
+
+  openspace.action.removeAction(ClearConstellationFocus.Identifier)
+
+  openspace.action.removeAction(ToggleZodiacArt)
+  openspace.action.removeAction(ToggleArt)
+end)
+
+asset.export("ToggleArt", ToggleArt.Identifier)
+asset.export("ToggleZodiacArt", ToggleZodiacArt.Identifier)
+asset.export("ClearConstellationFocus", ClearConstellationFocus.Identifier )
+
+asset.meta = {
+  Name = "Constellation Images",
+  Description = "Artistic images depicting the constellations",
+  Author = "James Hedberg",
+  URL = "http://jameshedberg.com",
+  License = "CC-BY"
+}

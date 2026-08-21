@@ -1,0 +1,224 @@
+local constellations_helper = asset.require("util/constellations_helper")
+
+local speck = asset.resource({
+  Name = "Constellation Files",
+  Type = "HttpSynchronization",
+  Identifier = "digitaluniverse_constellations_data",
+  Version = 3
+})
+
+local function zodiacsString(zodiacsList)
+  local zodiacsString = "{"
+  local isFirst = true
+
+  for k, zodiac in pairs(zodiacsList) do
+    local fullName = constellations_helper.findFullName(zodiac)
+    if fullName ~= nil then
+      if isFirst then
+        isFirst = false
+      else
+        zodiacsString = zodiacsString .. ", "
+      end
+
+      zodiacsString = zodiacsString .. [["]] .. fullName .. [["]]
+    end
+  end
+
+  zodiacsString = zodiacsString .. "}"
+  return zodiacsString
+end
+
+local Constellations = {
+  Identifier = "Constellations",
+  Renderable = {
+    Type = "RenderableConstellationLines",
+    Enabled = false,
+    Labels = {
+      File = speck .. "constellation_lines.label",
+      Opacity = 0.3,
+      Color = { 0.8, 0.8, 0.8 },
+      Size = 14.5,
+      MinMaxSize = { 8, 170 },
+      Unit = "pc"
+    },
+    Opacity = 0.3,
+    File = speck .. "constellation_lines.speck",
+    NamesFile = speck .. "constellations.dat",
+    Colors = { { 0.6, 0.4, 0.4 }, { 0.8, 0.0, 0.0 }, { 0.0, 0.3, 0.8 } },
+    Unit = "pc",
+    DimInAtmosphere = true
+  },
+  Tag = { "daytime_hidden", "constellation_marking"  },
+  GUI = {
+    Name = "Constellation Lines",
+    Path = "/Milky Way/Constellations",
+    Focusable = false,
+    Description = [[Lines connecting the stars that make up the constellation figures.
+      We represent the constellations by connecting the main stars that make up the
+      constellation "stick figures," as seen from Earth. Colors: most constellations
+      are pink, while the zodical constellations are red. We also color Orion and Ursa
+      Major blue as two recognizable constellations in the night sky. Census: 88
+      constellations.]]
+  }
+}
+
+-- Constellation Modes: 0 = All Constellations Off, 1 = All Constellations On, 2 = Only Zodiac Constellations On, 3 = Individual Constellation On
+
+-- ===================================================================================================================
+-- Toggle All Constellation Lines and Labels
+-- ===================================================================================================================
+
+local ToggleConstellations = {
+  Identifier = "os.constellations.ToggleConstellations",
+  Name = "Constellation Lines and Labels",
+  Command = [[
+    openspace.setPropertyValueSingle("NavigationHandler.OrbitalNavigator.IdleMotion.Motion", 0.000000)
+
+    if openspace.constellationLineMode == 1 then
+      openspace.constellationLineMode = 0
+      openspace.constellationLineTimerTicket = (openspace.constellationLineTimerTicket or 0) + 1
+      
+      openspace.fadeOut("Scene.Constellations.Renderable")
+      openspace.fadeOut("Scene.Constellations.Renderable.Labels")
+      
+      if openspace.constellationMode == nil or openspace.constellationMode == 0 then
+        openspace.fadeIn("Scene.*Trail.Renderable")
+        openspace.fadeIn("Scene.SunGlare.Renderable")
+      end
+      
+    else
+      openspace.navigation.setFocus("Sun",true,true)
+      openspace.fadeOut("Scene.SunGlare.Renderable")
+      openspace.fadeOut("Scene.*Trail.Renderable")
+      openspace.setPropertyValueSingle("NavigationHandler.OrbitalNavigator.IdleMotion.Apply", true)
+      openspace.fadeOut('Scene.MercuryLabel.Renderable')
+      openspace.fadeOut('Scene.VenusLabel.Renderable')
+      openspace.fadeOut('Scene.EarthLabel.Renderable')
+      openspace.fadeOut('Scene.MarsLabel.Renderable')
+      openspace.fadeOut('Scene.JupiterLabel.Renderable')
+      openspace.fadeOut('Scene.SaturnLabel.Renderable')
+      openspace.fadeOut('Scene.UranusLabel.Renderable')
+      openspace.fadeOut('Scene.NeptuneLabel.Renderable')
+      openspace.fadeOut('Scene.PlutoLabel.Renderable')
+      openspace.fadeOut("Scene.SSSB_PHA_Asteroid.Renderable")
+      openspace.fadeOut("Scene.SSSB_Inner_Main_Belt_Asteroid.Renderable")
+      openspace.fadeOut("Scene.SSSB_Main_Belt_Asteroid.Renderable")
+      openspace.fadeOut("Scene.SSSB_Outer_Main_Belt_Asteroid.Renderable")
+
+      
+      openspace.constellationLineMode = 1
+      openspace.constellationLineTimerTicket = (openspace.constellationLineTimerTicket or 0) + 1
+      local currentTicket = openspace.constellationLineTimerTicket
+    
+      openspace.setPropertyValueSingle("Scene.Constellations.Renderable.ConstellationSelection", {})
+      
+      openspace.fadeIn("Scene.Constellations.Renderable")
+      openspace.fadeIn("Scene.Constellations.Renderable.Labels")
+      
+      local fadeOutLines = "if openspace.constellationLineTimerTicket == " .. currentTicket .. " then openspace.fadeOut('Scene.Constellations.Renderable') end"
+      local fadeOutLabels = "if openspace.constellationLineTimerTicket == " .. currentTicket .. " then openspace.fadeOut('Scene.Constellations.Renderable.Labels') end"
+      
+      local restoreBackgrounds = "if openspace.constellationLineTimerTicket == " .. currentTicket .. " then openspace.constellationLineMode = 0; if openspace.constellationMode == nil or openspace.constellationMode == 0 then openspace.fadeIn('Scene.*Trail.Renderable'); openspace.fadeIn('Scene.SunGlare.Renderable') end end"
+      
+      openspace.scheduleScript(fadeOutLines, 60)
+      openspace.scheduleScript(fadeOutLabels, 60)
+      openspace.scheduleScript(restoreBackgrounds, 60)
+    end
+  ]],
+  Documentation = "Toggle all the constellations lines",
+  GuiPath = "/Constellations",
+  IsLocal = false
+}
+
+-- ===================================================================================================================
+-- Toggle Only Zodiac Constellation Lines and Labels
+-- ===================================================================================================================
+
+local ShowZodiacsIdentifier = "os.constellation.ShowZodiacs"
+
+local zodiacsString = zodiacsString({
+  "CNC", "TAU", "PSC", "ARI", "LIB", "AQR", "CAP", "SCO", "VIR", "SGR", "GEM", "LEO"
+})
+
+local ToggleZodiacs = {
+  Identifier = ShowZodiacsIdentifier,
+  Name = "Zodiac Constellation Lines and Labels",
+  Command = [[
+    openspace.setPropertyValueSingle("NavigationHandler.OrbitalNavigator.IdleMotion.Motion", 0.000000)
+
+    if openspace.constellationLineMode == 2 then
+      openspace.constellationLineMode = 0
+      openspace.constellationLineTimerTicket = (openspace.constellationLineTimerTicket or 0) + 1
+      
+      openspace.fadeOut("Scene.Constellations.Renderable")
+      openspace.fadeOut("Scene.Constellations.Renderable.Labels")
+      
+      if openspace.constellationMode == nil or openspace.constellationMode == 0 then
+        openspace.fadeIn("Scene.*Trail.Renderable")
+        openspace.fadeIn("Scene.SunGlare.Renderable")
+      end
+    
+    else
+      openspace.fadeOut("{constellation_art_non_zodiac}")
+      openspace.navigation.setFocus("Sun",true,true)
+      openspace.fadeOut("Scene.SunGlare.Renderable")
+      openspace.fadeOut("Scene.*Trail.Renderable")
+      openspace.fadeOut('Scene.MercuryLabel.Renderable')
+      openspace.fadeOut('Scene.VenusLabel.Renderable')
+      openspace.fadeOut('Scene.EarthLabel.Renderable')
+      openspace.fadeOut('Scene.MarsLabel.Renderable')
+      openspace.fadeOut('Scene.JupiterLabel.Renderable')
+      openspace.fadeOut('Scene.SaturnLabel.Renderable')
+      openspace.fadeOut('Scene.UranusLabel.Renderable')
+      openspace.fadeOut('Scene.NeptuneLabel.Renderable')
+      openspace.fadeOut('Scene.PlutoLabel.Renderable')
+      openspace.fadeOut("Scene.SSSB_PHA_Asteroid.Renderable")
+      openspace.fadeOut("Scene.SSSB_Inner_Main_Belt_Asteroid.Renderable")
+      openspace.fadeOut("Scene.SSSB_Main_Belt_Asteroid.Renderable")
+      openspace.fadeOut("Scene.SSSB_Outer_Main_Belt_Asteroid.Renderable")
+      
+      openspace.constellationLineMode = 2
+      openspace.constellationLineTimerTicket = (openspace.constellationLineTimerTicket or 0) + 1
+      local currentTicket = openspace.constellationLineTimerTicket
+      
+      openspace.setPropertyValueSingle("Scene.Constellations.Renderable.ConstellationSelection", ]] .. zodiacsString .. [[)
+      
+      openspace.fadeIn("Scene.Constellations.Renderable")
+      openspace.fadeIn("Scene.Constellations.Renderable.Labels")
+      openspace.setPropertyValueSingle("NavigationHandler.OrbitalNavigator.IdleMotion.Apply", true)
+      
+      local fadeOutLines = "if openspace.constellationLineTimerTicket == " .. currentTicket .. " then openspace.fadeOut('Scene.Constellations.Renderable') end"
+      local fadeOutLabels = "if openspace.constellationLineTimerTicket == " .. currentTicket .. " then openspace.fadeOut('Scene.Constellations.Renderable.Labels') end"
+      
+      local restoreBackgrounds = "if openspace.constellationLineTimerTicket == " .. currentTicket .. " then openspace.constellationLineMode = 0; if openspace.constellationMode == nil or openspace.constellationMode == 0 then openspace.fadeIn('Scene.*Trail.Renderable'); openspace.fadeIn('Scene.SunGlare.Renderable') end end"
+      
+      openspace.scheduleScript(fadeOutLines, 60)
+      openspace.scheduleScript(fadeOutLabels, 60)
+      openspace.scheduleScript(restoreBackgrounds, 60)
+    end
+  ]],
+  Documentation = "Toggles the zodiac constellations lines and labels",
+  GuiPath = "/Constellations",
+  IsLocal = false
+}
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(Constellations)
+  openspace.action.registerAction(ToggleConstellations)
+  openspace.action.registerAction(ToggleZodiacs)
+end)
+
+asset.onDeinitialize(function()
+  openspace.action.removeAction(ToggleZodiacs)
+  openspace.action.removeAction(ToggleConstellations)
+  openspace.removeSceneGraphNode(Constellations)
+end)
+
+asset.export(Constellations)
+
+asset.meta = {
+  Description = Constellations.GUI.Description,
+  Author = "Brian Abbott, Zack Reeves (AMNH)",
+  URL = "https://www.amnh.org/research/hayden-planetarium/digital-universe",
+  License = "AMNH Digital Universe"
+}

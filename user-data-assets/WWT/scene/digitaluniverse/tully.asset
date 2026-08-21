@@ -1,0 +1,141 @@
+local transforms = asset.require("./transforms")
+
+
+
+local textures = asset.resource({
+  Name = "Tully Textures",
+  Type = "HttpSynchronization",
+  Identifier = "digitaluniverse_tully_textures",
+  Version = 3
+})
+
+local speck = asset.resource({
+  Name = "Tully Speck Files",
+  Type = "HttpSynchronization",
+  Identifier = "digitaluniverse_tully_speck",
+  Version = 4
+})
+
+
+local TullyGalaxies = {
+  Identifier = "TullyGalaxies",
+  Renderable = {
+    Type = "RenderablePointCloud",
+    Enabled = true,
+    Labels = {
+      File = speck .. "tully.label",
+      Color = { 0.7, 0.7, 0.7 },
+      Size = 19.36,
+      MinMaxSize = { 8, 20 },
+      Unit = "Mpc",
+      TransformationMatrix = transforms.Supergalactic
+    },
+    Opacity = 0.99,
+    File = speck .. "tully.speck",
+    SkipFirstDataPoint = true,
+    Texture = {
+      File = textures .. "point3A.png"
+    },
+    Coloring = {
+      FixedColor = { 1.0, 0.4, 0.2 },
+      ColorMapping = {
+        File = speck .. "lss.cmap",
+        ParameterOptions = {
+          { Key = "prox5Mpc", Range = { 1.0, 30.0 } }
+        }
+      }
+    },
+    Unit = "Mpc",
+    TransformationMatrix = transforms.Supergalactic,
+    Fading = {
+      FadeInDistances = { 0.001, 1.0 } -- Fade in value in the same unit as "Unit"
+    },
+    SizeSettings = {
+      ScaleExponent = 21.7,
+      MaxSize = 0.3,
+      EnableMaxSizeControl = true
+    }
+  },
+  GUI = {
+    Name = "Tully Galaxies",
+    Path = "/Universe/Nearby Surveys",
+    Focusable = false,
+    Description = [[The Tully Catalog is the most polished, accurate catalog of nearby
+      galaxies. It includes over 30,000 galaxies in the local universe that surround the
+      Milky Way. This catalog demonstrates the large-scale structure of the universe
+      exceptionally well. Each galaxy has a representative image that is properly sized
+      and inclined and reflects its morphological type. The data form a cube, which is an
+      arbitrary cutoff based on the completeness of these data. Beyond this, data from
+      these sources are not as reliable. The size of the cube is roughly 1 billion light
+      years on a diagonal, or about 700 million light years per side. Colors: Orange
+      denotes more dense regions of the local universe, aqua is given to galaxies in an
+      intermediate-density area, and green is given to lower density regions. Census:
+      30,059 galaxies.]]
+  }
+}
+
+local TullyGalaxiesImages = {
+  Identifier = "TullyGalaxiesImages",
+  Renderable = {
+    Type = "RenderablePointCloud",
+    Opacity = 0.99,
+    File = speck .. "tully.speck",
+    SkipFirstDataPoint = true,
+    Texture = {
+      Folder = textures
+    },
+    TransformationMatrix = transforms.Supergalactic,
+    -- Use fixed orientation, and rotate planes based on orientation information in
+    -- the dataset
+    Billboard = "Fixed Rotation",
+    UseOrientationData = true,
+    Unit = "Mpc",
+    Fading = {
+      FadeInDistances = { 0.0005, 0.003 } -- Fade in value in the same unit as "Unit"
+    },
+    SizeSettings = {
+      SizeMapping = {
+        ParameterOptions = { "diamkpc" },
+        ScaleFactor = "Kiloparsec"
+      },
+      -- No exponential scaling, just use size mapping to set the correct size
+      ScaleExponent = 0.0
+    }
+  },
+  GUI = {
+    Name = "Tully Galaxy Images",
+    Path = "/Universe/Nearby Surveys",
+    Focusable = false,
+    Description = [[Each Tully galaxy is represented by an image that represents its
+      morphological type (spiral, elliptical, etc.). Most of these come from The Galaxy
+      Catalog. A handful of nearby galaxies are represented by their actual images, which
+      come mostly from the National Optical Astronomy Observatory (NOAO). Each of these
+      images has been altered from its original state. Taken from Earth, foreground stars
+      from our own Galaxy appear in each image and were removed. Census: 30,159 galaxy
+      images.]]
+  }
+}
+
+
+asset.onInitialize(function()
+  openspace.addSceneGraphNode(TullyGalaxies)
+  openspace.addSceneGraphNode(TullyGalaxiesImages)
+end)
+
+asset.onDeinitialize(function()
+  openspace.removeSceneGraphNode(TullyGalaxiesImages)
+  openspace.removeSceneGraphNode(TullyGalaxies)
+end)
+
+asset.export(TullyGalaxies)
+asset.export(TullyGalaxiesImages)
+
+
+
+asset.meta = {
+  Name = "Tully Galaxies",
+  Description = TullyGalaxies.GUI.Description,
+  Author = "Stuart Levy (NCSA/UIUC), Brian Abbott (AMNH)",
+  URL = "https://www.amnh.org/research/hayden-planetarium/digital-universe",
+  License = "AMNH Digital Universe"
+}
