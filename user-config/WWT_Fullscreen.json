@@ -23,8 +23,8 @@
             "y": 0
           },
           "size": {
-            "x": 3840,
-            "y": 2160
+            "x": 1920,
+            "y": 1080
           },
           "viewports": [
             {
@@ -52,11 +52,6 @@
       ]
     }
   ],
-  "settings": {
-    "display": {
-      "swapinterval": 1
-    }
-  },
   "users": [
     {
       "eyeseparation": 0.05999999865889549,
