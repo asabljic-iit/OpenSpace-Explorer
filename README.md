@@ -7,7 +7,7 @@ The project combines OpenSpace assets and Lua actions with a browser-based table
 ## Requirements
 
 - Windows with OpenSpace installed. The project was tested with OpenSpace v0.22.0 at `C:\OpenSpace-v.0.22.0`.
-- The [OSBaseDefault](https://github.com/asabljic-adler/OSBaseDefault) assets installed in OpenSpace's `user\data\assets` directory.
+- The [OSBaseDefault](https://github.com/asabljic-iit/OSBaseDefault) assets installed in OpenSpace's `user\data\assets` directory.
 - Git and [Git LFS](https://git-lfs.com/). The repository stores large 3D models and images with LFS.
 - Node.js for the web server. A Windows installer is included in `WWT\web`.
 
