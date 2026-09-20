@@ -60,3 +60,11 @@ For additional help or information, please see the [documentation](https://docs.
 ## Credits and License
 
 Created by Vanessa Garcia and Amir Sabljic during the 2026 Summer Space Visualization Lab internship at the Adler Planetarium. Released under the [MIT License](LICENSE).
+
+## Acknowledgments
+
+The material contained in this document is based upon work supported by a National Aeronautics and Space Administration (NASA) grant. Any opinions, findings, conclusions, or recommendations expressed in this material are those of the author and do not necessarily reflect the views of NASA. This work was supported through a NASA grant awarded to the NASA Illinois Space Grant Consortium under Grant No. 80NSSC25M7083.
+
+Built on [OpenSpace](https://www.openspaceproject.com/), an open-source interactive data visualization software supported by NASA.
+
+Built for the Adler Planetarium's Space Visualization Lab.
