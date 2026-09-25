@@ -4,6 +4,8 @@ OpenSpace Explorer is an interactive astronomy exhibit built on [OpenSpace](http
 
 The project combines OpenSpace assets and Lua actions with a browser-based tablet interface. Guests can explore the Solar System, constellations, deep-sky images, asteroids, satellites, ground-based telescopes, space telescopes, and a lunar tardigrade easter egg.
 
+<img width="1184" height="714" alt="image" src="https://github.com/user-attachments/assets/b54f411c-e5c6-431b-aa08-10d3b946b04f" />
+
 ## Requirements
 
 - Windows with OpenSpace installed. The project was tested with OpenSpace v0.22.0 at `C:\OpenSpace-v.0.22.0`.
