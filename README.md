@@ -2,7 +2,7 @@
 
 OpenSpace Explorer is an interactive astronomy exhibit built on [OpenSpace](https://openspaceproject.com/). It was created during the 2026 Summer Space Visualization Lab internship at the Adler Planetarium by Vanessa Garcia and Amir Sabljic as a replacement for the WorldWide Telescope exhibit.
 
-The project combines OpenSpace assets and Lua actions with a browser-based tablet interface. Guests can explore the Solar System, constellations, deep-sky images, asteroids, satellites, ground-based telescopes, space telescopes, and a lunar tardigrade easter egg.
+The project combines OpenSpace assets and actions with a browser-based tablet interface. Guests can explore the Solar System, constellations, deep-sky images, asteroids, satellites, ground-based telescopes, space telescopes, and a lunar tardigrade easter egg.
 
 <img width="1184" height="714" alt="image" src="https://github.com/user-attachments/assets/b54f411c-e5c6-431b-aa08-10d3b946b04f" />
 
